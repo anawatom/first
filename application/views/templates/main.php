@@ -32,17 +32,15 @@
 			<!-- Left side column. contains the content -->
 			<div class="right-side">
 				<!-- Content Header (Page header) -->
-			    <section class="content-header">
-			        <h1>
-			            ระบบฝึกอบรมกรมพลศึกษา
-			        </h1>
-			        <ol class="breadcrumb">
-			            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			            <li><a href="#">Examples</a></li>
-			            <li class="active">Blank page</li>
-			        </ol>
-			    </section>
-			    <!-- End Content Header (Page header) -->
+				<section class="content-header">
+					<h1>ระบบฝึกอบรมกรมพลศึกษา</h1>
+					<?php 
+						if (isset($this->breadcrumbs)) {
+							echo $this->breadcrumbs->show();
+						}
+					?>
+				</section>
+				<!-- End Content Header (Page header) -->
 
 				<?php echo $content; ?>
 			</div>

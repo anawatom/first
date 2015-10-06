@@ -25,6 +25,11 @@ class Welcome extends CI_Controller {
 	public function test_template()
 	{
 		$this->load->library('template');
+		$this->load->library('breadcrumbs');
+
+		$this->breadcrumbs->push('<i class="fa fa-dashboard"></i> Dashboard', 'section');
+		// $this->breadcrumbs->push('Page', '/section/page');
+
 		$this->template->load('test_templates', 'index', null);
 	}
 }

@@ -5,8 +5,9 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * Template
  *
- * @package     Libraries
+ * @package     Template
  * @author      Anawat Onmee<anawat.om@gmail.com>
+ * @version     1.0
  */
 Class Template
 {
@@ -118,6 +119,7 @@ Class Template
 		// it's a sample code you can init some other part of your page
 	}
 }
+// END Breadcrumbs Class
 
 /* End of file Template.php */
 /* Location: ./application/libraries/Template.php */
