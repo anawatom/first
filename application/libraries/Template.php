@@ -2,48 +2,78 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+/**
+ * Template
+ *
+ * @package     Libraries
+ * @author      Anawat Onmee<anawat.om@gmail.com>
+ */
 Class Template
 {
-    private $CI;
+	private $ci;
 	private $data;
-    private $js_file;
-    private $css_file;
-     
-    function __construct() 
-    {
-        $this->ci =& get_instance();
-        $this->CI->load->helper('url');
+	private $js_file;
+	private $css_file;
 
-        $this->data['title'] = 'This is a title';
-
-        // Add the JavaScript and CSS Files
-        // $this->addJS( base_url('assets/js/jquery-1.7.1.min.js') );
-        // $this->addCSS( base_url('assets/css/semantic.min.css') );
-    }
-
-    function load($folder, $page = NULL, $data = NULL, $menu = TRUE)
+	function __construct() 
 	{
-		if ( ! file_exists(APPPATH.$folder.'/'.$page.'.php' ) )
-        {
-            show_404();
-        }
-        else
-        {
-            $this->data['page_var'] = $data;
-            $this->load_JS_and_css();
-            $this->init_menu();
+		$this->ci =& get_instance();
+		$this->ci->load->helper('url');
 
-            if ($menu)
-            {
-                $this->data['content'] = $this->CI->load->view('template/menu.php', $this->data, true);
-            }
-            else {
-            	$this->data['content'] = '';
-            }
+		$this->data['title'] = 'ระบบฝึกอบรมกรมพลศึกษา';
 
-            $this->data['content'] .= $this->CI->load->view($folder.'/'.$page.'.php', $this->data, true);
-            $this->CI->load->view('template/main.php', $this->data);
-        }
+		// Add the JavaScript and CSS Files
+		$this->addJS(base_url('js/jquery-1.11.3.min.js'));
+		$this->addJS(base_url('js/jquery-ui-1.10.3.min.js'));
+		$this->addJS(base_url('js/bootstrap.min.js'));
+		$this->addJS(base_url('js/AdminLTE/app.js'));
+		$this->addJS(base_url('js/plugins/fullcalendar/fullcalendar.min.js'));
+
+		// bootstrap 3.0.2
+		$this->addCSS(base_url('css/bootstrap.min.css'));
+		$this->addCSS(base_url('css/font-awesome.min.css'));
+		$this->addCSS(base_url('css/ionicons.min.css'));
+		$this->addCSS(base_url('css/morris/morris.css'));
+		$this->addCSS(base_url('css/jvectormap/jquery-jvectormap-1.2.2.css'));
+		$this->addCSS(base_url('css/fullcalendar/fullcalendar.css'));
+		$this->addCSS(base_url('css/daterangepicker/daterangepicker-bs3.css'));
+		$this->addCSS(base_url('css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'));
+		$this->addCSS(base_url('css/AdminLTE.css'));
+	}
+
+	function load($folder, $page = NULL, $data = NULL, $header_bar = TRUE, $menu = TRUE)
+	{
+		if ( ! file_exists(APPPATH.'views/'.$folder.'/'.$page.'.php') )
+		{
+			show_404();
+		}
+		else
+		{
+			$this->data['data'] = $data;
+			$this->load_JS_and_css();
+			$this->init_menu();
+
+			if ($header_bar === TRUE)
+			{
+				$this->data['header_bar'] = $this->ci->load->view('templates/header_bar.php', $this->data, true);
+			}
+			else
+			{
+				$this->data['header_bar'] = '';
+			}
+
+			if ($menu === TRUE)
+			{
+				$this->data['menu'] = $this->ci->load->view('templates/menu.php', $this->data, true);
+			}
+			else 
+			{
+				$this->data['menu'] = '';
+			}
+
+			$this->data['content'] = $this->ci->load->view($folder.'/'.$page.'.php', $this->data, true);
+			$this->ci->load->view('templates/main.php', $this->data);
+		}
 	}
 
 	public function addJS( $name )
@@ -62,22 +92,23 @@ Class Template
 
 	private function load_JS_and_css()
 	{
-		$this->data['html_head'] = '';
+		$this->data['link_tags'] = '';
 
-		if ( $this->css_file )
+		if ($this->css_file)
 		{
-		    foreach( $this->css_file as $css )
-		    {
-		        $this->data['html_head'] .= "<link rel='stylesheet' type='text/css' href=".$css->file.">". "\n";
-		    }
+			foreach ($this->css_file as $css)
+			{
+				$this->data['link_tags'] .= "<link rel='stylesheet' type='text/css' href=".$css->file.">". "\n";
+			}
 		}
 
+		$this->data['script_tags'] = '';
 		if ( $this->js_file )
 		{
-		    foreach( $this->js_file as $js )
-		    {
-		        $this->data['html_head'] .= "<script type='text/javascript' src=".$js->file."></script>". "\n";
-		    }
+			foreach( $this->js_file as $js )
+			{
+				$this->data['script_tags'] .= "<script type='text/javascript' src=".$js->file."></script>". "\n";
+			}
 		}
 	}
 
@@ -87,4 +118,6 @@ Class Template
 		// it's a sample code you can init some other part of your page
 	}
 }
-/* End of file */
+
+/* End of file Template.php */
+/* Location: ./application/libraries/Template.php */
