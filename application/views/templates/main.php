@@ -42,6 +42,19 @@
 				</section>
 				<!-- End Content Header (Page header) -->
 
+				<!-- Flash message -->
+				<?php if (isset($this->session) && $this->session->flashdata('flash_message') !== NULL) : ?>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="alert alert-<?php echo $this->session->flashdata('flash_message')['status']; ?> alert-dismissible fade in" role="alert">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+								<strong><?php echo $this->session->flashdata('flash_message')['message']; ?></strong>
+							</div>
+						</div>
+					</div>
+				<?php endif; ?>
+				<!-- End Flash message -->
+
 				<?php echo $content; ?>
 			</div>
 			<!-- End Left side column. -->

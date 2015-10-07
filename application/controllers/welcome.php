@@ -22,13 +22,15 @@ class Welcome extends CI_Controller {
 		$this->load->view('welcome_message');
 	}
 
-	public function test_template()
+	public function template()
 	{
 		$this->load->library('template');
 		$this->load->library('breadcrumbs');
+		$this->load->library('session');
 
 		$this->breadcrumbs->push('<i class="fa fa-dashboard"></i> Dashboard', 'section');
 		// $this->breadcrumbs->push('Page', '/section/page');
+		$this->session->set_flashdata('flash_message', ['message' => 'Test', 'status' => 'success']);
 
 		$this->template->load('test_templates', 'index', null);
 	}
