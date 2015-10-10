@@ -33,7 +33,7 @@
 			<div class="right-side">
 				<!-- Content Header (Page header) -->
 				<section class="content-header">
-					<h1>ระบบฝึกอบรมกรมพลศึกษา</h1>
+					<h1><?php echo $page_header; ?></h1>
 					<?php 
 						if (isset($this->breadcrumbs)) {
 							echo $this->breadcrumbs->show();
@@ -43,7 +43,7 @@
 				<!-- End Content Header (Page header) -->
 
 				<!-- Flash message -->
-				<?php if (isset($this->session) && $this->session->flashdata('flash_message') !== NULL) : ?>
+				<?php if (isset($this->session) && !empty($this->session->flashdata('flash_message'))) : ?>
 					<div class="row">
 						<div class="col-md-12">
 							<div class="alert alert-<?php echo $this->session->flashdata('flash_message')['status']; ?> alert-dismissible fade in" role="alert">

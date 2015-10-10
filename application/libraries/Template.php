@@ -9,8 +9,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
  * @author      Anawat Onmee<anawat.om@gmail.com>
  * @version     1.0
  */
-Class Template
-{
+Class Template {
 	private $ci;
 	private $data;
 	private $js_file;
@@ -43,18 +42,19 @@ Class Template
 		$this->addCSS(base_url('css/override.css'));
 	}
 
-	function load($folder, $page = NULL, $data = NULL, $header_bar = TRUE, $menu = TRUE)
+	function load($page_header = '', $path, $data = NULL, $header_bar = TRUE, $menu = TRUE)
 	{
-		if ( ! file_exists(APPPATH.'views/'.$folder.'/'.$page.'.php') )
+		if ( ! file_exists(APPPATH.'views/'.$path.'.php') )
 		{
 			show_404();
 		}
 		else
 		{
-			$this->data['data'] = $data;
+			$this->data['page_var'] = $data;
 			$this->load_JS_and_css();
 			$this->init_menu();
 
+			$this->data['page_header'] = $page_header;
 			if ($header_bar === TRUE)
 			{
 				$this->data['header_bar'] = $this->ci->load->view('templates/header_bar.php', $this->data, true);
@@ -73,7 +73,7 @@ Class Template
 				$this->data['menu'] = '';
 			}
 
-			$this->data['content'] = $this->ci->load->view($folder.'/'.$page.'.php', $this->data, true);
+			$this->data['content'] = $this->ci->load->view($path.'.php', $this->data, true);
 			$this->ci->load->view('templates/main.php', $this->data);
 		}
 	}
