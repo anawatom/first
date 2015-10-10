@@ -41,7 +41,12 @@
 $route['default_controller'] = "login";
 $route['404_override'] = '';
 
-$route['sports/(:any)'] = 'gms_sports';
+// Gms_sports
+$route['sports'] = 'gms_sports/index/0';
+$route['sports/(:num)'] = 'gms_sports/index/$1';
+$route['sports/index'] = 'gms_sports/index/$1';
+$route['sports/index/(:num)'] = 'gms_sports/index/$1';
+$route['sports/delete/(:num)'] = 'gms_sports/delete/$1';
 
 
 /* End of file routes.php */
