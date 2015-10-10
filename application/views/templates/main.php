@@ -55,7 +55,9 @@
 				<?php endif; ?>
 				<!-- End Flash message -->
 
-				<?php echo $content; ?>
+				<section class="content">
+					<?php echo $content; ?>
+				</section> <!-- /.content -->
 			</div>
 			<!-- End Left side column. -->
 		</div>
@@ -63,6 +65,17 @@
 
 		<!-- Script tags -->
 		<?php echo $script_tags; ?>
+		<script type="text/javascript">
+			$(function() {
+				$('.btn-delete').on('click', function(event) {
+					event.preventDefault();
+
+					if (confirm('กรุณายืนยัน')) {
+						window.location.replace($(this).attr('href'));
+					}
+				});
+			});
+		</script>
 		<!-- End Script tags -->
 	</body>
 </html>

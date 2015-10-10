@@ -13,9 +13,11 @@ class model_gms_sport extends CI_Model {
     public $UPDATE_BY;
     public $UPDATE_DATE;
     public $VERSION = 3;
+    public $table_name;
 
     public function __construct() {
         parent::__construct();
+        $this->table_name = 'GMS_SPORT';
         date_default_timezone_set('Asia/Bangkok');
     }
     
@@ -33,6 +35,55 @@ class model_gms_sport extends CI_Model {
         $rs = $this->db->get('GMS_SPORT');
         return $rs->result_array();
     }
+
+    public function find_by_id()
+    {
+        $this->db->where('SPORT_ID', $this->SPORT_ID);
+        $rs = $this->db->get($this->table_name);
+
+        return $rs;
+    }
+
+    // Count all record of table "contact_info" in database.
+    public function get_total_rows() 
+    {
+        return $this->db->count_all($this->table_name);
+    }
+
+    public function get_all($order_type = 'ASC')
+    {
+        $this->db->order_by('SPORT_ID', $order_type);
+        $rs = $this->db->get($this->table_name);
+
+        return $rs->result_array();
+    }
+
+    public function fetch_data($limit = '0', $offset = '0', $order_type = 'ASC')
+    {
+        $this->db->from($this->table_name);
+        $this->db->join('GMS_TYPE', 'GMS_SPORT.TYPE_ID = GMS_TYPE.TYPE_ID');
+        $this->db->order_by('SPORT_ID', $order_type);
+        $this->db->limit($limit, $offset);
+
+        $rs = $this->db->get();
+
+        return $rs->result_array();
+    }
+
+    public function delete()
+    {
+        $this->db->where('SPORT_ID', $this->SPORT_ID);
+        $data = $this->db->get($this->table_name);
+
+        if (count($data->result_array()) === 0 )
+        {
+            throw new Exception('Cannot find model', 1);
+        } else 
+        {
+            return $this->db->delete($this->table_name);
+        }
+    }
+
 //    public function _getAllType() { //แสดงทั้งหมด
 //        $this->db->order_by("TYPE_ID",'ASC');
 //        $rs = $this->db->get('GMS_TYPE');
