@@ -37,7 +37,7 @@
 									<i class='fa fa-edit'></i>
 								</a>
 								<a class="btn btn-default btn-delete" 
-										href="<?php echo site_url(['sports', 'delete', '12121221212']); ?>"
+										href="<?php echo site_url(['sports', 'delete', $row['SPORT_ID']]); ?>"
 										data-value="<?php echo $row['SPORT_ID']; ?>">
 									<i class='fa fa-times'></i>
 								</a>
