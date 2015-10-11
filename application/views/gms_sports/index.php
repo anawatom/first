@@ -46,7 +46,7 @@
 					<?php endforeach; ?>
 				</table>
 			</div><!-- /.box-body -->
-			<div class="box-footer">
+			<div class="box-footer text-right">
 				<?php echo $page_var['pagination']->create_links(); ?>
 			</div><!-- /.box-footer -->
 		</div><!-- /.box -->
