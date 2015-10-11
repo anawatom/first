@@ -219,6 +219,10 @@ class model_gms_sport extends CI_Model {
             {
                 continue;
             }
+            else if ($value === 'all')
+            {
+                continue;
+            }
 
             if ($key === 'SPORT_SUBJECT')
             {
