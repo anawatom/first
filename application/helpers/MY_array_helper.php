@@ -23,9 +23,13 @@
  */
 if ( ! function_exists('elements_for_dropdown'))
 {
-	function elements_for_dropdown($array, $key_name = 'ID', $value_name = 'NAME')
+	function elements_for_dropdown($array, $key_name = 'ID', $value_name = 'NAME', $include_all = FALSE)
 	{
 		$result = [];
+		if ($include_all === TRUE)
+		{
+			$result['all'] = 'ทั้งหมด';
+		}
 
 		foreach ($array as $key => $value) {
 			$result[$value[$key_name]] = $value[$value_name];
