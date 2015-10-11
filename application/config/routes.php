@@ -45,7 +45,11 @@ $route['404_override'] = '';
 $route['sports'] = 'gms_sports/index/0';
 $route['sports/(:num)'] = 'gms_sports/index/$1';
 $route['sports/index'] = 'gms_sports/index/$1';
+// $route['sports/index/(:any)'] = 'gms_sports/index/$1'; // for work
 $route['sports/index/(:num)'] = 'gms_sports/index/$1';
+$route['sports/create'] = 'gms_sports/create';
+$route['sports/update/(:num)'] = 'gms_sports/update/$1';
+$route['sports/view/(:num)'] = 'gms_sports/view/$1';
 $route['sports/delete/(:num)'] = 'gms_sports/delete/$1';
 
 
