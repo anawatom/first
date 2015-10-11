@@ -8,6 +8,7 @@ class Gms_sports extends CI_Controller {
 	{
 		parent::__construct();
 
+		$this->load->model('model_gms_type', 'gms_type');
 		$this->load->model('model_gms_sport', 'gms_sport');
 	}
 
@@ -19,14 +20,97 @@ class Gms_sports extends CI_Controller {
 		$data['pagination'] = init_pagination('/sports/index',  $this->gms_sport->get_total_rows());
 		$data['gms_sports'] = $this->gms_sport->fetch_data($data['pagination']->per_page, $offset);
 
-		$this->template->load('รหัสชนิดกีฬา/ชนิดการฝึกอบรม', 'gms_sports/index', $data);
+		$this->template->load('ชนิดกีฬา/ชนิดการฝึกอบรม', 'gms_sports/index', $data);
+	}
+
+	public function create()
+	{
+		$page_var = [
+			'form_url' => site_url('/sports/create'),
+			'gms_type_list' => elements_for_dropdown($this->gms_type->get_all(), 'TYPE_ID', 'TYPE_SUBJECT')
+		];
+
+		if (empty($this->input->post(NULL)) === FALSE)
+		{
+			// TODO: Need to move to config file.
+			$this->form_validation->set_rules('TYPE_ID', 'ประเภทการฝึกอบรม', 'required');
+			$this->form_validation->set_rules('SPORT_CODE', 'เลขที่', 'required|is_natural');
+			$this->form_validation->set_rules('SPORT_SUBJECT', 'ชนิดกีฬา/ชนิดการฝึกอบรม', 'required');
+			$this->form_validation->set_rules('SPORT_STATUS', 'สถานะ', 'required');
+
+			if ($this->form_validation->run() == FALSE)
+			{
+				$this->template->load('เพิ่มชนิดกีฬา/ชนิดการฝึกอบรม', 'gms_sports/create', $page_var);
+			}
+			else
+			{
+				$data = $this->input->post(NULL, TRUE);
+				$data['CREATE_BY'] = $this->session->userdata('LOGIN_USERNAME');
+				$data['UPDATE_BY'] = $this->session->userdata('LOGIN_USERNAME');
+
+				if ($this->gms_sport->insert($data) === TRUE)
+				{
+					$this->session->set_flashdata('flash_message', ['message' => 'ดำเนินการสำเร็จ', 'status' => 'success']);
+					redirect('sports/update/'.$this->gms_sport->get_last_id(), 'refresh');
+				}
+				else
+				{
+					$this->session->set_flashdata('flash_message', ['message' => 'เกิดข้อผิดพลาด', 'status' => 'danger']);
+					redirect('sports/create', 'refresh');
+				}
+			}
+		}
+		else
+		{
+			$this->template->load('เพิ่มชนิดกีฬา/ชนิดการฝึกอบรม', 'gms_sports/create', $page_var);
+		}
+	}
+
+	public function update($id)
+	{
+		$page_var = [
+			'form_url' => site_url('/sports/update/'.$id),
+			'gms_type_list' => elements_for_dropdown($this->gms_type->get_all(), 'TYPE_ID', 'TYPE_SUBJECT'),
+			'model' => $this->gms_sport->find_by_id($id)
+		];
+
+		if (empty($this->input->post(NULL)) === FALSE)
+		{
+			$this->form_validation->set_rules('TYPE_ID', 'ประเภทการฝึกอบรม', 'required');
+			$this->form_validation->set_rules('SPORT_CODE', 'เลขที่', 'required|is_natural');
+			$this->form_validation->set_rules('SPORT_SUBJECT', 'ชนิดกีฬา/ชนิดการฝึกอบรม', 'required');
+			$this->form_validation->set_rules('SPORT_STATUS', 'สถานะ', 'required');
+
+			if ($this->form_validation->run() == FALSE)
+			{
+				$this->template->load('แก้ไขชนิดกีฬา/ชนิดการฝึกอบรม', 'gms_sports/update', $page_var);
+			}
+			else
+			{
+				$data = $this->input->post(NULL, TRUE);
+				$data['UPDATE_BY'] = $this->session->userdata('LOGIN_USERNAME');
+
+				if ($this->gms_sport->update($id, $data) === TRUE)
+				{
+					$this->session->set_flashdata('flash_message', ['message' => 'ดำเนินการสำเร็จ', 'status' => 'success']);
+					redirect('sports/update/'.$this->gms_sport->get_last_id(), 'refresh');
+				}
+				else
+				{
+					$this->session->set_flashdata('flash_message', ['message' => 'เกิดข้อผิดพลาด', 'status' => 'danger']);
+					redirect('sports/create', 'refresh');
+				}
+			}
+		}
+		else
+		{
+			$this->template->load('แก้ไขชนิดกีฬา/ชนิดการฝึกอบรม', 'gms_sports/update', $page_var);
+		}
 	}
 
 	public function delete($id = 0)
 	{
-		$this->gms_sport->SPORT_ID = $id;
-
-		if ($this->gms_sport->delete())
+		if ($this->gms_sport->delete($id))
 		{
 			$this->session->set_flashdata('flash_message', ['message' => 'ดำเนินการสำเร็จ', 'status' => 'success']);
 		} 
@@ -35,7 +119,7 @@ class Gms_sports extends CI_Controller {
 			$this->session->set_flashdata('flash_message', ['message' => 'เกิดข้อผิดพลาด', 'status' => 'danger']);
 		}
 
-		redirect('/sports/'.$id, 'refresh');
+		redirect('/sports', 'refresh');
 	}
 }
 

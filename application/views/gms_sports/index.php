@@ -23,11 +23,11 @@
 								<?php
 									if ($row['SPORT_STATUS'] === '1') {
 										echo '<span class="label label-success">'
-												.$STATUS_MAPPING[$row['SPORT_STATUS']]
+												.$STATUSES[$row['SPORT_STATUS']]
 												.'</span>';
 									} else {
 										echo '<span class="label label-danger">'
-												.$STATUS_MAPPING[$row['SPORT_STATUS']]
+												.$STATUSES[$row['SPORT_STATUS']]
 												.'</span>';
 									}
 								?>

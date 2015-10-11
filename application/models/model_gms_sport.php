@@ -36,12 +36,9 @@ class model_gms_sport extends CI_Model {
         return $rs->result_array();
     }
 
-    public function find_by_id()
+    public function find_by_id($id)
     {
-        $this->db->where('SPORT_ID', $this->SPORT_ID);
-        $rs = $this->db->get($this->table_name);
-
-        return $rs;
+        return $this->find_model($id)->row_array();
     }
 
     // Count all record of table "contact_info" in database.
@@ -70,17 +67,119 @@ class model_gms_sport extends CI_Model {
         return $rs->result_array();
     }
 
-    public function delete()
+    /*
+    * Get id for inserting.
+    */
+    public function get_inserting_id()
     {
-        $this->db->where('SPORT_ID', $this->SPORT_ID);
-        $data = $this->db->get($this->table_name);
+        $this->db->select('SPORT_ID');
+        $this->db->order_by('SPORT_ID', 'DESC');
+        $this->db->limit(2, 0);
 
-        if (count($data->result_array()) === 0 )
+        $query = $this->db->get($this->table_name);
+
+        if ($query->num_rows() > 0)
         {
-            throw new Exception('Cannot find model', 1);
-        } else 
+            return $query->row()->SPORT_ID + 1;
+        }
+        else
         {
+            return 1;
+        }
+    }
+
+    /*
+    * Get id after insert.
+    */
+    public function get_last_id()
+    {
+        $this->db->select('SPORT_ID');
+        $this->db->order_by('SPORT_ID', 'DESC');
+        $this->db->limit(2, 0);
+
+        $query = $this->db->get($this->table_name);
+
+        if ($query->num_rows() > 0)
+        {
+            return $query->row()->SPORT_ID;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    public function insert($data)
+    {
+        $data['SPORT_ID'] = $this->get_inserting_id();
+
+        return $this->db->insert($this->table_name, $this->permit_insert_params($data));
+    }
+
+    public function update($id, $data = [])
+    {
+        if ($this->find_model($id))
+        {
+            $this->db->where('SPORT_ID', $id);
+            return $this->db->update($this->table_name, $this->permit_update_params($data));
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public function delete($id)
+    {
+        if ($this->find_model($id))
+        {
+            $this->db->where('SPORT_ID', $id);
             return $this->db->delete($this->table_name);
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public function permit_params($data)
+    {
+        return elements(['SPORT_ID',
+                        'TYPE_ID',
+                        'SPORT_CODE',
+                        'SPORT_SUBJECT',
+                        'SPORT_STATUS',
+                        'CREATE_BY',
+                        'UPDATE_BY'], $data);
+    }
+
+    public function permit_update_params($data)
+    {
+        return elements(['TYPE_ID',
+                        'SPORT_CODE',
+                        'SPORT_SUBJECT',
+                        'SPORT_STATUS',
+                        'UPDATE_BY'], $data);
+    }
+
+    /*
+    * Find this model by id
+    *
+    * @param string
+    * @return object of this model
+    */
+    private function find_model($id)
+    {
+        $this->db->where('SPORT_ID', $id);
+        $query = $this->db->get($this->table_name);
+
+        if ($query->num_rows() > 0)
+        {
+            return $query;
+        }
+        else
+        {
+            throw new Exception('Cannot found the model.', 1);
         }
     }
 
