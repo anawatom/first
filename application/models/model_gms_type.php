@@ -13,9 +13,11 @@ class model_gms_type extends CI_Model {
     public $UPDATE_BY;
     public $VERSION = 3;
 	public $OrderBy;
+    private $table_name;
 
     public function __construct() {
         parent::__construct();
+        $this->rable_name = 'GMS_TYPE';
         date_default_timezone_set('Asia/Bangkok');
     }
     
@@ -35,6 +37,14 @@ class model_gms_type extends CI_Model {
         $this->db->order_by("TYPE_ID",'ASC');
 		//$this->_chkVarForOrderBy($this->OrderBy);
         $rs = $this->db->get('GMS_TYPE');
+        return $rs->result_array();
+    }
+
+    public function get_all($order_field = 'TYPE_ID', $order_by = 'ASC')
+    {
+        $this->db->order_by($order_field, $order_by);
+        $rs = $this->db->get($this->rable_name);
+
         return $rs->result_array();
     }
 
