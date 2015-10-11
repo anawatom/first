@@ -1,6 +1,32 @@
+<?php echo form_open('sports/index', ['method' => 'GET', 'class' => 'form-filter']) ?>
+	<div class="box box-solid box-primary">
+		<div class="box-header">
+			<h3 class="box-title">เงื่อนไขการค้นหา</h3>
+		</div><!-- /.box-header -->
+		<div class="box-body">
+			<div class="form-group">
+				<?php echo form_label('ประเภทการฝึกอบรม', 'TYPE_ID'); ?>
+				<?php echo form_dropdown('TYPE_ID', 
+											$page_var['gms_type_list'], 
+											set_value('TYPE_ID', isset($page_var['search_params']['TYPE_ID']) ? $page_var['search_params']['TYPE_ID'] : ''), 'class="form-control"'); ?>
+			</div>
+			<div class="form-group">
+				<?php echo form_label('ชนิดกีฬา/ชนิดการฝึกอบรม', 'TYPE_ID'); ?>
+				<input type="text" 
+						name="SPORT_SUBJECT" 
+						class="form-control" 
+						value="<?php echo set_value('SPORT_SUBJECT', isset($page_var['search_params']['SPORT_SUBJECT']) ? $page_var['search_params']['SPORT_SUBJECT'] : ''); ?>">
+			</div>
+		</div><!-- /.box-body -->
+		<div class="box-footer text-center">
+			<input type="submit" value="ค้นหา" class="btn btn-primary">
+		</div><!-- /.box-footer -->
+	</div><!-- /.box -->
+<?php echo form_close(); ?>
+
 <div class="row">
 	<div class="col-md-12">
-		<div class="box">
+		<div class="box box-primary">
 			<div class="box-header">
 				<h3 class="box-title">ข้อมูลนิดกีฬา/ชนิดการฝึกอบรม</h3>
 				<div class="box-tools pull-right">

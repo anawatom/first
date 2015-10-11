@@ -19,11 +19,23 @@ class Gms_sports extends CI_Controller {
 		$this->breadcrumbs->push($this->config->item('dashboard_icon').' Dashboard', 'dashboard');
 		$this->breadcrumbs->push('ข้อมูลชนิดกีฬา/ชนิดการฝึกอบรม', 'sports');
 
-		$data = array();
-		$data['pagination'] = init_pagination('/sports/index',  $this->gms_sport->get_total_rows());
-		$data['gms_sports'] = $this->gms_sport->fetch_data($data['pagination']->per_page, $offset);
+		$search_params = $this->uri->uri_to_assoc(4);
+		$page_var = array();
+		if (count($search_params) === 0)
+		{
+			$page_var['pagination'] = init_pagination('/sports/index',  $this->gms_sport->get_total_rows());
+			$page_var['gms_sports'] = $this->gms_sport->fetch_data($page_var['pagination']->per_page, $offset);
+		}
+		else
+		{
+			$page_var['pagination'] = init_pagination('/sports/index',  $this->gms_sport->get_search_rows($search_params));
+			$page_var['gms_sports'] = $this->gms_sport->search($search_params, $page_var['pagination']->per_page, $offset);
+			$page_var['search_params'] = $search_params;
+		}
 
-		$this->template->load('ชนิดกีฬา/ชนิดการฝึกอบรม', 'gms_sports/index', $data);
+		$page_var['gms_type_list']  = elements_for_dropdown($this->gms_type->get_all(), 'TYPE_ID', 'TYPE_SUBJECT');
+
+		$this->template->load('ชนิดกีฬา/ชนิดการฝึกอบรม', 'gms_sports/index', $page_var);
 	}
 
 	public function create()

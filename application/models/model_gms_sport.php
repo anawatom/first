@@ -41,10 +41,15 @@ class model_gms_sport extends CI_Model {
         return $this->find_model($id)->row_array();
     }
 
-    // Count all record of table "contact_info" in database.
     public function get_total_rows() 
     {
         return $this->db->count_all($this->table_name);
+    }
+
+    public function get_search_rows($params) 
+    {
+        $this->add_search_conditions($params);
+        return $this->db->count_all_results($this->table_name);
     }
 
     public function get_all($order_type = 'ASC')
@@ -65,6 +70,20 @@ class model_gms_sport extends CI_Model {
         $rs = $this->db->get();
 
         return $rs->result_array();
+    }
+
+    public function search($params, $limit = '0', $offset = '0', $order_type = 'ASC')
+    {
+
+        $this->db->from($this->table_name);
+        $this->db->join('GMS_TYPE', 'GMS_SPORT.TYPE_ID = GMS_TYPE.TYPE_ID');
+        $this->add_search_conditions($params);
+        $this->db->order_by('SPORT_ID', $order_type);
+        $this->db->limit($limit, $offset);
+
+        $query = $this->db->get();
+
+        return $query->result_array();
     }
 
     /*
@@ -164,6 +183,12 @@ class model_gms_sport extends CI_Model {
                         'UPDATE_BY'], $data, NULL);
     }
 
+    public function permit_search_params($data)
+    {
+        return elements(['TYPE_ID',
+                        'SPORT_SUBJECT'], $data, NULL);
+    }
+
     /*
     * Find this model by id
     *
@@ -183,6 +208,29 @@ class model_gms_sport extends CI_Model {
         {
             throw new Exception('Cannot found the model.', 1);
         }
+    }
+
+    private function add_search_conditions($params)
+    {
+        $params = $this->permit_search_params($params);
+        foreach ($params as $key => $value)
+        {
+            if ($value === NULL OR $value === '')
+            {
+                continue;
+            }
+
+            if ($key === 'SPORT_SUBJECT')
+            {
+                $this->db->like($this->table_name.'.'.$key, $value);
+            }
+            else
+            {
+                $this->db->where($this->table_name.'.'.$key, $value);
+            }
+        }
+
+        return $this->db;
     }
 
 //    public function _getAllType() { //แสดงทั้งหมด
