@@ -86,7 +86,7 @@ $autoload['helper'] = array('array', 'url', 'form', 'html');
 |
 */
 
-$autoload['config'] = array();
+$autoload['config'] = array('form_validation');
 
 
 /*
