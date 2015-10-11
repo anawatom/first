@@ -23,12 +23,14 @@ class Gms_sports extends CI_Controller {
 		$page_var = array();
 		if (count($search_params) === 0)
 		{
-			$page_var['pagination'] = init_pagination('/sports/index',  $this->gms_sport->get_total_rows());
+			$page_var['pagination'] = init_pagination('/sports/index', $this->gms_sport->get_total_rows());
 			$page_var['gms_sports'] = $this->gms_sport->fetch_data($page_var['pagination']->per_page, $offset);
 		}
 		else
 		{
-			$page_var['pagination'] = init_pagination('/sports/index',  $this->gms_sport->get_search_rows($search_params));
+			$page_var['pagination'] = init_pagination('/sports/index', 
+														$this->gms_sport->get_search_rows($search_params),
+														'/'.$this->uri->assoc_to_uri($search_params));
 			$page_var['gms_sports'] = $this->gms_sport->search($search_params, $page_var['pagination']->per_page, $offset);
 			$page_var['search_params'] = $search_params;
 		}
