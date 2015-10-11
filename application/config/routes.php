@@ -42,11 +42,13 @@ $route['default_controller'] = "login";
 $route['404_override'] = '';
 
 // Gms_sports
-$route['sports'] = 'gms_sports/index/0';
-$route['sports/(:num)'] = 'gms_sports/index/$1';
+// $route['sports'] = 'gms_sports/index/0';
+// $route['sports/(:num)'] = 'gms_sports/index/$1';
+// $route['sports/(:num)/(:any)'] = 'gms_sports/index/$1';
 $route['sports/index'] = 'gms_sports/index/$1';
 // $route['sports/index/(:any)'] = 'gms_sports/index/$1'; // for work
 $route['sports/index/(:num)'] = 'gms_sports/index/$1';
+$route['sports/index/(:num)/(:any)'] = 'gms_sports/index/$1';
 $route['sports/create'] = 'gms_sports/create';
 $route['sports/update/(:num)'] = 'gms_sports/update/$1';
 $route['sports/view/(:num)'] = 'gms_sports/view/$1';
