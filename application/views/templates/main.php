@@ -67,7 +67,7 @@
 		<?php echo $script_tags; ?>
 		<script type="text/javascript">
 			$(function() {
-				$('.form-filter').on('submit', function(event){
+				$('.form-search').on('submit', function(event){
 					// $(this).serialize() outputs param1=value1&param2=value2 string
 					// var.replace(regex, string) outputs param1/value1/param2/value2 string
 					// newact would be http://localhost/class/index/param1/value1/param2/value2

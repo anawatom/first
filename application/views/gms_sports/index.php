@@ -1,4 +1,4 @@
-<?php echo form_open('sports/index', ['method' => 'GET', 'class' => 'form-filter']) ?>
+<?php echo form_open('sports/index', ['method' => 'GET', 'class' => 'form-search']) ?>
 	<div class="box box-solid box-primary">
 		<div class="box-header">
 			<h3 class="box-title">เงื่อนไขการค้นหา</h3>
