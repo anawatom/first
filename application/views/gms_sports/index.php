@@ -33,7 +33,7 @@
 								?>
 							</td>
 							<td>
-								<a class="btn btn-default btn-edit">
+								<a class="btn btn-default btn-edit" href="<?php echo site_url('sports/update/'.$row['SPORT_ID']); ?>">
 									<i class='fa fa-edit'></i>
 								</a>
 								<a class="btn btn-default btn-delete" 

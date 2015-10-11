@@ -16,6 +16,9 @@ class Gms_sports extends CI_Controller {
 	{
 		$this->load->helper('pagination');
 
+		$this->breadcrumbs->push($this->config->item('dashboard_icon').' Dashboard', 'dashboard');
+		$this->breadcrumbs->push('ข้อมูลชนิดกีฬา/ชนิดการฝึกอบรม', 'sports');
+
 		$data = array();
 		$data['pagination'] = init_pagination('/sports/index',  $this->gms_sport->get_total_rows());
 		$data['gms_sports'] = $this->gms_sport->fetch_data($data['pagination']->per_page, $offset);
@@ -25,6 +28,10 @@ class Gms_sports extends CI_Controller {
 
 	public function create()
 	{
+		$this->breadcrumbs->push($this->config->item('dashboard_icon').' Dashboard', 'dashboard');
+		$this->breadcrumbs->push('ข้อมูลชนิดกีฬา/ชนิดการฝึกอบรม', 'sports');
+		$this->breadcrumbs->push('เพิ่มชนิดกีฬา/ชนิดการฝึกอบรม', 'sports/create');
+
 		$page_var = [
 			'form_url' => site_url('/sports/create'),
 			'gms_type_list' => elements_for_dropdown($this->gms_type->get_all(), 'TYPE_ID', 'TYPE_SUBJECT')
@@ -79,6 +86,10 @@ class Gms_sports extends CI_Controller {
 
 	public function update($id)
 	{
+		$this->breadcrumbs->push($this->config->item('dashboard_icon').' Dashboard', 'dashboard');
+		$this->breadcrumbs->push('ข้อมูลชนิดกีฬา/ชนิดการฝึกอบรม', 'sports');
+		$this->breadcrumbs->push('แก้ไขชนิดกีฬา/ชนิดการฝึกอบรม', 'sports/update'.$id);
+
 		$page_var = [
 			'form_url' => site_url('/sports/update/'.$id),
 			'gms_type_list' => elements_for_dropdown($this->gms_type->get_all(), 'TYPE_ID', 'TYPE_SUBJECT'),
