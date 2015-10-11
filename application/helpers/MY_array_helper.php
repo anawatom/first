@@ -21,9 +21,9 @@
  * @param 	string
  * @return	$array
  */
-if ( ! function_exists('element_for_dropdown'))
+if ( ! function_exists('elements_for_dropdown'))
 {
-	function element_for_dropdown($array, $key_name = 'ID', $value_name = 'NAME')
+	function elements_for_dropdown($array, $key_name = 'ID', $value_name = 'NAME')
 	{
 		$result = [];
 
