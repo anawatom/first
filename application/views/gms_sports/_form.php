@@ -24,14 +24,18 @@
 				<?php echo form_dropdown('SPORT_STATUS', $STATUSES, set_value('SPORT_STATUS', isset($page_var['model']['SPORT_STATUS']) ? $page_var['model']['SPORT_STATUS'] : ''), 'class="form-control"'); ?>
 				<?php echo form_error('SPORT_STATUS'); ?>
 			</div>
-			<div class="form-group">
-				<?php echo form_label('รูปภาพ', 'SPORT_IMAGE'); ?>
-				<?php echo form_upload(['name' => 'SPORT_IMAGE', 'class' => 'form-control']); ?>
-				<?php echo form_error('SPORT_IMAGE'); ?>
-			</div>
-			<div class="form-group text-center">
-				<img src="<?php echo base_url('img/no_image.png'); ?>" height="180" id="imgprvw" alt="uploaded image preview" name="pPicture">
-			</div>
+			<?php if (isset($page_var['model']) === TRUE): ?>
+				<div class="form-group">
+					<?php echo form_label('รูปภาพ', 'SPORT_IMAGE'); ?>
+					<?php echo form_upload(['name' => 'SPORT_IMAGE', 
+											'class' => 'form-control']); ?>
+					<?php echo form_error('SPORT_IMAGE'); ?>
+					<?php echo isset($page_var['upload_error'])? $page_var['upload_error']: ''; ?>
+				</div>
+				<div class="form-group text-center">
+					<img src="<?php echo isset($page_var['model']['SPORT_IMAGE']) ? base_url('uploads/images/gms_sport/'.$page_var['model']['SPORT_IMAGE']) : base_url('img/no_image.png'); ?>" height="180" id="imgprvw" alt="uploaded image preview" name="pPicture">
+				</div>
+			<?php endif; ?>
 		</div>
 		<div class="box-footer text-center">
 			<button type="submit" name="submit" class="btn btn-primary btn-save">บันทึก</button>

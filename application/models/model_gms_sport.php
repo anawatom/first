@@ -118,15 +118,15 @@ class model_gms_sport extends CI_Model {
 
     public function update($id, $data = [])
     {
-        if ($this->find_model($id))
+        $model_data = $this->find_model($id)->row_array();
+
+        if (isset($data['SPORT_IMAGE']) === FALSE) 
         {
-            $this->db->where('SPORT_ID', $id);
-            return $this->db->update($this->table_name, $this->permit_update_params($data));
+            $data['SPORT_IMAGE'] = $model_data['SPORT_IMAGE'];
         }
-        else
-        {
-            return false;
-        }
+
+        $this->db->where('SPORT_ID', $model_data['SPORT_ID']);
+        return $this->db->update($this->table_name, $this->permit_update_params($data));
     }
 
     public function delete($id)
@@ -142,15 +142,16 @@ class model_gms_sport extends CI_Model {
         }
     }
 
-    public function permit_params($data)
+    public function permit_insert_params($data)
     {
         return elements(['SPORT_ID',
                         'TYPE_ID',
                         'SPORT_CODE',
                         'SPORT_SUBJECT',
                         'SPORT_STATUS',
+                        'SPORT_IMAGE',
                         'CREATE_BY',
-                        'UPDATE_BY'], $data);
+                        'UPDATE_BY'], $data, NULL);
     }
 
     public function permit_update_params($data)
@@ -159,7 +160,8 @@ class model_gms_sport extends CI_Model {
                         'SPORT_CODE',
                         'SPORT_SUBJECT',
                         'SPORT_STATUS',
-                        'UPDATE_BY'], $data);
+                        'SPORT_IMAGE',
+                        'UPDATE_BY'], $data, NULL);
     }
 
     /*
