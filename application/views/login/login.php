@@ -7,7 +7,7 @@
         <title>เข้าสู่ระบบ ฝึกอบรมกรมพลศึกษา</title><script type="text/javascript" src="/trnWeb/javax.faces.resource/site-min.js.jsf?ln=js"></script>
         <link type="text/css" rel="stylesheet" href="http://ipeshd.dpe.go.th/trnWeb/css/login.css" />
         <link rel="shortcut icon" href="/trnWeb/javax.faces.resource/images/favicon.ico.jsf" type="image/x-icon" /></head><body class="bg_login_page">
-        <form id="form" name="form" method="post" action="<?php echo site_url('login/loginExc') ?>" enctype="application/x-www-form-urlencoded">
+        <form id="form" name="form" method="post" action="<?php echo site_url('/login/loginExc'); ?>" enctype="application/x-www-form-urlencoded">
             <body>
                 <div class="login">
                     <div class="watermark">© Copyright 2014, Institute of Physical Education and Sports Human Development. All rights reserved.</div>
