@@ -21,6 +21,12 @@ $config['crumb_open'] = '<li>';
 $config['crumb_last_open'] = '<li class="active">';
 $config['crumb_close'] = '</li>';
 
+/*
+| -------------------------------------------------------------------
+| BREADCRUMB CONFIG CUSTOMIZE
+| -------------------------------------------------------------------
+*/
+$config['dashboard_icon'] = '<i class="fa fa-dashboard"></i>';
 
 /* End of file breadcrumbs.php */
 /* Location: ./application/config/breadcrumbs.php */
