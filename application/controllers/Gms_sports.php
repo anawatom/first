@@ -17,7 +17,7 @@ class Gms_sports extends CI_Controller {
 		$this->load->helper('pagination');
 
 		$this->breadcrumbs->push($this->config->item('dashboard_icon').' Dashboard', 'dashboard');
-		$this->breadcrumbs->push('ข้อมูลชนิดกีฬา/ชนิดการฝึกอบรม', 'sports');
+		$this->breadcrumbs->push('ข้อมูลชนิดกีฬา/ชนิดการฝึกอบรม', 'sports/index');
 
 		$search_params = $this->uri->uri_to_assoc(4);
 		$page_var = array();
@@ -43,7 +43,7 @@ class Gms_sports extends CI_Controller {
 	public function create()
 	{
 		$this->breadcrumbs->push($this->config->item('dashboard_icon').' Dashboard', 'dashboard');
-		$this->breadcrumbs->push('ข้อมูลชนิดกีฬา/ชนิดการฝึกอบรม', 'sports');
+		$this->breadcrumbs->push('ข้อมูลชนิดกีฬา/ชนิดการฝึกอบรม', 'sports/index');
 		$this->breadcrumbs->push('เพิ่มชนิดกีฬา/ชนิดการฝึกอบรม', 'sports/create');
 
 		$page_var = [
@@ -101,7 +101,7 @@ class Gms_sports extends CI_Controller {
 	public function update($id)
 	{
 		$this->breadcrumbs->push($this->config->item('dashboard_icon').' Dashboard', 'dashboard');
-		$this->breadcrumbs->push('ข้อมูลชนิดกีฬา/ชนิดการฝึกอบรม', 'sports');
+		$this->breadcrumbs->push('ข้อมูลชนิดกีฬา/ชนิดการฝึกอบรม', 'sports/index');
 		$this->breadcrumbs->push('แก้ไขชนิดกีฬา/ชนิดการฝึกอบรม', 'sports/update'.$id);
 
 		$page_var = [
@@ -173,7 +173,7 @@ class Gms_sports extends CI_Controller {
 			$this->session->set_flashdata('flash_message', ['message' => 'เกิดข้อผิดพลาด', 'status' => 'danger']);
 		}
 
-		redirect('/sports', 'refresh');
+		redirect('/sports/index', 'refresh');
 	}
 }
 
