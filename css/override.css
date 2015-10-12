@@ -1,4 +1,15 @@
+/* **
+* bootstrap.css
+** */
 .alert {
 	margin-left: 0px;
 	margin-bottom: 0px;
+}
+
+/* **
+* AdminLTE.css
+** */
+.skin-blue .treeview-menu > li.active > a,
+.skin-blue .treeview-menu > li > a:hover {
+	border-left: #357ca5 5px solid;
 }
