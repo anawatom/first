@@ -80,6 +80,15 @@ $route['certificate_sign/update/(:num)'] = 'gms_certificate_sign/update/$1';
 $route['certificate_sign/view/(:num)'] = 'gms_certificate_sign/view/$1';
 $route['certificate_sign/delete/(:num)'] = 'gms_certificate_sign/delete/$1';
 
+// Gms_term_position
+$route['term_position/index'] = 'gms_term_position/index/$1';
+$route['term_position/index/(:num)'] = 'gms_term_position/index/$1';
+$route['term_position/index/(:num)/(:any)'] = 'gms_term_position/index/$1';
+$route['term_position/create'] = 'gms_term_position/create';
+$route['term_position/update/(:num)'] = 'gms_term_position/update/$1';
+$route['term_position/view/(:num)'] = 'gms_term_position/view/$1';
+$route['term_position/delete/(:num)'] = 'gms_term_position/delete/$1';
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

@@ -54,8 +54,8 @@
                 <li class="<?php echo ($active_menu === 'certificate_sign')? 'active': ''; ?>">
                     <?php echo anchor('certificate_sign/index', 'S06-ผู้มีอำนาจลงนาม'); ?>
                 </li>
-                <li>
-                    <a href="<?php echo base_url(); ?>index.php/s07"> S07-ตำแหน่งในรุ่นฝึกอบรม</a>
+                <li class="<?php echo ($active_menu === 'term_position')? 'active': ''; ?>">
+                    <?php echo anchor('term_position/index', 'S07-ตำแหน่งในรุ่นฝึกอบรม'); ?>
                 </li>
             </ul>
         </li> 
