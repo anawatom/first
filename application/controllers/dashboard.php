@@ -10,9 +10,10 @@ class Dashboard extends CI_Controller {
     }
     
     public function index(){
-        $this->load->view("lib/header");
-        $this->load->view("blank");
-        $this->load->view("lib/footer");
+        // $this->load->view("lib/header");
+        // $this->load->view("blank");
+        // $this->load->view("lib/footer");
+        $this->template->load('หน้าหลัก', 'dashboard/index');
     }
 }
 
