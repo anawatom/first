@@ -45,14 +45,14 @@
                 <li>
                     <a href="<?php echo base_url(); ?>index.php/s03"> S03-หลักสูตรและวิทยากร</a>
                 </li>
-                <li>
+                <li class="<?php echo ($active_menu === 'prefix')? 'active': ''; ?>">
                     <?php echo anchor('prefix/index', 'S04-คำนำหน้านาม'); ?>
                 </li>
                 <li class="<?php echo ($active_menu === 'cancel_result')? 'active': ''; ?>">
                     <?php echo anchor('cancel_result/index', 'S05-เหตุผลการไม่อนุมัติ'); ?>
                 </li>
-                <li>
-                    <a href="<?php echo base_url(); ?>index.php/s06"> S06-ผู้มีอำนาจลงนาม</a>
+                <li class="<?php echo ($active_menu === 'certificate_sign')? 'active': ''; ?>">
+                    <?php echo anchor('certificate_sign/index', 'S06-ผู้มีอำนาจลงนาม'); ?>
                 </li>
                 <li>
                     <a href="<?php echo base_url(); ?>index.php/s07"> S07-ตำแหน่งในรุ่นฝึกอบรม</a>

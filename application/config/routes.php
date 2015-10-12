@@ -71,6 +71,15 @@ $route['cancel_result/update/(:num)'] = 'gms_cancel_result/update/$1';
 $route['cancel_result/view/(:num)'] = 'gms_cancel_result/view/$1';
 $route['cancel_result/delete/(:num)'] = 'gms_cancel_result/delete/$1';
 
+// Gms_certificate_sign
+$route['certificate_sign/index'] = 'gms_certificate_sign/index/$1';
+$route['certificate_sign/index/(:num)'] = 'gms_certificate_sign/index/$1';
+$route['certificate_sign/index/(:num)/(:any)'] = 'gms_certificate_sign/index/$1';
+$route['certificate_sign/create'] = 'gms_certificate_sign/create';
+$route['certificate_sign/update/(:num)'] = 'gms_certificate_sign/update/$1';
+$route['certificate_sign/view/(:num)'] = 'gms_certificate_sign/view/$1';
+$route['certificate_sign/delete/(:num)'] = 'gms_certificate_sign/delete/$1';
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
