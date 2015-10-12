@@ -48,8 +48,8 @@
                 <li>
                     <a href="<?php echo base_url(); ?>index.php/s04"> S04-คำนำหน้านาม</a>
                 </li>
-                <li>
-                    <a href="<?php echo base_url(); ?>index.php/s05"> S05-เหตุผลการไม่อนุมัติ</a>
+                <li class="<?php echo ($active_menu === 'cancel_result')? 'active': ''; ?>">
+                    <?php echo anchor('cancel_result/index', 'S05-เหตุผลการไม่อนุมัติ'); ?>
                 </li>
                 <li>
                     <a href="<?php echo base_url(); ?>index.php/s06"> S06-ผู้มีอำนาจลงนาม</a>

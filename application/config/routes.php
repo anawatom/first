@@ -53,6 +53,15 @@ $route['sports/update/(:num)'] = 'gms_sports/update/$1';
 $route['sports/view/(:num)'] = 'gms_sports/view/$1';
 $route['sports/delete/(:num)'] = 'gms_sports/delete/$1';
 
+// Gms_cancel_result
+$route['cancel_result/index'] = 'gms_cancel_result/index/$1';
+$route['cancel_result/index/(:num)'] = 'gms_cancel_result/index/$1';
+$route['cancel_result/index/(:num)/(:any)'] = 'gms_cancel_result/index/$1';
+$route['cancel_result/create'] = 'gms_cancel_result/create';
+$route['cancel_result/update/(:num)'] = 'gms_cancel_result/update/$1';
+$route['cancel_result/view/(:num)'] = 'gms_cancel_result/view/$1';
+$route['cancel_result/delete/(:num)'] = 'gms_cancel_result/delete/$1';
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
