@@ -50,7 +50,6 @@ Class Template {
 		}
 		else
 		{
-			$this->data['page_var'] = $data;
 			$this->load_JS_and_css();
 			$this->init_menu();
 
@@ -66,13 +65,14 @@ Class Template {
 
 			if ($menu === TRUE)
 			{
-				$this->data['menu'] = $this->ci->load->view('templates/menu.php', $this->data, true);
+				$this->data['menu'] = $this->ci->load->view('templates/menu.php', ['active_menu' => $this->ci->uri->segment(1)], true);
 			}
 			else 
 			{
 				$this->data['menu'] = '';
 			}
 
+			$this->data['page_var'] = $data;
 			$this->data['content'] = $this->ci->load->view($path.'.php', $this->data, true);
 			$this->ci->load->view('templates/main.php', $this->data);
 		}

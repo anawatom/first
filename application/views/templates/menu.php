@@ -24,7 +24,7 @@
     <!-- /.search form -->
     <!-- sidebar menu: : style can be found in sidebar.less -->
     <ul class="sidebar-menu">
-        <li class="active">
+        <li>
             <a href="<?php echo base_url(); ?>index.php/dashboard">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             </a>
@@ -36,13 +36,27 @@
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li><a href="<?php echo base_url(); ?>index.php/s01"> S01-ประเภทการฝึกอบรม</a></li>
-                <li><a href="<?php echo site_url('sports/index'); ?>"> S02-ชนิดกีฬา/การฝึกอบรม</a></li>
-                <li><a href="<?php echo base_url(); ?>index.php/s03"> S03-หลักสูตรและวิทยากร</a></li>
-                <li><a href="<?php echo base_url(); ?>index.php/s04"> S04-คำนำหน้านาม</a></li>
-                <li><a href="<?php echo base_url(); ?>index.php/s05"> S05-เหตุผลการไม่อนุมัติ</a></li>
-                <li><a href="<?php echo base_url(); ?>index.php/s06"> S06-ผู้มีอำนาจลงนาม</a></li>
-                <li><a href="<?php echo base_url(); ?>index.php/s07"> S07-ตำแหน่งในรุ่นฝึกอบรม</a></li>
+                <li>
+                    <a href="<?php echo base_url(); ?>index.php/s01"> S01-ประเภทการฝึกอบรม</a>
+                </li>
+                <li class="<?php echo ($active_menu === 'sports')? 'active': ''; ?>">
+                    <?php echo anchor('sports/index', 'S02-ชนิดกีฬา/การฝึกอบรม'); ?>
+                </li>
+                <li>
+                    <a href="<?php echo base_url(); ?>index.php/s03"> S03-หลักสูตรและวิทยากร</a>
+                </li>
+                <li>
+                    <a href="<?php echo base_url(); ?>index.php/s04"> S04-คำนำหน้านาม</a>
+                </li>
+                <li>
+                    <a href="<?php echo base_url(); ?>index.php/s05"> S05-เหตุผลการไม่อนุมัติ</a>
+                </li>
+                <li>
+                    <a href="<?php echo base_url(); ?>index.php/s06"> S06-ผู้มีอำนาจลงนาม</a>
+                </li>
+                <li>
+                    <a href="<?php echo base_url(); ?>index.php/s07"> S07-ตำแหน่งในรุ่นฝึกอบรม</a>
+                </li>
             </ul>
         </li> 
         <li class="treeview">
