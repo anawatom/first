@@ -12,8 +12,8 @@ $config['per_page'] = 20;
 
 $config['query_string_segment'] = 'page';
 
-$config['full_tag_open'] = '<ul class="pagination">';
-$config['full_tag_close'] = '</ul><!-- /.pagination -->';
+$config['full_tag_open'] = '<div class="row"><div class="col-md-12 text-right"><ul class="pagination">';
+$config['full_tag_close'] = '</ul><!-- /.pagination --></div><!-- /.col-md-12 --></div><!-- /.row -->';
 
 $config['first_link'] = '&laquo; First';
 $config['first_tag_open'] = '<li class="prev page">';
