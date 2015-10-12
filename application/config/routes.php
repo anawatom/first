@@ -53,6 +53,15 @@ $route['sports/update/(:num)'] = 'gms_sports/update/$1';
 $route['sports/view/(:num)'] = 'gms_sports/view/$1';
 $route['sports/delete/(:num)'] = 'gms_sports/delete/$1';
 
+// Gms_prefix
+$route['prefix/index'] = 'gms_prefix/index/$1';
+$route['prefix/index/(:num)'] = 'gms_prefix/index/$1';
+$route['prefix/index/(:num)/(:any)'] = 'gms_prefix/index/$1';
+$route['prefix/create'] = 'gms_prefix/create';
+$route['prefix/update/(:num)'] = 'gms_prefix/update/$1';
+$route['prefix/view/(:num)'] = 'gms_prefix/view/$1';
+$route['prefix/delete/(:num)'] = 'gms_prefix/delete/$1';
+
 // Gms_cancel_result
 $route['cancel_result/index'] = 'gms_cancel_result/index/$1';
 $route['cancel_result/index/(:num)'] = 'gms_cancel_result/index/$1';

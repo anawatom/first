@@ -46,7 +46,7 @@
                     <a href="<?php echo base_url(); ?>index.php/s03"> S03-หลักสูตรและวิทยากร</a>
                 </li>
                 <li>
-                    <a href="<?php echo base_url(); ?>index.php/s04"> S04-คำนำหน้านาม</a>
+                    <?php echo anchor('prefix/index', 'S04-คำนำหน้านาม'); ?>
                 </li>
                 <li class="<?php echo ($active_menu === 'cancel_result')? 'active': ''; ?>">
                     <?php echo anchor('cancel_result/index', 'S05-เหตุผลการไม่อนุมัติ'); ?>
