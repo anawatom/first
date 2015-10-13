@@ -1,0 +1,31 @@
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+/**
+ * This file is used to extend the form helper
+ *
+ * @package		Library
+ * @author		Anawat Onmee<anawat.om@gmail.com>
+ */
+
+// ------------------------------------------------------------------------
+
+/**
+ * Set the value to a form
+ * Note the input name must be the key of the data parameter
+ *
+ * @access	public
+ * @param	string
+ * @param	array
+ * @return	$string
+ */
+ if ( ! function_exists('set_form_value'))
+ {
+   function set_form_value($input_name = '', $data = [], $default_value = '')
+   {
+     return set_value($input_name,
+                        isset($data[$input_name]) ? $data[$input_name] : $default_value);
+   }
+ }
+
+ /* End of file MY_form_helper.php */
+ /* Location: ./system/helpers/MY_form_helper.php */
