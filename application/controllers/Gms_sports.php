@@ -19,20 +19,19 @@ class Gms_sports extends CI_Controller {
 		$this->breadcrumbs->push($this->config->item('dashboard_icon').' Dashboard', 'dashboard');
 		$this->breadcrumbs->push('ข้อมูลชนิดกีฬา/ชนิดการฝึกอบรม', 'sports/index');
 
-		$search_params = $this->uri->uri_to_assoc(4);
 		$page_var = array();
-		if (count($search_params) === 0)
+		$page_var['search_params'] = $this->uri->uri_to_assoc(4);
+		if (count($page_var['search_params']) === 0)
 		{
 			$page_var['pagination'] = init_pagination('/sports/index', $this->gms_sport->get_total_rows());
 			$page_var['gms_sports'] = $this->gms_sport->fetch_data($page_var['pagination']->per_page, $offset);
 		}
 		else
 		{
-			$page_var['pagination'] = init_pagination('/sports/index', 
-														$this->gms_sport->get_search_rows($search_params),
-														'/'.$this->uri->assoc_to_uri($search_params));
-			$page_var['gms_sports'] = $this->gms_sport->search($search_params, $page_var['pagination']->per_page, $offset);
-			$page_var['search_params'] = $search_params;
+			$page_var['pagination'] = init_pagination('/sports/index',
+														$this->gms_sport->get_search_rows($page_var['search_params']),
+														'/'.$this->uri->assoc_to_uri($page_var['search_params']));
+			$page_var['gms_sports'] = $this->gms_sport->search($page_var['search_params'], $page_var['pagination']->per_page, $offset);
 		}
 
 		$page_var['gms_type_list']  = elements_for_dropdown($this->gms_type->get_all(), 'TYPE_ID', 'TYPE_SUBJECT', TRUE);
@@ -167,7 +166,7 @@ class Gms_sports extends CI_Controller {
 		if ($this->gms_sport->delete($id))
 		{
 			$this->session->set_flashdata('flash_message', ['message' => 'ดำเนินการสำเร็จ', 'status' => 'success']);
-		} 
+		}
 		else
 		{
 			$this->session->set_flashdata('flash_message', ['message' => 'เกิดข้อผิดพลาด', 'status' => 'danger']);
