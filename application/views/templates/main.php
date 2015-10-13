@@ -34,7 +34,7 @@
 				<!-- Content Header (Page header) -->
 				<section class="content-header">
 					<h1><?php echo $page_header; ?></h1>
-					<?php 
+					<?php
 						if (isset($this->breadcrumbs)) {
 							echo $this->breadcrumbs->show();
 						}
@@ -67,11 +67,15 @@
 		<?php echo $script_tags; ?>
 		<script type="text/javascript">
 			$(function() {
-				$('.form-search').on('submit', function(event){
-					// $(this).serialize() outputs param1=value1&param2=value2 string
-					// var.replace(regex, string) outputs param1/value1/param2/value2 string
-					// newact would be http://localhost/class/index/param1/value1/param2/value2
-					var newact = $(this).attr("action") + "/0/" + $(this).serialize().replace(/&|=/g,"/");
+				$('.form-search').on('submit', function(event) {
+					var newact = $(this).attr('action') + '/0/'
+																							// $(this).serialize() outputs param1=value1&param2=value2 string
+																							+ $(this).serialize()
+																							// replace params that havn't value (e.g. param1=& or param=) with ''
+																							.replace(/[A-Za-z_]*=&(?=[A-Za-z_])|[A-Za-z_]*=(?=$)/g, '')
+																							// replace & and = with /
+																							.replace(/&|=/g,"/");
+					// 'PREFIX_TH=&PREFIX_TH_SH='.replace(/[A-Za-z_]*(?=\=&)|[A-Za-z_]*(?=\=$)/g, '')
 
 					window.location = newact;
 
