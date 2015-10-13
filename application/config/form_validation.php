@@ -23,6 +23,33 @@ $config = array(
 					'rules' => 'required'
 				)
 			),
+			'gms_prefix_validation' => array(
+				array(
+					'field' => 'PREFIX_TH',
+					'label' => 'ชื่อคำนำหน้า(ไทย)',
+					'rules' => 'required|trim'
+				),
+				array(
+					'field' => 'PREFIX_TH_SH',
+					'label' => 'ชื่อย่อคำนำหน้า(ไทย)',
+					'rules' => 'trim'
+				),
+				array(
+					'field' => 'PREFIX_EN',
+					'label' => 'ชื่อคำนำหน้า(อังกฤษ)',
+					'rules' => 'trim'
+				),
+				array(
+					'field' => 'PREFIX_EN_SH',
+					'label' => 'ชื่อย่อคำนำหน้า(อังกฤษ)',
+					'rules' => 'trim'
+				),
+				array(
+					'field' => 'PREFIX_STATUS',
+					'label' => 'สถานะ',
+					'rules' => 'required|trim'
+				)
+			)
 	);
 
 /* End of file form_validation.php */

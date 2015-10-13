@@ -5,14 +5,14 @@
 		</div><!-- /.box-header -->
 		<div class="box-body">
 			<div class="form-group">
-				<?php echo form_label('ชื่อคำนำหน้า', 'PREFIX_TH'); ?>
+				<?php echo form_label('คำนำหน้าภาษาไทย', 'PREFIX_TH'); ?>
 				<input type="text"
 						name="PREFIX_TH"
 						class="form-control"
 						value="<?php echo set_form_value('PREFIX_TH', $page_var['search_params']); ?>">
 			</div>
 			<div class="form-group">
-				<?php echo form_label('ชื่อย่อคำนำหน้า', 'PREFIX_TH_SH'); ?>
+				<?php echo form_label('คำนำหน้าภาษาไทยย่อ', 'PREFIX_TH_SH'); ?>
 				<input type="text"
 						name="PREFIX_TH_SH"
 						class="form-control"
@@ -31,7 +31,7 @@
 			<div class="box-header">
 				<h3 class="box-title">ข้อมูลคำนำหน้านาม</h3>
 				<div class="box-tools pull-right">
-					<?php echo anchor('sports/create', '<i class="fa fa-plus"></i>', 'class="btn btn-sm btn-default btn-create" title="เพิ่มข้อมูล"'); ?>
+					<?php echo anchor('prefix/create', '<i class="fa fa-plus"></i>', 'class="btn btn-sm btn-default btn-create" title="เพิ่มข้อมูล"'); ?>
 				</div>
 			</div><!-- /.box-header -->
 			<div class="box-body no-padding">

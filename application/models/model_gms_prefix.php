@@ -52,7 +52,7 @@ class Model_gms_prefix extends CI_Model {
 
     public function get_all($order_type = 'ASC')
     {
-        $this->db->order_by('SPORT_ID', $order_type);
+        $this->db->order_by('PREFIX_ID', $order_type);
         $rs = $this->db->get($this->table_name);
 
         return $rs->result_array();
@@ -82,15 +82,15 @@ class Model_gms_prefix extends CI_Model {
     */
     public function get_inserting_id()
     {
-        $this->db->select('SPORT_ID');
-        $this->db->order_by('SPORT_ID', 'DESC');
+        $this->db->select('PREFIX_ID');
+        $this->db->order_by('PREFIX_ID', 'DESC');
         $this->db->limit(2, 0);
 
         $query = $this->db->get($this->table_name);
 
         if ($query->num_rows() > 0)
         {
-            return $query->row()->SPORT_ID + 1;
+            return $query->row()->PREFIX_ID + 1;
         }
         else
         {
@@ -103,15 +103,15 @@ class Model_gms_prefix extends CI_Model {
     */
     public function get_last_id()
     {
-        $this->db->select('SPORT_ID');
-        $this->db->order_by('SPORT_ID', 'DESC');
+        $this->db->select('PREFIX_ID');
+        $this->db->order_by('PREFIX_ID', 'DESC');
         $this->db->limit(2, 0);
 
         $query = $this->db->get($this->table_name);
 
         if ($query->num_rows() > 0)
         {
-            return $query->row()->SPORT_ID;
+            return $query->row()->PREFIX_ID;
         }
         else
         {
@@ -121,7 +121,9 @@ class Model_gms_prefix extends CI_Model {
 
     public function insert($data)
     {
-        $data['SPORT_ID'] = $this->get_inserting_id();
+        $data['PREFIX_ID'] = $this->get_inserting_id();
+        $data['CREATE_BY'] = $this->session->userdata('LOGIN_USERNAME');
+        $data['UPDATE_BY'] = $this->session->userdata('LOGIN_USERNAME');
 
         return $this->db->insert($this->table_name, $this->permit_insert_params($data));
     }
@@ -130,12 +132,9 @@ class Model_gms_prefix extends CI_Model {
     {
         $model_data = $this->find_model($id)->row_array();
 
-        if (isset($data['SPORT_IMAGE']) === FALSE)
-        {
-            $data['SPORT_IMAGE'] = $model_data['SPORT_IMAGE'];
-        }
+        $data['UPDATE_BY'] = $this->session->userdata('LOGIN_USERNAME');
 
-        $this->db->where('SPORT_ID', $model_data['SPORT_ID']);
+        $this->db->where('PREFIX_ID', $model_data['PREFIX_ID']);
         return $this->db->update($this->table_name, $this->permit_update_params($data));
     }
 
@@ -143,7 +142,7 @@ class Model_gms_prefix extends CI_Model {
     {
         if ($this->find_model($id))
         {
-            $this->db->where('SPORT_ID', $id);
+            $this->db->where('PREFIX_ID', $id);
             return $this->db->delete($this->table_name);
         }
         else
@@ -154,23 +153,23 @@ class Model_gms_prefix extends CI_Model {
 
     public function permit_insert_params($data)
     {
-        return elements(['SPORT_ID',
-                        'TYPE_ID',
-                        'SPORT_CODE',
-                        'SPORT_SUBJECT',
-                        'SPORT_STATUS',
-                        'SPORT_IMAGE',
+        return elements(['PREFIX_ID',
+                        'PREFIX_TH',
+                        'PREFIX_TH_SH',
+                        'PREFIX_EN',
+                        'PREFIX_EN_SH',
+                        'PREFIX_STATUS',
                         'CREATE_BY',
                         'UPDATE_BY'], $data, NULL);
     }
 
     public function permit_update_params($data)
     {
-        return elements(['TYPE_ID',
-                        'SPORT_CODE',
-                        'SPORT_SUBJECT',
-                        'SPORT_STATUS',
-                        'SPORT_IMAGE',
+        return elements(['PREFIX_TH',
+                        'PREFIX_TH_SH',
+                        'PREFIX_EN',
+                        'PREFIX_EN_SH',
+                        'PREFIX_STATUS',
                         'UPDATE_BY'], $data, NULL);
     }
 
@@ -188,7 +187,7 @@ class Model_gms_prefix extends CI_Model {
     */
     private function find_model($id)
     {
-        $this->db->where('SPORT_ID', $id);
+        $this->db->where('PREFIX_ID', $id);
         $query = $this->db->get($this->table_name);
 
         if ($query->num_rows() > 0)
