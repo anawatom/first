@@ -19,6 +19,8 @@ class model_gms_cancel_result extends CI_Model {
 		parent::__construct();
 		date_default_timezone_set('Asia/Bangkok');
 
+		$this->load->helper('date');
+
 		$this->table_name = 'GMS_CANCEL_RESULT';
 		$this->primary_key = 'CANCEL_ID';
 	}
@@ -118,7 +120,9 @@ class model_gms_cancel_result extends CI_Model {
 	{
 		$data[$this->primary_key] = $this->get_inserting_id();
 		$data['CREATE_BY'] = $this->session->userdata('LOGIN_USERNAME');
+		$data['CREATE_DATE'] = get_oracle_current_timestamp();
 		$data['UPDATE_BY'] = $this->session->userdata('LOGIN_USERNAME');
+		$data['UPDATE_DATE'] = get_oracle_current_timestamp();
 
 		return $this->db->insert($this->table_name, $this->permit_insert_params($data));
 	}
@@ -128,6 +132,7 @@ class model_gms_cancel_result extends CI_Model {
 		$model_data = $this->find_model($id)->row_array();
 
 		$data['UPDATE_BY'] = $this->session->userdata('LOGIN_USERNAME');
+		$data['UPDATE_DATE'] = get_oracle_current_timestamp();
 
 		$this->db->where($this->primary_key, $model_data[$this->primary_key]);
 		return $this->db->update($this->table_name, $this->permit_update_params($data));
@@ -153,7 +158,9 @@ class model_gms_cancel_result extends CI_Model {
 							'CANCEL_SUBJECT',
 							'CANCEL_STATUS',
 							'CREATE_BY',
-							'UPDATE_BY'], $data, $default_value);
+							'CREATE_DATE',
+							'UPDATE_BY',
+							'UPDATE_DATE'], $data, $default_value);
 	}
 
 	public function permit_update_params($data, $default_value = NULL)
@@ -161,8 +168,6 @@ class model_gms_cancel_result extends CI_Model {
 		return elements(['CANCEL_CODE',
 						'CANCEL_SUBJECT',
 						'CANCEL_STATUS',
-						'CREATE_BY',
-						'CREATE_DATE',
 						'UPDATE_BY',
 						'UPDATE_DATE'], $data, $default_value);
 	}
