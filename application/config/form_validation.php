@@ -49,8 +49,26 @@ $config = array(
 					'label' => 'สถานะ',
 					'rules' => 'required|trim'
 				)
+			),
+			'gms_cancel_result' => array(
+				array(
+					'field' => 'CANCEL_CODE',
+					'label' => 'lang:GMS_CANCEL_RESULT_CANCEL_CODE',
+					'rules' => 'required|max_length[2]|is_natural|trim'
+				),
+				array(
+					'field' => 'CANCEL_SUBJECT',
+					'label' => 'lang:GMS_CANCEL_RESULT_CANCEL_SUBJECT',
+					'rules' => 'required|trim'
+				),
+				array(
+					'field' => 'CANCEL_STATUS',
+					'label' => 'lang:GMS_CANCEL_RESULT_CANCEL_STATUS',
+					'rules' => 'required|trim'
+				)
 			)
 	);
+
 
 /* End of file form_validation.php */
 /* Location: ./application/config/form_validation.php */
