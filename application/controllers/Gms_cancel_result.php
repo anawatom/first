@@ -80,7 +80,7 @@ class Gms_cancel_result extends CI_Controller {
 	public function update($id)
 	{
 		$this->breadcrumbs->push($this->config->item('dashboard_icon').' Dashboard', 'dashboard');
-		$this->breadcrumbs->push('ข้อมูคำนำหน้านาม', 'cancel_result/index');
+		$this->breadcrumbs->push('ข้อมูลเหตุผลที่ไม่อนุมัติ', 'cancel_result/index');
 		$this->breadcrumbs->push('แก้ไขเหตุผลที่ไม่อนุมัติ', 'cancel_result/update'.$id);
 
 		$page_var = [
