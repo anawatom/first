@@ -66,6 +66,13 @@ $config = array(
 					'label' => 'lang:GMS_CANCEL_RESULT_CANCEL_STATUS',
 					'rules' => 'required|trim'
 				)
+			),
+			'gms_term_position' => array(
+				array(
+					'field' => 'POSITION_NAME',
+					'label' => 'lang:GMS_TERM_POSITION_POSITION_NAME',
+					'rules' => 'required|trim'
+				)
 			)
 	);
 
