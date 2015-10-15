@@ -29,7 +29,7 @@
 	<div class="col-md-12">
 		<div class="box box-primary">
 			<div class="box-header">
-				<h3 class="box-title">ข้อมูลคำนำหน้านาม</h3>
+				<h3 class="box-title">ข้อมูลเหตุผลที่ไม่อนุมัติ'</h3>
 				<div class="box-tools pull-right">
 					<?php echo anchor('cancel_result/create', '<i class="fa fa-plus"></i>', 'class="btn btn-sm btn-default btn-create" title="เพิ่มข้อมูล"'); ?>
 				</div>
@@ -53,7 +53,7 @@
 														'class="btn btn-default btn-edit"'); ?>
 								<?php echo anchor(['cancel_result', 'delete', $row['CANCEL_ID']],
 														'<i class="fa fa-times"></i>',
-														'class="btn btn-default btn-edit" data-value="'.$row['CANCEL_ID'].'"'); ?>
+														'class="btn btn-default btn-delete" data-value="'.$row['CANCEL_ID'].'"'); ?>
 							</td>
 						</tr>
 					<?php endforeach; ?>
