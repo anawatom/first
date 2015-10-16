@@ -29,7 +29,8 @@
 				<i class="fa fa-dashboard"></i> <span>Dashboard</span>
 			</a>
 		</li>
-		<li class="treeview <?php echo ($active_menu === 'sports'
+		<li class="treeview <?php echo ($active_menu === 's01'
+										OR $active_menu === 'sports'
 										OR $active_menu === 'prefix'
 										OR $active_menu === 'cancel_result'
 										OR $active_menu === 'certificate_sign'
@@ -40,8 +41,8 @@
 				<i class="fa fa-angle-left pull-right"></i>
 			</a>
 			<ul class="treeview-menu">
-				<li>
-					<a href="<?php echo base_url(); ?>index.php/s01"> S01-ประเภทการฝึกอบรม</a>
+				<li class="<?php echo ($active_menu === 's01')? 'active': ''; ?>">
+					<?php echo anchor('index.php/s01', 'S01-ประเภทการฝึกอบรม'); ?>
 				</li>
 				<li class="<?php echo ($active_menu === 'sports')? 'active': ''; ?>">
 					<?php echo anchor('sports/index', 'S02-ชนิดกีฬา/การฝึกอบรม'); ?>

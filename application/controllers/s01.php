@@ -19,23 +19,27 @@ class S01 extends CI_Controller {
     }
 
     public function selectType() {
-        $this->load->view("lib/header");
+        // $this->load->view("lib/header");
 
+        $page_var = [];
         if (!$this->input->post('TYPE_CODE') and ! $this->input->post('TYPE_SUBJECT')) {
-            $data['type'] = $this->gms_type->_getAllType();
+            $page_var['type'] = $this->gms_type->_getAllType();
         } else {
             $this->gms_type->TYPE_CODE = $this->input->post('TYPE_CODE');
             $this->gms_type->TYPE_SUBJECT = $this->input->post('TYPE_SUBJECT');
-            $data['type'] = $this->gms_type->_getSearchType();
+            $page_var['type'] = $this->gms_type->_getSearchType();
         }
-        $this->load->view($this->dir . "/_select", $data);
-        $this->load->view("lib/footer");
+
+        $this->template->load('S01-ประเภทการฝึกอบรม', $this->dir . "/_select", $page_var);
+        // $this->load->view();
+        // $this->load->view("lib/footer");
     }
 
     public function insertType() {
-        $this->load->view("lib/header");
-        $this->load->view($this->dir . "/_insert");
-        $this->load->view("lib/footer");
+        // $this->load->view("lib/header");
+        // $this->load->view($this->dir . "/_insert");
+         $this->template->load('S01-ประเภทการฝึกอบรม', $this->dir . "/_insert");
+        // $this->load->view("lib/footer");
     }
 
     public function insertTypeExc() {
