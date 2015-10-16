@@ -90,7 +90,7 @@ class Gms_sports extends CI_Controller {
 				}
 				else
 				{
-					$this->session->set_flashdata('flash_message', ['message' => 'เกิดข้อผิดพลาด', 'status' => 'danger']);
+					$this->session->set_flashdata('flash_message', ['message' => 'เกิดข้อผิดพลาด', 'status' => 'error']);
 					redirect('sports/create', 'refresh');
 				}
 			}
@@ -150,7 +150,7 @@ class Gms_sports extends CI_Controller {
 				}
 				else
 				{
-					$this->session->set_flashdata('flash_message', ['message' => 'เกิดข้อผิดพลาด', 'status' => 'danger']);
+					$this->session->set_flashdata('flash_message', ['message' => 'เกิดข้อผิดพลาด', 'status' => 'error']);
 					redirect('sports/create', 'refresh');
 				}
 			}
@@ -169,7 +169,7 @@ class Gms_sports extends CI_Controller {
 		}
 		else
 		{
-			$this->session->set_flashdata('flash_message', ['message' => 'เกิดข้อผิดพลาด', 'status' => 'danger']);
+			$this->session->set_flashdata('flash_message', ['message' => 'เกิดข้อผิดพลาด', 'status' => 'error']);
 		}
 
 		redirect('/sports/index', 'refresh');

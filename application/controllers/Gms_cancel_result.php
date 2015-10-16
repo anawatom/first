@@ -70,7 +70,7 @@ class Gms_cancel_result extends CI_Controller {
 				}
 				else
 				{
-					$this->session->set_flashdata('flash_message', ['message' => 'เกิดข้อผิดพลาด', 'status' => 'danger']);
+					$this->session->set_flashdata('flash_message', ['message' => 'เกิดข้อผิดพลาด', 'status' => 'error']);
 					redirect('cancel_result/create', 'refresh');
 				}
 			}
@@ -114,7 +114,7 @@ class Gms_cancel_result extends CI_Controller {
 				}
 				else
 				{
-					$this->session->set_flashdata('flash_message', ['message' => 'เกิดข้อผิดพลาด', 'status' => 'danger']);
+					$this->session->set_flashdata('flash_message', ['message' => 'เกิดข้อผิดพลาด', 'status' => 'error']);
 					redirect('cancel_result/update/'.$id, 'refresh');
 				}
 			}
@@ -129,7 +129,7 @@ class Gms_cancel_result extends CI_Controller {
 		}
 		else
 		{
-			$this->session->set_flashdata('flash_message', ['message' => 'เกิดข้อผิดพลาด', 'status' => 'danger']);
+			$this->session->set_flashdata('flash_message', ['message' => 'เกิดข้อผิดพลาด', 'status' => 'error']);
 		}
 
 		redirect('cancel_result/index', 'refresh');

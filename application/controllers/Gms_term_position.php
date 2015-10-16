@@ -59,7 +59,7 @@ class Gms_term_position extends CI_Controller {
 				}
 				else
 				{
-					$this->session->set_flashdata('flash_message', ['message' => 'เกิดข้อผิดพลาด', 'status' => 'danger']);
+					$this->session->set_flashdata('flash_message', ['message' => 'เกิดข้อผิดพลาด', 'status' => 'error']);
 					redirect('term_position/create', 'refresh');
 				}
 			}
@@ -103,7 +103,7 @@ class Gms_term_position extends CI_Controller {
 				}
 				else
 				{
-					$this->session->set_flashdata('flash_message', ['message' => 'เกิดข้อผิดพลาด', 'status' => 'danger']);
+					$this->session->set_flashdata('flash_message', ['message' => 'เกิดข้อผิดพลาด', 'status' => 'error']);
 					redirect('term_position/update/'.$id, 'refresh');
 				}
 			}
@@ -118,7 +118,7 @@ class Gms_term_position extends CI_Controller {
 		}
 		else
 		{
-			$this->session->set_flashdata('flash_message', ['message' => 'เกิดข้อผิดพลาด', 'status' => 'danger']);
+			$this->session->set_flashdata('flash_message', ['message' => 'เกิดข้อผิดพลาด', 'status' => 'error']);
 		}
 
 		redirect('term_position/index', 'refresh');

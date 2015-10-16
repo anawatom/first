@@ -42,19 +42,6 @@
 				</section>
 				<!-- End Content Header (Page header) -->
 
-				<!-- Flash message -->
-				<?php if (isset($this->session) && !empty($this->session->flashdata('flash_message'))) : ?>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="alert alert-<?php echo $this->session->flashdata('flash_message')['status']; ?> alert-dismissible fade in" role="alert">
-								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-								<strong><?php echo $this->session->flashdata('flash_message')['message']; ?></strong>
-							</div>
-						</div>
-					</div>
-				<?php endif; ?>
-				<!-- End Flash message -->
-
 				<section class="content">
 					<?php echo $content; ?>
 				</section> <!-- /.content -->
@@ -67,6 +54,14 @@
 		<?php echo $script_tags; ?>
 		<script type="text/javascript">
 			$(function() {
+				<?php if (isset($this->session) && !empty($this->session->flashdata('flash_message'))) : ?>
+					$.notify('<?php echo $this->session->flashdata("flash_message")["message"]; ?>',
+								{
+									status: '<?php echo $this->session->flashdata("flash_message")["status"]; ?>',
+									timeout: 15000
+								});
+				<?php endif; ?>
+
 				$('.form-search').on('submit', function(event) {
 					var newact = $(this).attr('action') + '/0/'
 																							// $(this).serialize() outputs param1=value1&param2=value2 string

@@ -25,9 +25,10 @@ Class Template {
 		// Add the JavaScript and CSS Files
 		$this->addJS(base_url('js/jquery-1.11.3.min.js'));
 		$this->addJS(base_url('js/jquery-ui-1.10.3.min.js'));
-		$this->addJS(base_url('js/bootstrap.min.js'));
+		$this->addJS(base_url('js/bootstrap.js'));
 		$this->addJS(base_url('js/AdminLTE/app.js'));
 		$this->addJS(base_url('js/plugins/fullcalendar/fullcalendar.min.js'));
+		$this->addJS(base_url('js/notify-0.8.0/notify.js'));
 
 		// bootstrap 3.0.2
 		$this->addCSS(base_url('css/bootstrap.min.css'));
@@ -40,6 +41,7 @@ Class Template {
 		$this->addCSS(base_url('css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'));
 		$this->addCSS(base_url('css/AdminLTE.css'));
 		$this->addCSS(base_url('css/override.css'));
+		$this->addCSS(base_url('css/notify-0.8.0/notify.css'));
 	}
 
 	function load($page_header = '', $path, $data = NULL, $header_bar = TRUE, $menu = TRUE)
