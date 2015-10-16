@@ -42,7 +42,7 @@
 			</a>
 			<ul class="treeview-menu">
 				<li class="<?php echo ($active_menu === 's01')? 'active': ''; ?>">
-					<?php echo anchor('index.php/s01', 'S01-ประเภทการฝึกอบรม'); ?>
+					<?php echo anchor('s01/index', 'S01-ประเภทการฝึกอบรม'); ?>
 				</li>
 				<li class="<?php echo ($active_menu === 'sports')? 'active': ''; ?>">
 					<?php echo anchor('sports/index', 'S02-ชนิดกีฬา/การฝึกอบรม'); ?>
