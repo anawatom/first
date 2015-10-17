@@ -84,6 +84,19 @@
 						window.location.replace($(this).attr('href'));
 					}
 				});
+
+				$('.has-preview[type="file"]').on('change', function(event) {
+					var input = $(this).get(0),
+						fileName = $(this).attr('name');
+
+					if (input.files && input.files[0]) {
+						var filerdr = new FileReader();
+						filerdr.onload = function (e) {
+							$('.image-preview[data-name="' + fileName + '"]').attr('src', e.target.result);
+						}
+						filerdr.readAsDataURL(input.files[0]);
+					}
+				});
 			});
 		</script>
 		<!-- End Script tags -->
