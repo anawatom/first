@@ -305,26 +305,46 @@
                     </form>
                     <!-- /.search form -->
                     <!-- sidebar menu: : style can be found in sidebar.less -->
+                    <?php $active_menu = $this->uri->segment(1); ?>
                     <ul class="sidebar-menu">
                         <li class="active">
                             <a href="<?php echo base_url(); ?>index.php/dashboard">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                             </a>
                         </li>
-                        <li class="treeview">
+                        <li class="treeview <?php echo ($active_menu === 's01'
+                                        OR $active_menu === 'sports'
+                                        OR $active_menu === 'prefix'
+                                        OR $active_menu === 'cancel_result'
+                                        OR $active_menu === 'certificate_sign'
+                                        OR $active_menu === 'term_position')? 'active': ''; ?>">
                             <a href="#">
                                 <i class="fa fa-bar-chart-o"></i>
                                 <span>ตารางรหัส</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="<?php echo base_url(); ?>index.php/s01"> S01-ประเภทการฝึกอบรม</a></li>
-<!--                                <li><a href="<?php echo base_url(); ?>index.php/s02"> S02-ชนิดกีฬา/การฝึก</a></li>-->
-                                <li><a href="<?php echo base_url(); ?>index.php/s03"> S03-หลักสูตรและวิทยากร</a></li>
-<!--                                <li><a href="<?php echo base_url(); ?>index.php/s04"> S04-คำนำหน้านาม</a></li>-->
-<!--                                <li><a href="<?php echo base_url(); ?>index.php/s05"> S05-เหตุผลการไม่อนุมัติ</a></li>-->
-<!--                                <li><a href="<?php echo base_url(); ?>index.php/s06"> S06-ผู้มีอำนาจลงนาม</a></li>-->
-<!--                                <li><a href="<?php echo base_url(); ?>index.php/s07"> S07-ตำแหน่งในรุ่นฝึกอบรม</a></li>-->
+                                <li class="<?php echo ($active_menu === 's01')? 'active': ''; ?>">
+                                    <?php echo anchor('s01/index', 'S01-ประเภทการฝึกอบรม'); ?>
+                                </li>
+                                <li class="<?php echo ($active_menu === 'sports')? 'active': ''; ?>">
+                                    <?php echo anchor('sports/index', 'S02-ชนิดกีฬา/การฝึกอบรม'); ?>
+                                </li>
+                                <li>
+                                    <a href="<?php echo base_url(); ?>index.php/s03"> S03-หลักสูตรและวิทยากร</a>
+                                </li>
+                                <li class="<?php echo ($active_menu === 'prefix')? 'active': ''; ?>">
+                                    <?php echo anchor('prefix/index', 'S04-คำนำหน้านาม'); ?>
+                                </li>
+                                <li class="<?php echo ($active_menu === 'cancel_result')? 'active': ''; ?>">
+                                    <?php echo anchor('cancel_result/index', 'S05-เหตุผลการไม่อนุมัติ'); ?>
+                                </li>
+                                <li class="<?php echo ($active_menu === 'certificate_sign')? 'active': ''; ?>">
+                                    <?php echo anchor('certificate_sign/index', 'S06-ผู้มีอำนาจลงนาม'); ?>
+                                </li>
+                                <li class="<?php echo ($active_menu === 'term_position')? 'active': ''; ?>">
+                                    <?php echo anchor('term_position/index', 'S07-ตำแหน่งในรุ่นฝึกอบรม'); ?>
+                                </li>
                             </ul>
                         </li> 
                         <li class="treeview">
