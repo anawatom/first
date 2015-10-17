@@ -44,6 +44,12 @@ $route['404_override'] = '';
 // Dashboard
 $route['dashboard/index'] = 'dashboard/index';
 
+// Amphur
+$route['amphur/get_html_options/(:num)'] = 'amphur/get_html_options/$1';
+
+// Tumbol
+$route['tumbol/get_html_options/(:num)'] = 'tumbol/get_html_options/$1';
+
 // Gms_sports
 $route['sports/index'] = 'gms_sports/index/$1';
 $route['sports/index/(:num)'] = 'gms_sports/index/$1';
@@ -88,6 +94,15 @@ $route['term_position/create'] = 'gms_term_position/create';
 $route['term_position/update/(:num)'] = 'gms_term_position/update/$1';
 $route['term_position/view/(:num)'] = 'gms_term_position/view/$1';
 $route['term_position/delete/(:num)'] = 'gms_term_position/delete/$1';
+
+// Gms_work
+// for gms_member
+$route['member/(:num)/work/index'] = 'gms_work/index_for_member/$1/$2';
+$route['member/(:num)/work/index/(:num)'] = 'gms_work/index_for_member/$1/$2';
+$route['work/create/(:any)'] = 'gms_work/create';
+$route['work/update/(:num)'] = 'gms_work/update$1';
+$route['work/view/(:num)'] = 'gms_work/view$1';
+$route['work/delete/(:num)'] = 'gms_work/delete$1';
 
 
 /* End of file routes.php */
