@@ -26,9 +26,12 @@ Class Template {
 		$this->addJS(base_url('js/jquery-1.11.3.min.js'));
 		$this->addJS(base_url('js/jquery-ui-1.10.3.min.js'));
 		$this->addJS(base_url('js/bootstrap.js'));
+		$this->addJS(base_url('js/bootstrap-datepicker-1.4.0/js/bootstrap-datepicker.js'));
+		$this->addJS(base_url('js/bootstrap-datepicker-1.4.0/locales/bootstrap-datepicker.th.min.js'));
 		$this->addJS(base_url('js/AdminLTE/app.js'));
 		$this->addJS(base_url('js/plugins/fullcalendar/fullcalendar.min.js'));
 		$this->addJS(base_url('js/notify-0.8.0/notify.js'));
+		$this->addJS(base_url('js/main.js'));
 
 		// bootstrap 3.0.2
 		$this->addCSS(base_url('css/bootstrap.min.css'));
@@ -37,15 +40,15 @@ Class Template {
 		$this->addCSS(base_url('css/morris/morris.css'));
 		$this->addCSS(base_url('css/jvectormap/jquery-jvectormap-1.2.2.css'));
 		$this->addCSS(base_url('css/fullcalendar/fullcalendar.css'));
-		$this->addCSS(base_url('css/daterangepicker/daterangepicker-bs3.css'));
 		$this->addCSS(base_url('css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'));
 		$this->addCSS(base_url('css/AdminLTE.css'));
+		$this->addCSS(base_url('css/bootstrap-datepicker-1.4.0/bootstrap-datepicker.css'));
 		$this->addCSS(base_url('css/notify-0.8.0/notify.css'));
 		$this->addCSS(base_url('css/style.css'));
 		$this->addCSS(base_url('css/override.css'));
 	}
 
-	function load($page_header = '', $path, $data = NULL, $header_bar = TRUE, $menu = TRUE)
+	function load($page_header = '', $path, $data = NULL, $options_param = [])
 	{
 		if ( ! file_exists(APPPATH.'views/'.$path.'.php') )
 		{
@@ -53,31 +56,47 @@ Class Template {
 		}
 		else
 		{
+			$options = [];
+			$default_options = ['header_bar' => TRUE, 
+								'menu' => TRUE, 
+								'layout' => TRUE];
+			$options = array_merge($default_options, $options_param);
+
 			$this->load_JS_and_css();
 			$this->init_menu();
 
-			$this->data['page_header'] = $page_header;
-			if ($header_bar === TRUE)
+			$this->data['page_var'] = $data;
+			if ($options['layout'] === FALSE)
 			{
-				$this->data['header_bar'] = $this->ci->load->view('templates/header_bar.php', $this->data, true);
+				$this->data['content'] = $this->ci->load->view($path.'.php', $this->data, true);
+				$this->ci->load->view('templates/no_layout.php', $this->data);
+				return false;
 			}
 			else
 			{
-				$this->data['header_bar'] = '';
-			}
+				$this->data['page_header'] = $page_header;
+				if ($options['header_bar'] === TRUE)
+				{
+					$this->data['header_bar'] = $this->ci->load->view('templates/header_bar.php', $this->data, true);
+				}
+				else
+				{
+					$this->data['header_bar'] = '';
+				}
 
-			if ($menu === TRUE)
-			{
-				$this->data['menu'] = $this->ci->load->view('templates/menu.php', ['active_menu' => $this->ci->uri->segment(1)], true);
-			}
-			else 
-			{
-				$this->data['menu'] = '';
-			}
+				if ($options['menu'] === TRUE)
+				{
+					$this->data['menu'] = $this->ci->load->view('templates/menu.php', ['active_menu' => $this->ci->uri->segment(1)], true);
+				}
+				else 
+				{
+					$this->data['menu'] = '';
+				}
 
-			$this->data['page_var'] = $data;
-			$this->data['content'] = $this->ci->load->view($path.'.php', $this->data, true);
-			$this->ci->load->view('templates/main.php', $this->data);
+				$this->data['content'] = $this->ci->load->view($path.'.php', $this->data, true);
+				$this->ci->load->view('templates/main.php', $this->data);
+				return false;
+			}
 		}
 	}
 
