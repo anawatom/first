@@ -1,4 +1,4 @@
-<?php echo form_open('cancel_result/index', ['method' => 'GET', 'class' => 'form-search']) ?>
+<?php echo form_open('certificate_sign/index', ['method' => 'GET', 'class' => 'form-search']) ?>
 	<div class="box box-solid box-primary">
 		<div class="box-header">
 			<h3 class="box-title">เงื่อนไขการค้นหา</h3>
@@ -41,9 +41,17 @@
 						<tr>
 							<td><?php echo $row['SIGN_ID']; ?></td>
 							<td><?php echo $row['GENERAL_NAME']; ?></td>
-							<td><?php echo $row['GENERAL_SIGN']; ?></td>
+							<td>
+								<?php echo get_element_image( empty($row['GENERAL_SIGN']) === TRUE ?
+																'':
+																base_url('uploads/images/gms_certificate_sign/'.$row['GENERAL_SIGN']) ); ?>
+							</td>
 							<td><?php echo $row['MANAGER_NAME']; ?></td>
-							<td><?php echo $row['MANAGER_SIGN']; ?></td>
+							<td>
+								<?php echo get_element_image( empty($row['MANAGER_SIGN']) === TRUE ?
+																'':
+																base_url('uploads/images/gms_certificate_sign/'.$row['MANAGER_SIGN']) ); ?>
+							</td>
 							<td>
 								<?php echo anchor('certificate_sign/update/'.$row['SIGN_ID'],
 														'<i class="fa fa-edit"></i>',
