@@ -128,7 +128,7 @@ class Gms_sports extends CI_Controller {
 				$data = $this->input->post(NULL, TRUE);
 				$data['UPDATE_BY'] = $this->session->userdata('LOGIN_USERNAME');
 
-				if (empty($_FILES['SPORT_IMAGE']) === FALSE)
+				if ($_FILES['SPORT_IMAGE']['error'] !== 4)
 				{
 					$this->load->helper('upload_form');
 					$result_upload = upload_image('SPORT_IMAGE', 'gms_sport', $id);
