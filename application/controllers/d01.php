@@ -19,7 +19,7 @@ class D01 extends CI_Controller {
         $this->load->model('model_province', 'province');
         $this->load->model('model_amphur', 'amphur');
         $this->load->model('model_tumbol', 'tumbol');
-        $this->load->model('model_certificate_sign', 'certificate_sign');
+        $this->load->model('model_gms_certificate_sign', 'certificate_sign');
         $this->load->model('model_gms_director_course', 'director_course');
         $this->load->model('model_gms_director_term', 'director_term');
         $this->load->model('model_gms_blog', 'gms_blog');
