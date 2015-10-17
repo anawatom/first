@@ -12,12 +12,15 @@
 			<div class="form-group require">
 				<?php echo lang('GMS_CERTIFICATE_SIGN_GENERAL_SIGN', 'GENERAL_SIGN'); ?>
 				<?php echo form_upload(['name' => 'GENERAL_SIGN', 
-										'class' => '']); ?>
+										'class' => 'has-preview']); ?>
 				<?php echo form_error('GENERAL_SIGN'); ?>
-				<?php echo isset($page_var['upload_error'])? $page_var['upload_error']: ''; ?>
+				<?php echo isset($page_var['upload_error']['GENERAL_SIGN'])? $page_var['upload_error']['GENERAL_SIGN']: ''; ?>
 			</div>
 			<div class="form-group text-left">
-				<img src="<?php echo isset($page_var['model']['GENERAL_SIGN']) ? base_url('uploads/images/gms_certificate_sign/'.$page_var['model']['GENERAL_SIGN']) : base_url('img/no_image.png'); ?>" height="180" id="imgprvw" alt="uploaded image preview" name="pPicture">
+				<?php echo get_element_image_preview( (isset($page_var['model']['GENERAL_SIGN']) === FALSE) ? 
+															'' :
+															base_url('uploads/images/gms_certificate_sign/'.$page_var['model']['GENERAL_SIGN']),
+														'GENERAL_SIGN' ); ?>
 			</div>
 			<div class="form-group require">
 				<?php echo lang('GMS_CERTIFICATE_SIGN_MANAGER_NAME', 'MANAGER_NAME'); ?>
@@ -26,23 +29,29 @@
 			</div>
 			<div class="form-group require">
 				<?php echo lang('GMS_CERTIFICATE_SIGN_MANAGER_SIGN', 'MANAGER_SIGN'); ?>
-				<?php echo form_upload(['name' => 'SPORT_IMAGE', 
-										'class' => '']); ?>
+				<?php echo form_upload(['name' => 'MANAGER_SIGN', 
+										'class' => 'has-preview']); ?>
 				<?php echo form_error('MANAGER_SIGN'); ?>
-				<?php echo isset($page_var['upload_error'])? $page_var['upload_error']: ''; ?>
+				<?php echo isset($page_var['upload_error']['MANAGER_SIGN'])? $page_var['upload_error']['MANAGER_SIGN']: ''; ?>
 			</div>
 			<div class="form-group text-left">
-				<img src="<?php echo isset($page_var['model']['MANAGER_SIGN']) ? base_url('uploads/images/gms_sport/'.$page_var['model']['MANAGER_SIGN']) : base_url('img/no_image.png'); ?>" height="180" id="imgprvw" alt="uploaded image preview" name="pPicture">
+				<?php echo get_element_image_preview( (isset($page_var['model']['MANAGER_SIGN']) === FALSE) ? 
+															'' :
+															base_url('uploads/images/gms_certificate_sign/'.$page_var['model']['MANAGER_SIGN']),
+														'MANAGER_SIGN' ); ?>
 			</div>
 			<div class="form-group require">
 				<?php echo lang('GMS_CERTIFICATE_SIGN_TEMPLATE_USE', 'TEMPLATE_USE'); ?>
 				<?php echo form_upload(['name' => 'TEMPLATE_USE', 
-										'class' => '']); ?>
+										'class' => 'has-preview']); ?>
 				<?php echo form_error('TEMPLATE_USE'); ?>
-				<?php echo isset($page_var['upload_error'])? $page_var['upload_error']: ''; ?>
+				<?php echo isset($page_var['upload_error']['TEMPLATE_USE'])? $page_var['upload_error']['TEMPLATE_USE']: ''; ?>
 			</div>
 			<div class="form-group text-left">
-				<img src="<?php echo isset($page_var['model']['TEMPLATE_USE']) ? base_url('uploads/images/gms_sport/'.$page_var['model']['TEMPLATE_USE']) : base_url('img/no_image.png'); ?>" height="180" id="imgprvw" alt="uploaded image preview" name="pPicture">
+				<?php echo get_element_image_preview( (isset($page_var['model']['TEMPLATE_USE']) === FALSE) ? 
+															'' :
+															base_url('uploads/images/gms_certificate_sign/'.$page_var['model']['TEMPLATE_USE']),
+														'TEMPLATE_USE' ); ?>
 			</div>
 		</div>
 		<div class="box-footer text-center">

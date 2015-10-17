@@ -57,8 +57,7 @@ class Gms_certificate_sign extends CI_Controller {
 		}
 		else
 		{
-			$this->form_validation->set_rules($this->config->item('gms_certificate_sign'));
-
+			$this->form_validation->set_rules($this->config->item('gms_certificate_sign')['create']);
 
 			if ($this->form_validation->run() === FALSE)
 			{
@@ -67,23 +66,48 @@ class Gms_certificate_sign extends CI_Controller {
 			}
 			else
 			{
+				$data = $this->input->post(NULL, TRUE);
+
 				// Upload image
 				$this->load->helper('upload_form');
 
-				// GENERAL_SIGN
-				// MANAGER_SIGN
-				// TEMPLATE_USE
-				$result_upload = upload_image('SPORT_IMAGE', 'gms_sport');
-
-				if ($result_upload['status'] === FALSE)
+				$result_upload_general_sign = upload_image('GENERAL_SIGN', 'gms_certificate_sign');
+				if ($result_upload_general_sign['status'] === FALSE)
 				{
-					$page_var['upload_error'][''] = $result_upload['data'];
-					$this->template->load('เพิ่มชนิดกีฬา/ชนิดการฝึกอบรม', 'gms_sports/create', $page_var);
-				} else {
-					$data['SPORT_IMAGE'] = $result_upload['data']['file_name'];
+					$page_var['upload_error']['GENERAL_SIGN'] = $result_upload_general_sign['data'];
+					$this->template->load('S06-ผู้มีอำนาจลงนาม', 'gms_certificate_sign/create', $page_var);
+					return false;
+				} 
+				else 
+				{
+					$data['GENERAL_SIGN'] = $result_upload_general_sign['data']['file_name'];
 				}
 
-				$data = $this->input->post(NULL, TRUE);
+				$result_upload_manager_sign = upload_image('MANAGER_SIGN', 'gms_certificate_sign');
+				if ($result_upload_manager_sign['status'] === FALSE)
+				{
+					$page_var['upload_error']['MANAGER_SIGN'] = $result_upload_manager_sign['data'];
+					$this->template->load('S06-ผู้มีอำนาจลงนาม', 'gms_certificate_sign/create', $page_var);
+					return false;
+				}
+				else
+				{
+					$data['MANAGER_SIGN'] = $result_upload_manager_sign['data']['file_name'];
+				}
+
+				$result_upload_template_use = upload_image('TEMPLATE_USE', 'gms_certificate_sign');
+				if ($result_upload_template_use['status'] === FALSE)
+				{
+					$page_var['upload_error']['TEMPLATE_USE'] = $result_upload_template_use['data'];
+					$this->template->load('S06-ผู้มีอำนาจลงนาม', 'gms_certificate_sign/create', $page_var);
+					return false;
+				}
+				else
+				{
+					$data['TEMPLATE_USE'] = $result_upload_template_use['data']['file_name'];
+				}
+				// End upload images.
+
 				if ($this->gms_certificate_sign->insert($data) === TRUE)
 				{
 					$this->session->set_flashdata('flash_message', ['message' => 'ดำเนินการสำเร็จ', 'status' => 'success']);
@@ -110,7 +134,6 @@ class Gms_certificate_sign extends CI_Controller {
 		$this->breadcrumbs->push('ข้อมูลผู้มีอำนาจลงนาม', 'certificate_sign/index');
 		$this->breadcrumbs->push($page_var['form_header'], 'certificate_sign/update'.$id);
 
-
 		if ($this->input->post(NULL) === FALSE)
 		{
 			$this->template->load('S06-ผู้มีอำนาจลงนาม', 'gms_certificate_sign/update', $page_var);
@@ -118,7 +141,7 @@ class Gms_certificate_sign extends CI_Controller {
 		}
 		else
 		{
-			$this->form_validation->set_rules($this->config->item('gms_certificate_sign'));
+			$this->form_validation->set_rules($this->config->item('gms_certificate_sign')['update']);
 
 			if ($this->form_validation->run() == FALSE)
 			{
@@ -128,6 +151,67 @@ class Gms_certificate_sign extends CI_Controller {
 			else
 			{
 				$data = $this->input->post(NULL, TRUE);
+
+				// Upload images
+				$this->load->helper('upload_form');
+
+				if ($_FILES['GENERAL_SIGN']['error'] === 4)
+				{
+					$data['GENERAL_SIGN'] = $page_var['model']['GENERAL_SIGN'];
+				}
+				else
+				{
+					$result_upload_general_sign = upload_image('GENERAL_SIGN', 'gms_certificate_sign');
+					if ($result_upload_general_sign['status'] === FALSE)
+					{
+						$page_var['upload_error']['GENERAL_SIGN'] = $result_upload_general_sign['data'];
+						$this->template->load('S06-ผู้มีอำนาจลงนาม', 'gms_certificate_sign/create', $page_var);
+						return false;
+					} 
+					else 
+					{
+						$data['GENERAL_SIGN'] = $result_upload_general_sign['data']['file_name'];
+					}
+				}
+				
+				if ($_FILES['MANAGER_SIGN']['error'] === 4)
+				{
+					$data['MANAGER_SIGN'] = $page_var['model']['MANAGER_SIGN'];
+				}
+				else
+				{
+					$result_upload_manager_sign = upload_image('MANAGER_SIGN', 'gms_certificate_sign');
+					if ($result_upload_manager_sign['status'] === FALSE)
+					{
+						$page_var['upload_error']['MANAGER_SIGN'] = $result_upload_manager_sign['data'];
+						$this->template->load('S06-ผู้มีอำนาจลงนาม', 'gms_certificate_sign/create', $page_var);
+						return false;
+					}
+					else
+					{
+						$data['MANAGER_SIGN'] = $result_upload_manager_sign['data']['file_name'];
+					}
+				}
+
+				if ($_FILES['TEMPLATE_USE']['error'] === 4)
+				{
+					$data['TEMPLATE_USE'] = $page_var['model']['TEMPLATE_USE'];
+				}
+				else
+				{
+					$result_upload_template_use = upload_image('TEMPLATE_USE', 'gms_certificate_sign');
+					if ($result_upload_template_use['status'] === FALSE)
+					{
+						$page_var['upload_error']['TEMPLATE_USE'] = $result_upload_template_use['data'];
+						$this->template->load('S06-ผู้มีอำนาจลงนาม', 'gms_certificate_sign/create', $page_var);
+						return false;
+					}
+					else
+					{
+						$data['TEMPLATE_USE'] = $result_upload_template_use['data']['file_name'];
+					}
+				}
+				// End upload images.
 
 				if ($this->gms_certificate_sign->update($id, $data) === TRUE)
 				{
@@ -155,6 +239,11 @@ class Gms_certificate_sign extends CI_Controller {
 		}
 
 		redirect('certificate_sign/index', 'refresh');
+	}
+
+	public function check_uploaded_image($str, $param)
+	{
+		return check_uploaded_image($param);
 	}
 
 }

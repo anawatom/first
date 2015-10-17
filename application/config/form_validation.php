@@ -68,30 +68,44 @@ $config = array(
 				)
 			),
 			'gms_certificate_sign' => array(
-				array(
-					'field' => 'GENERAL_NAME',
-					'label' => 'lang:GMS_CERTIFICATE_SIGN_GENERAL_NAME',
-					'rules' => 'required|trim'
+				'create' => array(
+					array(
+						'field' => 'GENERAL_NAME',
+						'label' => 'lang:GMS_CERTIFICATE_SIGN_GENERAL_NAME',
+						'rules' => 'required|trim'
+					),
+					array(
+						'field' => 'GENERAL_SIGN',
+						'label' => 'lang:GMS_CERTIFICATE_SIGN_GENERAL_SIGN',
+						'rules' => 'callback_check_uploaded_image[GENERAL_SIGN]|trim'
+					),
+					array(
+						'field' => 'MANAGER_NAME',
+						'label' => 'lang:GMS_CERTIFICATE_SIGN_MANAGER_NAME',
+						'rules' => 'required|trim'
+					),
+					array(
+						'field' => 'MANAGER_SIGN',
+						'label' => 'lang:GMS_CERTIFICATE_SIGN_MANAGER_SIGN',
+						'rules' => 'callback_check_uploaded_image[MANAGER_SIGN]|trim'
+					),
+					array(
+						'field' => 'TEMPLATE_USE',
+						'label' => 'lang:GMS_CERTIFICATE_SIGN_TEMPLATE_USE',
+						'rules' => 'callback_check_uploaded_image[TEMPLATE_USE]|trim'
+					)
 				),
-				array(
-					'field' => 'GENERAL_SIGN',
-					'label' => 'lang:GMS_CERTIFICATE_SIGN_GENERAL_SIGN',
-					'rules' => 'required|trim'
-				),
-				array(
-					'field' => 'MANAGER_NAME',
-					'label' => 'lang:GMS_CERTIFICATE_SIGN_MANAGER_NAME',
-					'rules' => 'required|trim'
-				),
-				array(
-					'field' => 'MANAGER_SIGN',
-					'label' => 'lang:GMS_CERTIFICATE_SIGN_MANAGER_SIGN',
-					'rules' => 'required|trim'
-				),
-				array(
-					'field' => 'TEMPLATE_USE',
-					'label' => 'lang:GMS_CERTIFICATE_SIGN_TEMPLATE_USE',
-					'rules' => 'required|trim'
+				'update' => array(
+					array(
+						'field' => 'GENERAL_NAME',
+						'label' => 'lang:GMS_CERTIFICATE_SIGN_GENERAL_NAME',
+						'rules' => 'required|trim'
+					),
+					array(
+						'field' => 'MANAGER_NAME',
+						'label' => 'lang:GMS_CERTIFICATE_SIGN_MANAGER_NAME',
+						'rules' => 'required|trim'
+					)
 				)
 			),
 			'gms_term_position' => array(
