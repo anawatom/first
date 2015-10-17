@@ -91,8 +91,13 @@
 
 					if (input.files && input.files[0]) {
 						var filerdr = new FileReader();
+
 						filerdr.onload = function (e) {
-							$('.image-preview[data-name="' + fileName + '"]').attr('src', e.target.result);
+							if ( e.target.result.indexOf('image') === -1) {
+								$('.image-preview[data-name="' + fileName + '"]').attr('src', '<?php echo base_url("img/no_image.png"); ?>');
+							} else {
+								$('.image-preview[data-name="' + fileName + '"]').attr('src', e.target.result);
+							}
 						}
 						filerdr.readAsDataURL(input.files[0]);
 					}
