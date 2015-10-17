@@ -525,24 +525,50 @@ foreach ($page_var['member'] as $row) {
             <div class="box-header">
                 <h3 class="box-title">ข้อมูลการใช้งานในระบบ</h3>
             </div>
-
             <div role="tabpanel">
-
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">ประวัติการฝึกอบรม</a></li>
-                    <!--                            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">ประวัติการปฏิบัติงาน</a></li>-->
+                    <li role="presentation" class="active">
+                        <a href="#gmsHistory" aria-controls="gmsHistory" role="tab" data-toggle="tab">ประวัติการฝึกอบรม</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#gmsWork" aria-controls="gmsWork" role="tab" data-toggle="tab">ประวัติการปฏิบัติงาน</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#gmsDirectoryCourse" aria-controls="gmsDirectoryCourse" role="tab" data-toggle="tab">ประวัติวิทยากร</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#gmsDirectoryWork" aria-controls="gmsDirectoryWork" role="tab" data-toggle="tab">ประวัติการทำงาน</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#gmsDirectoryEdu" aria-controls="gmsDirectoryEdu" role="tab" data-toggle="tab">ประวัติการศึกษา</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#gmsDirectoryProduce" aria-controls="gmsDirectoryProduce" role="tab" data-toggle="tab">หัวข้อที่บรรยาย</a>
+                    </li>
                 </ul>
-
                 <!-- Tab panes -->
                 <div class="tab-content">
-                    <!-- <div role="tabpanel" class="tab-pane active" id="home">
-                        <iframe src="<?php echo base_url(); ?>index.php/<?php echo $this->router->class; ?>/searchHistory/<?php echo $id; ?>" width="100%" height="100%"></iframe>
-                    </div> -->
-                    <!--                            <div role="tabpanel" class="tab-pane" id="profile">uuuu</div>-->
+                    <div role="tabpanel" class="tab-pane active" id="gmsHistory">
+                        gmsHistory
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="gmsWork">
+                        gmsWork
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="gmsDirectoryCourse">
+                        gmsDirectoryCourse
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="gmsDirectoryWork">
+                        gmsDirectoryWork
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="gmsDirectoryEdu">
+                        gmsDirectoryEdu
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="gmsDirectoryProduce">
+                        gmsDirectoryProduce
+                    </div>
                 </div>
-
-            </div>
+            </div><!-- /role="tabpanel" -->
         </div>
     </div>
 </div>

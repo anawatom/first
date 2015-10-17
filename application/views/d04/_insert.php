@@ -574,7 +574,7 @@
             return false;
         }
         if (document.form1.FIRST_NAME.value == '') {
-            alert('กรุณากรอกช่ือ');
+            alert('กรุณากรอกชื่อ');
             document.form1.FIRST_NAME.focus();
             return false;
         }
@@ -584,7 +584,7 @@
             return false;
         }
         if (document.form1.FIRST_NAME_ENG.value == '') {
-            alert('กรุณากรอกช่ือ ENG');
+            alert('กรุณากรอกชื่อ ENG');
             document.form1.FIRST_NAME_ENG.focus();
             return false;
         }
