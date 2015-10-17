@@ -70,7 +70,7 @@ $autoload['libraries'] = array('global_variable',
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('array', 'url', 'form', 'html', 'language');
+$autoload['helper'] = array('array', 'url', 'form', 'form_validation', 'html', 'language');
 
 
 /*
