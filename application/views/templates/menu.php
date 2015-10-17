@@ -64,7 +64,7 @@
 				</li>
 			</ul>
 		</li> 
-		<li class="treeview">
+		<li class="treeview  <?php echo ($active_menu === 'd04')? 'active': ''; ?>">
 			<a href="#">
 				<i class="fa fa-laptop"></i>
 				<span>บันทึกข้อมูล</span>
@@ -74,7 +74,9 @@
 				<li><a href="<?php echo base_url(); ?>index.php/d01"> D01-หลักสูตรฝึกอบรม</a></li>
 				<li><a href="<?php echo base_url(); ?>index.php/d02"> D02-อนุมัติ/สละสิทธิ</a></li>
 				<li><a href="<?php echo base_url(); ?>index.php/d03"> D03-รายละเอียดหลักสูตร</a></li>
-				<li><a href="<?php echo base_url(); ?>index.php/d04"> D04-ทะเบียนประวัติ</a></li> 
+				<li class="<?php echo ($active_menu === 'd04')? 'active': ''; ?>">
+					<?php echo anchor('d04/index', 'D04-ทะเบียนประวัติ'); ?>
+				</li>
 			</ul>
 		</li>
 		<li class="treeview">

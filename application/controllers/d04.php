@@ -29,8 +29,6 @@ class D04 extends CI_Controller {
     }
 
     public function select($numL = 0) {
-        $this->load->view("lib/header");
-
         if ($this->input->post('search')) {
             $session = array(
                 'HRS_ID' => $this->input->post('HRS_ID'),
@@ -63,22 +61,20 @@ class D04 extends CI_Controller {
         $numF = 10;
         
         $data['type'] = $this->gms_type->_getAllType();
-        @$data['count'] = $this->gms_member->_selectCountViewMember();
-        @$data['member'] = $this->gms_member->_selectViewMember($numF, $numL);
+        $data['count'] = $this->gms_member->_selectCountViewMember();
+        $data['member'] = $this->gms_member->_selectViewMember($numF, $numL);
 
-        $this->load->view($this->dir . "/_select", $data);
-        $this->load->view("lib/footer");
+        $this->template->load('D04-ทะเบียนประวัติ', $this->dir . "/_select", $data);
     }
 
     public function insert() {
-        $this->load->view("lib/header");
         $data['prefix'] = $this->gms_prefix->_selectAllPrefix();
         $data['education'] = $this->osrt_education->_selectAllEducation();
         $data['province'] = $this->province->_getAllProvince();
         $data['class'] = $this->gms_class->_selectAllClass();
         $data['type'] = $this->gms_type->_getAllType();
-        $this->load->view($this->dir . "/_insert", $data);
-        $this->load->view("lib/footer");
+
+        $this->template->load('D04-ทะเบียนประวัติ', $this->dir . "/_insert", $data);
     }
 
     public function insertExc() {
@@ -179,7 +175,6 @@ class D04 extends CI_Controller {
     }
     
     public function updateMember($id){
-        $this->load->view("lib/header");
         $this->gms_member->MEMBER_ID = $id;
         $data['prefix'] = $this->gms_prefix->_selectAllPrefix();
         $data['education'] = $this->osrt_education->_selectAllEducation();
@@ -188,8 +183,8 @@ class D04 extends CI_Controller {
         $data['type'] = $this->gms_type->_getAllType();
         $data['member'] = $this->gms_member->_searchViewMember();
         $data['id'] = $id;
-        $this->load->view($this->dir . "/_update", $data);
-        $this->load->view("lib/footer");
+        
+        $this->template->load('D04-ทะเบียนประวัติ', $this->dir . "/_update", $data);
     }
     
     public function updateMemberExc(){
