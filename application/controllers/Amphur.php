@@ -18,7 +18,7 @@ class Amphur extends CI_Controller {
 
         $html = '<option value="" selected="true"></option>';
         foreach ($amphur as $row) {
-            $html .= '<option value="' . $row['AMPHUR_ID'] . '">' . $row['AMPHUR_NAME'] . '</option>';
+            $html .= '<option value="' . $row['AMPHUR_ID'] . '" data-province-id="'.$row['PROV_ID'].'">' . $row['AMPHUR_NAME'] . '</option>';
         }
         $result['data'] = $html;
 
