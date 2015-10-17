@@ -40,8 +40,9 @@ Class Template {
 		$this->addCSS(base_url('css/daterangepicker/daterangepicker-bs3.css'));
 		$this->addCSS(base_url('css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'));
 		$this->addCSS(base_url('css/AdminLTE.css'));
-		$this->addCSS(base_url('css/override.css'));
 		$this->addCSS(base_url('css/notify-0.8.0/notify.css'));
+		$this->addCSS(base_url('css/style.css'));
+		$this->addCSS(base_url('css/override.css'));
 	}
 
 	function load($page_header = '', $path, $data = NULL, $header_bar = TRUE, $menu = TRUE)
