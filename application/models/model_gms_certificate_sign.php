@@ -36,6 +36,12 @@ class Model_gms_certificate_sign extends CI_Model {
 		return $this->db->count_all($this->table_name);
 	}
 
+	public function get_search_rows($params)
+	{
+		$this->add_search_conditions($params);
+		return $this->db->count_all_results($this->table_name);
+	}
+
 	public function get_all($order_type = 'ASC')
 	{
 		$this->db->order_by($this->primary_key, $order_type);
