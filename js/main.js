@@ -37,7 +37,11 @@ $(function() {
 		event.preventDefault();
 
 		if (confirm('กรุณายืนยัน')) {
-			window.location.replace($(this).attr('href'));
+			if ($(this).attr('data-target') === '_parent') {
+				window.top.location.href = $(this).attr('href');
+			} else {
+				window.location.replace($(this).attr('href'));
+			}
 		}
 	});
 
