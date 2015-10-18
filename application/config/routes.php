@@ -104,6 +104,22 @@ $route['member/(:num)/work/create'] = 'gms_work/create_for_member/$1';
 $route['member/(:num)/work/update/(:num)'] = 'gms_work/update_for_member/$1/$2';
 $route['member/(:num)/work/delete/(:num)'] = 'gms_work/delete_for_member/$1/$2';
 
+// Gms_director_course
+// for gms_member
+$route['member/(:num)/director_course/index'] = 'gms_director_course/index_for_member/$1/$2';
+$route['member/(:num)/director_course/index/(:num)'] = 'gms_director_course/index_for_member/$1/$2';
+$route['member/(:num)/director_course/create'] = 'gms_director_course/create_for_member/$1';
+$route['member/(:num)/director_course/update/(:num)'] = 'gms_director_course/update_for_member/$1/$2';
+$route['member/(:num)/director_course/delete/(:num)'] = 'gms_director_course/delete_for_member/$1/$2';
+
+// Gms_director_work
+// for gms_member
+$route['member/(:num)/director_work/index'] = 'gms_director_work/index_for_member/$1/$2';
+$route['member/(:num)/director_work/index/(:num)'] = 'gms_director_work/index_for_member/$1/$2';
+$route['member/(:num)/director_work/create'] = 'gms_director_work/create_for_member/$1';
+$route['member/(:num)/director_work/update/(:num)'] = 'gms_director_work/update_for_member/$1/$2';
+$route['member/(:num)/director_work/delete/(:num)'] = 'gms_director_work/delete_for_member/$1/$2';
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
