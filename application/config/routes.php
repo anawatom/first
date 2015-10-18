@@ -120,6 +120,22 @@ $route['member/(:num)/director_work/create'] = 'gms_director_work/create_for_mem
 $route['member/(:num)/director_work/update/(:num)'] = 'gms_director_work/update_for_member/$1/$2';
 $route['member/(:num)/director_work/delete/(:num)'] = 'gms_director_work/delete_for_member/$1/$2';
 
+// Gms_director_edu
+// for gms_member
+$route['member/(:num)/director_edu/index'] = 'gms_director_edu/index_for_member/$1/$2';
+$route['member/(:num)/director_edu/index/(:num)'] = 'gms_director_edu/index_for_member/$1/$2';
+$route['member/(:num)/director_edu/create'] = 'gms_director_edu/create_for_member/$1';
+$route['member/(:num)/director_edu/update/(:num)'] = 'gms_director_edu/update_for_member/$1/$2';
+$route['member/(:num)/director_edu/delete/(:num)'] = 'gms_director_edu/delete_for_member/$1/$2';
+
+// Gms_director_produce
+// for gms_member
+$route['member/(:num)/director_produce/index'] = 'gms_director_produce/index_for_member/$1/$2';
+$route['member/(:num)/director_produce/index/(:num)'] = 'gms_director_produce/index_for_member/$1/$2';
+$route['member/(:num)/director_produce/create'] = 'gms_director_produce/create_for_member/$1';
+$route['member/(:num)/director_produce/update/(:num)'] = 'gms_director_produce/update_for_member/$1/$2';
+$route['member/(:num)/director_produce/delete/(:num)'] = 'gms_director_produce/delete_for_member/$1/$2';
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

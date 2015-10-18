@@ -181,7 +181,7 @@ $config = array(
 				array(
 					'field' => 'WORK_YR',
 					'label' => 'lang:GMS_DIRECTOR_WORK_WORK_YR',
-					'rules' => 'required|trim'
+					'rules' => 'required|max_length[4]|is_natural_no_zero|trim'
 				),
 				array(
 					'field' => 'WORK_POSITION',
@@ -194,6 +194,28 @@ $config = array(
 					'rules' => 'required|trim'
 				)
 			),
+			'gms_director_edu' => array(
+				array(
+					'field' => 'EDU_YR',
+					'label' => 'lang:GMS_DIRECTOR_EDU_EDU_YR',
+					'rules' => 'required|max_length[4]|is_natural_no_zero|trim'
+				),
+				array(
+					'field' => 'EDU_LEVEL',
+					'label' => 'lang:GMS_DIRECTOR_EDU_EDU_LEVEL',
+					'rules' => 'required|trim'
+				),
+				array(
+					'field' => 'EDU_DEPT',
+					'label' => 'lang:GMS_DIRECTOR_EDU_EDU_DEPT',
+					'rules' => 'required|trim'
+				),
+				array(
+					'field' => 'EDU_INSTITUTE',
+					'label' => 'lang:GMS_DIRECTOR_EDU_EDU_INSTITUTE',
+					'rules' => 'required|trim'
+				)
+			)
 	);
 
 
