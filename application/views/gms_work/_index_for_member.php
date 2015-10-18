@@ -2,7 +2,7 @@
 	<div class="col-md-12">
 		<div class="box box-primary">
 			<div class="box-header">
-				<h3 class="box-title">ทะเบียนประวัติ</h3>
+				<h3 class="box-title">ข้อมูลประวัติการปฏิบัติงาน</h3>
 				<div class="box-tools pull-right">
 					<?php echo anchor(['member', $page_var['member_id'], 'work', 'create'], 
 										'<i class="fa fa-plus"></i>', 
