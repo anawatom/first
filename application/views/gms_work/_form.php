@@ -11,7 +11,6 @@
 				<input type="text" name="WORK_YEAR" class="form-control" value="<?php echo set_form_value('WORK_YEAR', $page_var['model'], (date('Y') + 543)); ?>">
 				<?php echo form_error('WORK_YEAR'); ?>
 			</div>
-			<?php echo set_form_value('WORK_SUBJECT', $page_var['model']); ?>
 			<div class="form-group require">
 				<?php echo lang('GMS_WORK_WORK_SUBJECT', 'WORK_SUBJECT'); ?>
 				<input type="text" name="WORK_SUBJECT" class="form-control" value="<?php echo set_form_value('WORK_SUBJECT', $page_var['model']); ?>">
