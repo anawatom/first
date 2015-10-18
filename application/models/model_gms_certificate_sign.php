@@ -26,6 +26,12 @@ class Model_gms_certificate_sign extends CI_Model {
 		$this->primary_key = 'SIGN_ID';
 	}
 
+	public function _getAllCertificate(){
+		$this->db->order_by("SIGN_ID",'ASC');
+		$rs = $this->db->get('GMS_CERTIFICATE_SIGN');
+		return $rs->result_array();
+	}
+
 	public function find_by_id($id)
 	{
 		return $this->find_model($id)->row_array();
