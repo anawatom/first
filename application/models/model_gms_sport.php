@@ -60,6 +60,14 @@ class model_gms_sport extends CI_Model {
         return $rs->result_array();
     }
 
+    public function get_by_type_id($type_id = 0, $order_field = 'SPORT_ID', $order_type = 'ASC')
+    {
+        $this->db->where('TYPE_ID', $type_id);
+        $this->db->order_by($order_field, $order_type);
+
+        return $this->db->get($this->table_name)->result_array();
+    }
+
     public function fetch_data($limit = '0', $offset = '0', $order_type = 'ASC')
     {
         $this->db->from($this->table_name);
