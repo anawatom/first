@@ -215,6 +215,13 @@ $config = array(
 					'label' => 'lang:GMS_DIRECTOR_EDU_EDU_INSTITUTE',
 					'rules' => 'required|trim'
 				)
+			),
+			'gms_director_produce' => array(
+				array(
+					'field' => 'PROD_SUBJECT',
+					'label' => 'lang:GMS_DIRECTOR_PRODUCE_PROD_SUBJECT',
+					'rules' => 'required|trim'
+				)
 			)
 	);
 
