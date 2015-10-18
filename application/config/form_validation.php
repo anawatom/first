@@ -114,6 +114,68 @@ $config = array(
 					'label' => 'lang:GMS_TERM_POSITION_POSITION_NAME',
 					'rules' => 'required|trim'
 				)
+			),
+			'gms_work' => array(
+				array(
+					'field' => 'WORK_SUBJECT',
+					'label' => 'lang:GMS_WORK_WORK_SUBJECT',
+					'rules' => 'required|trim'
+				),
+				array(
+					'field' => 'WORK_YEAR',
+					'label' => 'lang:GMS_WORK_WORK_YEAR',
+					'rules' => 'required|trim'
+				),
+				array(
+					'field' => 'TYPE_ID',
+					'label' => 'ประเภทการฝึกอบรม',
+					'rules' => 'trim'
+				),
+				array(
+					'field' => 'SPORT_ID',
+					'label' => 'lang:GMS_WORK_SPORT_ID',
+					'rules' => 'trim'
+				),
+				array(
+					'field' => 'WORK_LEVEL',
+					'label' => 'lang:GMS_WORK_WORK_LEVEL',
+					'rules' => 'trim'
+				),
+				array(
+					'field' => 'WORK_TIME_START',
+					'label' => 'lang:GMS_WORK_WORK_TIME_START',
+					'rules' => 'trim'
+				),
+				array(
+					'field' => 'WORK_TIME_END',
+					'label' => 'lang:GMS_WORK_WORK_TIME_END',
+					'rules' => 'trim'
+				),
+				array(
+					'field' => 'WORK_DETAIL',
+					'label' => 'lang:GMS_WORK_WORK_DETAIL',
+					'rules' => 'trim'
+				),
+				array(
+					'field' => 'WORK_LOCATION',
+					'label' => 'lang:GMS_WORK_WORK_LOCATION',
+					'rules' => 'trim'
+				),
+				array(
+					'field' => 'PROVINCE_ID',
+					'label' => 'lang:GMS_WORK_PROVINCE_ID',
+					'rules' => 'trim'
+				),
+				array(
+					'field' => 'AMPHUR_ID',
+					'label' => 'lang:GMS_WORK_AMPHUR_ID',
+					'rules' => 'trim'
+				),
+				array(
+					'field' => 'TUMBOL_ID',
+					'label' => 'lang:GMS_WORK_TUMBOL_ID',
+					'rules' => 'trim'
+				)
 			)
 	);
 

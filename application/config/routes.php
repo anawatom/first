@@ -58,6 +58,7 @@ $route['sports/create'] = 'gms_sports/create';
 $route['sports/update/(:num)'] = 'gms_sports/update/$1';
 $route['sports/view/(:num)'] = 'gms_sports/view/$1';
 $route['sports/delete/(:num)'] = 'gms_sports/delete/$1';
+$route['sports/get_html_options_by_type_id/(:num)'] = 'gms_sports/get_html_options_by_type_id/$1';
 
 // Gms_prefix
 $route['prefix/index'] = 'gms_prefix/index/$1';
@@ -99,10 +100,9 @@ $route['term_position/delete/(:num)'] = 'gms_term_position/delete/$1';
 // for gms_member
 $route['member/(:num)/work/index'] = 'gms_work/index_for_member/$1/$2';
 $route['member/(:num)/work/index/(:num)'] = 'gms_work/index_for_member/$1/$2';
-$route['work/create/(:any)'] = 'gms_work/create';
-$route['work/update/(:num)'] = 'gms_work/update$1';
-$route['work/view/(:num)'] = 'gms_work/view$1';
-$route['work/delete/(:num)'] = 'gms_work/delete$1';
+$route['member/(:num)/work/create'] = 'gms_work/create_for_member/$1';
+$route['member/(:num)/work/update/(:num)'] = 'gms_work/update_for_member/$1/$2';
+$route['member/(:num)/work/delete/(:num)'] = 'gms_work/delete_for_member/$1/$2';
 
 
 /* End of file routes.php */
