@@ -174,6 +174,24 @@ class Gms_sports extends CI_Controller {
 
 		redirect('/sports/index', 'refresh');
 	}
+
+	/* **
+	* Ajax function
+	** */
+	public function get_html_options_by_type_id($type_id = 0)
+	{
+		$result = [];
+
+		$gms_sports = $this->gms_sport->get_by_type_id($type_id);
+
+		$html = '<option value="" selected="true"></option>';
+		foreach ($gms_sports as $row) {
+		$html .= '<option value="' . $row['SPORT_ID'] . '">' . $row['SPORT_SUBJECT'] . '</option>';
+		}
+		$result['data'] = $html;
+
+		$this->output->set_output(json_encode($result));
+	}
 }
 
 /* End of file Gms_sport.php */
