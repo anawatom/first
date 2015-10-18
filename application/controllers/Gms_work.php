@@ -23,8 +23,8 @@ class Gms_work extends CI_Controller {
 		$page_var = array();
 
 		$page_var['member_id'] = $member_id;
-		$page_var['pagination'] = init_pagination('/work/index', $this->gms_work->get_rows_by_member_id());
-		$page_var['gms_works'] = $this->gms_work->fetch_by_member_id($member_id, $page_var['pagination']->per_page, $offset);
+		$page_var['pagination'] = init_pagination('member/'.$member_id.'/work/index', $this->gms_work->get_rows_by_member_id($page_var['member_id']));
+		$page_var['gms_works'] = $this->gms_work->fetch_by_member_id($page_var['member_id'], $page_var['pagination']->per_page, $offset);
 
 		$this->template->load('', 'gms_work/_index_for_member', $page_var, ['layout' => FALSE]);
 	}
