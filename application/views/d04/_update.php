@@ -556,10 +556,10 @@ foreach ($page_var['member'] as $row) {
                         <iframe class="member-tab-iframe" src="<?php echo site_url(['member', $row['MEMBER_ID'], 'work', 'index']); ?>"></iframe>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="gmsDirectoryCourse">
-                        gmsDirectoryCourse
+                        <iframe class="member-tab-iframe" src="<?php echo site_url(['member', $row['MEMBER_ID'], 'director_course', 'index']); ?>"></iframe>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="gmsDirectoryWork">
-                        gmsDirectoryWork
+                         <iframe class="member-tab-iframe" src="<?php echo site_url(['member', $row['MEMBER_ID'], 'director_work', 'index']); ?>"></iframe>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="gmsDirectoryEdu">
                         gmsDirectoryEdu

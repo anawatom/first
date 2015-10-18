@@ -176,7 +176,24 @@ $config = array(
 					'label' => 'lang:GMS_WORK_TUMBOL_ID',
 					'rules' => 'trim'
 				)
-			)
+			),
+			'gms_director_work' => array(
+				array(
+					'field' => 'WORK_YR',
+					'label' => 'lang:GMS_DIRECTOR_WORK_WORK_YR',
+					'rules' => 'required|trim'
+				),
+				array(
+					'field' => 'WORK_POSITION',
+					'label' => 'lang:GMS_DIRECTOR_WORK_WORK_POSITION',
+					'rules' => 'required|trim'
+				),
+				array(
+					'field' => 'WORK_DEPT',
+					'label' => 'lang:GMS_DIRECTOR_WORK_WORK_DEPT',
+					'rules' => 'required|trim'
+				)
+			),
 	);
 
 
