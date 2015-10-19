@@ -52,7 +52,7 @@
 
 		<script type="text/javascript">
 			$(function() {
-				<?php if (isset($this->session) && !empty($this->session->flashdata('flash_message'))) : ?>
+				<?php if (isset($this->session) && ! $this->session->flashdata('flash_message')) : ?>
 					$.notify('<?php echo $this->session->flashdata("flash_message")["message"]; ?>',
 								{
 									status: '<?php echo $this->session->flashdata("flash_message")["status"]; ?>',
