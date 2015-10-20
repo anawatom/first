@@ -36,7 +36,8 @@ class Gms_director_work extends CI_Controller {
 		$this->breadcrumbs->push('ทะเบียนประวัติ', 'd04/updateMember/'.$page_var['model']['MEMBER_ID']);
 		$this->breadcrumbs->push($page_var['form_header'], 'director_work/create');
 
-		if (empty($this->input->post(NULL)) === TRUE)
+		$post_data = $this->input->post(NULL, TRUE);
+		if (empty($post_data) === TRUE)
 		{
 			$this->template->load('ประวัติการปฏิบัติงาน', 'gms_director_work/create', $page_var);
 			return false;
@@ -52,8 +53,7 @@ class Gms_director_work extends CI_Controller {
 			}
 			else
 			{
-				$data = $this->input->post(NULL, TRUE);
-				if ($this->gms_director_work->insert($data) === TRUE)
+				if ($this->gms_director_work->insert($post_data) === TRUE)
 				{
 					$this->session->set_flashdata('flash_message', ['message' => 'ดำเนินการสำเร็จ', 'status' => 'success']);
 					redirect('member/'.$member_id.'/director_work/update/'.$this->gms_director_work->get_last_id(), 'refresh');
@@ -79,7 +79,8 @@ class Gms_director_work extends CI_Controller {
 		$this->breadcrumbs->push('ทะเบียนประวัติ', 'd04/updateMember/'.$page_var['model']['MEMBER_ID']);
 		$this->breadcrumbs->push($page_var['form_header'], 'director_work/update');
 
-		if ($this->input->post(NULL) === FALSE)
+		$post_data = $this->input->post(NULL, TRUE);
+		if (empty($post_data) === TRUE)
 		{
 			$this->template->load('ประวัติการปฏิบัติงาน', 'gms_director_work/update', $page_var);
 			return false;
@@ -95,9 +96,7 @@ class Gms_director_work extends CI_Controller {
 			}
 			else
 			{
-				$data = $this->input->post(NULL, TRUE);
-
-				if ($this->gms_director_work->update($director_work_id, $data) === TRUE)
+				if ($this->gms_director_work->update($director_work_id, $post_data) === TRUE)
 				{
 					$this->session->set_flashdata('flash_message', ['message' => 'ดำเนินการสำเร็จ', 'status' => 'success']);
 					redirect('member/'.$member_id.'/director_work/update/'.$director_work_id, 'refresh');
