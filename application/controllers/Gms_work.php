@@ -45,9 +45,11 @@ class Gms_work extends CI_Controller {
 		$this->breadcrumbs->push('ทะเบียนประวัติ', 'd04/updateMember/'.$page_var['model']['MEMBER_ID']);
 		$this->breadcrumbs->push($page_var['form_header'], 'work/create');
 
-		if (empty($this->input->post(NULL)) === TRUE)
+		$post_data = $this->input->post(NULL, TRUE);
+		if (empty($post_data) === TRUE)
 		{
 			$this->template->load('ประวัติการปฏิบัติงาน', 'gms_work/create', $page_var);
+			return false;
 		}
 		else
 		{
@@ -56,11 +58,11 @@ class Gms_work extends CI_Controller {
 			if ($this->form_validation->run() === FALSE)
 			{
 				$this->template->load('ประวัติการปฏิบัติงาน', 'gms_work/create', $page_var);
+				return false;
 			}
 			else
 			{
-				$data = $this->input->post(NULL, TRUE);
-				if ($this->gms_work->insert($data) === TRUE)
+				if ($this->gms_work->insert($post_data) === TRUE)
 				{
 					$this->session->set_flashdata('flash_message', ['message' => 'ดำเนินการสำเร็จ', 'status' => 'success']);
 					redirect('member/'.$member_id.'/work/update/'.$this->gms_work->get_last_id(), 'refresh');
@@ -113,10 +115,11 @@ class Gms_work extends CI_Controller {
 		$this->breadcrumbs->push('ทะเบียนประวัติ', 'd04/updateMember/'.$page_var['model']['MEMBER_ID']);
 		$this->breadcrumbs->push($page_var['form_header'], 'work/update');
 
-		if ($this->input->post(NULL) === FALSE)
+		$post_data = $this->input->post(NULL, TRUE);
+		if (empty($post_data) === TRUE)
 		{
 			$this->template->load('ประวัติการปฏิบัติงาน', 'gms_work/update', $page_var);
-			return;
+			return false;
 		}
 		else
 		{
@@ -125,13 +128,11 @@ class Gms_work extends CI_Controller {
 			if ($this->form_validation->run() == FALSE)
 			{
 				$this->template->load('ประวัติการปฏิบัติงาน', 'gms_work/update', $page_var);
-				return;
+				return false;
 			}
 			else
 			{
-				$data = $this->input->post(NULL, TRUE);
-
-				if ($this->gms_work->update($work_id, $data) === TRUE)
+				if ($this->gms_work->update($work_id, $post_data) === TRUE)
 				{
 					$this->session->set_flashdata('flash_message', ['message' => 'ดำเนินการสำเร็จ', 'status' => 'success']);
 					redirect('member/'.$member_id.'/work/update/'.$work_id, 'refresh');
