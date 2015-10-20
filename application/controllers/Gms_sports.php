@@ -55,6 +55,7 @@ class Gms_sports extends CI_Controller {
 		if (empty($post_data) === TRUE)
 		{
 			$this->template->load('เพิ่มชนิดกีฬา/ชนิดการฝึกอบรม', 'gms_sports/create', $page_var);
+			return false;
 		}
 		else
 		{
@@ -63,6 +64,7 @@ class Gms_sports extends CI_Controller {
 			if ($this->form_validation->run() == FALSE)
 			{
 				$this->template->load('เพิ่มชนิดกีฬา/ชนิดการฝึกอบรม', 'gms_sports/create', $page_var);
+				return false;
 			}
 			else
 			{
@@ -112,7 +114,7 @@ class Gms_sports extends CI_Controller {
 		if (empty($post_data) === TRUE)
 		{
 			$this->template->load('แก้ไขชนิดกีฬา/ชนิดการฝึกอบรม', 'gms_sports/update', $page_var);
-			return;
+			return false;
 		}
 		else
 		{
@@ -121,7 +123,7 @@ class Gms_sports extends CI_Controller {
 			if ($this->form_validation->run() == FALSE)
 			{
 				$this->template->load('แก้ไขชนิดกีฬา/ชนิดการฝึกอบรม', 'gms_sports/update', $page_var);
-				return;
+				return false;
 			}
 			else
 			{
