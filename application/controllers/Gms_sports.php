@@ -50,7 +50,9 @@ class Gms_sports extends CI_Controller {
 			'gms_type_list' => elements_for_dropdown($this->gms_type->get_all(), 'TYPE_ID', 'TYPE_SUBJECT')
 		];
 
-		if (empty($this->input->post(NULL)) === TRUE)
+		$post_data = $this->input->post(NULL, TRUE);
+
+		if (empty($post_data) === TRUE)
 		{
 			$this->template->load('เพิ่มชนิดกีฬา/ชนิดการฝึกอบรม', 'gms_sports/create', $page_var);
 		}
@@ -64,10 +66,6 @@ class Gms_sports extends CI_Controller {
 			}
 			else
 			{
-				$data = $this->input->post(NULL, TRUE);
-				$data['CREATE_BY'] = $this->session->userdata('LOGIN_USERNAME');
-				$data['UPDATE_BY'] = $this->session->userdata('LOGIN_USERNAME');
-
 				// // Upload image
 				// if ($this->input->post('SPORT_IMAGE', TRUE) !== '')
 				// {
@@ -83,7 +81,7 @@ class Gms_sports extends CI_Controller {
 				// 	}
 				// }
 
-				if ($this->gms_sport->insert($data) === TRUE)
+				if ($this->gms_sport->insert($post_data) === TRUE)
 				{
 					$this->session->set_flashdata('flash_message', ['message' => 'ดำเนินการสำเร็จ', 'status' => 'success']);
 					redirect('sports/update/'.$this->gms_sport->get_last_id(), 'refresh');
@@ -109,7 +107,9 @@ class Gms_sports extends CI_Controller {
 			'model' => $this->gms_sport->find_by_id($id)
 		];
 
-		if ($this->input->post(NULL) === FALSE)
+		$post_data = $this->input->post(NULL, TRUE);
+
+		if (empty($post_data) === TRUE)
 		{
 			$this->template->load('แก้ไขชนิดกีฬา/ชนิดการฝึกอบรม', 'gms_sports/update', $page_var);
 			return;
@@ -125,9 +125,6 @@ class Gms_sports extends CI_Controller {
 			}
 			else
 			{
-				$data = $this->input->post(NULL, TRUE);
-				$data['UPDATE_BY'] = $this->session->userdata('LOGIN_USERNAME');
-
 				if ($_FILES['SPORT_IMAGE']['error'] !== 4)
 				{
 					$this->load->helper('upload_form');
@@ -139,11 +136,11 @@ class Gms_sports extends CI_Controller {
 						$this->template->load('เพิ่มชนิดกีฬา/ชนิดการฝึกอบรม', 'gms_sports/update', $page_var);
 						return;
 					} else {
-						$data['SPORT_IMAGE'] = $result_upload['data']['file_name'];
+						$post_data['SPORT_IMAGE'] = $result_upload['data']['file_name'];
 					}
 				}
 
-				if ($this->gms_sport->update($id, $data) === TRUE)
+				if ($this->gms_sport->update($id, $post_data) === TRUE)
 				{
 					$this->session->set_flashdata('flash_message', ['message' => 'ดำเนินการสำเร็จ', 'status' => 'success']);
 					redirect('sports/update/'.$id, 'refresh');
@@ -156,11 +153,7 @@ class Gms_sports extends CI_Controller {
 			}
 		}
 	}
-
-	public function test() {
-		print_r($this->input->post());
-	}
-
+	
 	public function delete($id = 0)
 	{
 		if ($this->gms_sport->delete($id))
@@ -184,7 +177,7 @@ class Gms_sports extends CI_Controller {
 
 		$gms_sports = $this->gms_sport->get_by_type_id($type_id);
 
-		$html = '<option value="" selected="true"></option>';
+		$html = '<option value="0" selected="true"></option>';
 		foreach ($gms_sports as $row) {
 		$html .= '<option value="' . $row['SPORT_ID'] . '">' . $row['SPORT_SUBJECT'] . '</option>';
 		}
