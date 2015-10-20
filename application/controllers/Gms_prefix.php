@@ -45,9 +45,11 @@ class Gms_prefix extends CI_Controller {
 			'model' => []
 		];
 
-		if (empty($this->input->post(NULL)) === TRUE)
+		$post_data = $this->input->post(NULL, TRUE);
+		if (empty($post_data) === TRUE)
 		{
 			$this->template->load('S04-คำนำหน้านาม', 'gms_prefix/create', $page_var);
+			return false;
 		}
 		else
 		{
@@ -57,11 +59,11 @@ class Gms_prefix extends CI_Controller {
 			if ($this->form_validation->run() === FALSE)
 			{
 				$this->template->load('S04-คำนำหน้านาม', 'gms_prefix/create', $page_var);
+				return false;
 			}
 			else
 			{
-				$data = $this->input->post(NULL, TRUE);
-				if ($this->gms_prefix->insert($data) === TRUE)
+				if ($this->gms_prefix->insert($post_data) === TRUE)
 				{
 					$this->session->set_flashdata('flash_message', ['message' => 'ดำเนินการสำเร็จ', 'status' => 'success']);
 					redirect('prefix/update/'.$this->gms_prefix->get_last_id(), 'refresh');
@@ -86,10 +88,11 @@ class Gms_prefix extends CI_Controller {
 			'model' => $this->gms_prefix->find_by_id($id)
 		];
 
-		if ($this->input->post(NULL) === FALSE)
+		$post_data = $this->input->post(NULL, TRUE);
+		if (empty($post_data) === TRUE)
 		{
 			$this->template->load('แก้ไขชนิดกีฬา/ชนิดการฝึกอบรม', 'gms_prefix/update', $page_var);
-			return;
+			return false;
 		}
 		else
 		{
@@ -98,13 +101,11 @@ class Gms_prefix extends CI_Controller {
 			if ($this->form_validation->run() == FALSE)
 			{
 				$this->template->load('แก้ไขชนิดกีฬา/ชนิดการฝึกอบรม', 'gms_prefix/update', $page_var);
-				return;
+				return false;
 			}
 			else
 			{
-				$data = $this->input->post(NULL, TRUE);
-
-				if ($this->gms_prefix->update($id, $data) === TRUE)
+				if ($this->gms_prefix->update($id, $post_data) === TRUE)
 				{
 					$this->session->set_flashdata('flash_message', ['message' => 'ดำเนินการสำเร็จ', 'status' => 'success']);
 					redirect('prefix/update/'.$id, 'refresh');
@@ -134,5 +135,5 @@ class Gms_prefix extends CI_Controller {
 
 }
 
-/* End of file Gms_cancel_result.php */
-/* Location: ./application/controllers/Gms_cancel_result.php */
+/* End of file Gms_prefix.php */
+/* Location: ./application/controllers/Gms_prefix.php */
