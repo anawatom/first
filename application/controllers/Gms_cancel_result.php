@@ -47,7 +47,8 @@ class Gms_cancel_result extends CI_Controller {
 			'form_header' => 'เพิ่มเหตุผลที่ไม่อนุมัติ'
 		];
 
-		if (empty($this->input->post(NULL)) === TRUE)
+		$post_data = $this->input->post(NULL, TRUE);
+		if (empty($post_data) === TRUE)
 		{
 			$this->template->load('S04-คำนำหน้านาม', 'gms_cancel_result/create', $page_var);
 		}
@@ -62,8 +63,7 @@ class Gms_cancel_result extends CI_Controller {
 			}
 			else
 			{
-				$data = $this->input->post(NULL, TRUE);
-				if ($this->gms_cancel_result->insert($data) === TRUE)
+				if ($this->gms_cancel_result->insert($post_data) === TRUE)
 				{
 					$this->session->set_flashdata('flash_message', ['message' => 'ดำเนินการสำเร็จ', 'status' => 'success']);
 					redirect('cancel_result/update/'.$this->gms_cancel_result->get_last_id(), 'refresh');
@@ -89,7 +89,8 @@ class Gms_cancel_result extends CI_Controller {
 			'form_header' => 'แก้ไขเหตุผลที่ไม่อนุมัติ'
 		];
 
-		if ($this->input->post(NULL) === FALSE)
+		$post_data = $this->input->post(NULL, TRUE);
+		if (empty($post_data) === TRUE)
 		{
 			$this->template->load('S04-คำนำหน้านาม', 'gms_cancel_result/update', $page_var);
 			return;
@@ -105,9 +106,7 @@ class Gms_cancel_result extends CI_Controller {
 			}
 			else
 			{
-				$data = $this->input->post(NULL, TRUE);
-
-				if ($this->gms_cancel_result->update($id, $data) === TRUE)
+				if ($this->gms_cancel_result->update($id, $post_data) === TRUE)
 				{
 					$this->session->set_flashdata('flash_message', ['message' => 'ดำเนินการสำเร็จ', 'status' => 'success']);
 					redirect('cancel_result/update/'.$id, 'refresh');
