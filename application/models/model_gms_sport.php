@@ -188,7 +188,9 @@ class model_gms_sport extends CI_Model {
                         'SPORT_STATUS',
                         'SPORT_IMAGE',
                         'CREATE_BY',
-                        'UPDATE_BY'], $data, NULL);
+                        'CREATE_DATE',
+                        'UPDATE_BY',
+                        'UPDATE_DATE'], $data, NULL);
     }
 
     public function permit_update_params($data)
@@ -198,7 +200,8 @@ class model_gms_sport extends CI_Model {
                         'SPORT_SUBJECT',
                         'SPORT_STATUS',
                         'SPORT_IMAGE',
-                        'UPDATE_BY'], $data, NULL);
+                        'UPDATE_BY',
+                        'UPDATE_DATE'], $data, NULL);
     }
 
     public function permit_search_params($data)
