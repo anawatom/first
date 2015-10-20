@@ -18,7 +18,10 @@
 			</div>
 			<div class="form-group">
 				<?php echo form_label('ประเภทการฝึกอบรม', 'TYPE_ID'); ?>
-				<?php echo form_dropdown('TYPE_ID', $page_var['gms_type_list'], set_form_value('TYPE_ID', $page_var['model']), 'class="form-control"'); ?>
+				<?php echo form_dropdown('TYPE_ID', 
+										$page_var['gms_type_list'], 
+										set_form_value('TYPE_ID', $page_var['model']), 
+										'class="form-control has-dependency" data-url-dependency="'.site_url(['sports', 'get_html_options_by_type_id']).'"'); ?>
 				<?php echo form_error('TYPE_ID'); ?>
 			</div>
 			<div class="form-group">
@@ -90,20 +93,6 @@
 
 <script type="text/javascript">
 	$(function() {
-		$('select[name="TYPE_ID"]').on('change', function(event) {
-			$.ajax({
-                url: '<?php echo site_url(['sports', 'get_html_options_by_type_id']); ?>/' + $(this).val(),
-                dataType: 'json',
-                success: function (data) {
-                	$('select[name="SPORT_ID"]').prop('disabled', false);
-                    $('select[name="SPORT_ID"]').html(data.data);
-                },
-                error: function (xhr, desc, exceptionobj) {
-                    alert("ERROR:" + xhr.responseText);
-                }
-            });
-		});
-
 		$('select[name="PROVINCE_ID"]').on('change', function(event) {
 			$.ajax({
                 url: '<?php echo site_url(['amphur', 'get_html_options']); ?>/' + $(this).val(),
