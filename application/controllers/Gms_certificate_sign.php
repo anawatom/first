@@ -50,7 +50,8 @@ class Gms_certificate_sign extends CI_Controller {
 		$this->breadcrumbs->push('ข้อมูลผู้มีอำนาจลงนาม', 'certificate_sign/index');
 		$this->breadcrumbs->push($page_var['form_header'], 'certificate_sign/create');
 
-		if (empty($this->input->post(NULL)) === TRUE)
+		$post_data = $this->input->post(NULL, TRUE);
+		if (empty($post_data) === TRUE)
 		{
 			$this->template->load('S06-ผู้มีอำนาจลงนาม', 'gms_certificate_sign/create', $page_var);
 			return false;
@@ -66,8 +67,6 @@ class Gms_certificate_sign extends CI_Controller {
 			}
 			else
 			{
-				$data = $this->input->post(NULL, TRUE);
-
 				// Upload image
 				$this->load->helper('upload_form');
 
@@ -80,7 +79,7 @@ class Gms_certificate_sign extends CI_Controller {
 				} 
 				else 
 				{
-					$data['GENERAL_SIGN'] = $result_upload_general_sign['data']['file_name'];
+					$post_data['GENERAL_SIGN'] = $result_upload_general_sign['data']['file_name'];
 				}
 
 				$result_upload_manager_sign = upload_image('MANAGER_SIGN', 'gms_certificate_sign');
@@ -92,7 +91,7 @@ class Gms_certificate_sign extends CI_Controller {
 				}
 				else
 				{
-					$data['MANAGER_SIGN'] = $result_upload_manager_sign['data']['file_name'];
+					$post_data['MANAGER_SIGN'] = $result_upload_manager_sign['data']['file_name'];
 				}
 
 				$result_upload_template_use = upload_image('TEMPLATE_USE', 'gms_certificate_sign');
@@ -104,11 +103,11 @@ class Gms_certificate_sign extends CI_Controller {
 				}
 				else
 				{
-					$data['TEMPLATE_USE'] = $result_upload_template_use['data']['file_name'];
+					$post_data['TEMPLATE_USE'] = $result_upload_template_use['data']['file_name'];
 				}
 				// End upload images.
 
-				if ($this->gms_certificate_sign->insert($data) === TRUE)
+				if ($this->gms_certificate_sign->insert($post_data) === TRUE)
 				{
 					$this->session->set_flashdata('flash_message', ['message' => 'ดำเนินการสำเร็จ', 'status' => 'success']);
 					redirect('certificate_sign/update/'.$this->gms_certificate_sign->get_last_id(), 'refresh');
@@ -134,7 +133,8 @@ class Gms_certificate_sign extends CI_Controller {
 		$this->breadcrumbs->push('ข้อมูลผู้มีอำนาจลงนาม', 'certificate_sign/index');
 		$this->breadcrumbs->push($page_var['form_header'], 'certificate_sign/update'.$id);
 
-		if ($this->input->post(NULL) === FALSE)
+		$post_data = $this->input->post(NULL, TRUE);
+		if (empty($post_data) === TRUE)
 		{
 			$this->template->load('S06-ผู้มีอำนาจลงนาม', 'gms_certificate_sign/update', $page_var);
 			return;
@@ -150,14 +150,12 @@ class Gms_certificate_sign extends CI_Controller {
 			}
 			else
 			{
-				$data = $this->input->post(NULL, TRUE);
-
 				// Upload images
 				$this->load->helper('upload_form');
 
 				if ($_FILES['GENERAL_SIGN']['error'] === 4)
 				{
-					$data['GENERAL_SIGN'] = $page_var['model']['GENERAL_SIGN'];
+					$post_data['GENERAL_SIGN'] = $page_var['model']['GENERAL_SIGN'];
 				}
 				else
 				{
@@ -170,13 +168,13 @@ class Gms_certificate_sign extends CI_Controller {
 					} 
 					else 
 					{
-						$data['GENERAL_SIGN'] = $result_upload_general_sign['data']['file_name'];
+						$post_data['GENERAL_SIGN'] = $result_upload_general_sign['data']['file_name'];
 					}
 				}
 				
 				if ($_FILES['MANAGER_SIGN']['error'] === 4)
 				{
-					$data['MANAGER_SIGN'] = $page_var['model']['MANAGER_SIGN'];
+					$post_data['MANAGER_SIGN'] = $page_var['model']['MANAGER_SIGN'];
 				}
 				else
 				{
@@ -189,13 +187,13 @@ class Gms_certificate_sign extends CI_Controller {
 					}
 					else
 					{
-						$data['MANAGER_SIGN'] = $result_upload_manager_sign['data']['file_name'];
+						$post_data['MANAGER_SIGN'] = $result_upload_manager_sign['data']['file_name'];
 					}
 				}
 
 				if ($_FILES['TEMPLATE_USE']['error'] === 4)
 				{
-					$data['TEMPLATE_USE'] = $page_var['model']['TEMPLATE_USE'];
+					$post_data['TEMPLATE_USE'] = $page_var['model']['TEMPLATE_USE'];
 				}
 				else
 				{
@@ -208,12 +206,12 @@ class Gms_certificate_sign extends CI_Controller {
 					}
 					else
 					{
-						$data['TEMPLATE_USE'] = $result_upload_template_use['data']['file_name'];
+						$post_data['TEMPLATE_USE'] = $result_upload_template_use['data']['file_name'];
 					}
 				}
 				// End upload images.
 
-				if ($this->gms_certificate_sign->update($id, $data) === TRUE)
+				if ($this->gms_certificate_sign->update($id, $post_data) === TRUE)
 				{
 					$this->session->set_flashdata('flash_message', ['message' => 'ดำเนินการสำเร็จ', 'status' => 'success']);
 					redirect('certificate_sign/update/'.$id, 'refresh');
