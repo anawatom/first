@@ -138,19 +138,29 @@ class model_gms_sport extends CI_Model {
 
     public function insert($data)
     {
+        $this->load->helper('date');
+
         $data['SPORT_ID'] = $this->get_inserting_id();
+        $data['CREATE_BY'] = $this->session->userdata('LOGIN_USERNAME');
+        $data['CREATE_DATE'] = get_oracle_current_timestamp();
+        $data['UPDATE_BY'] = $this->session->userdata('LOGIN_USERNAME');
+        $data['UPDATE_DATE'] = get_oracle_current_timestamp();
 
         return $this->db->insert($this->table_name, $this->permit_insert_params($data));
     }
 
     public function update($id, $data = [])
     {
+        $this->load->helper('date');
+        
         $model_data = $this->find_model($id)->row_array();
 
         if (isset($data['SPORT_IMAGE']) === FALSE) 
         {
             $data['SPORT_IMAGE'] = $model_data['SPORT_IMAGE'];
         }
+        $data['UPDATE_BY'] = $this->session->userdata('LOGIN_USERNAME');
+        $data['UPDATE_DATE'] = get_oracle_current_timestamp();
 
         $this->db->where('SPORT_ID', $model_data['SPORT_ID']);
         return $this->db->update($this->table_name, $this->permit_update_params($data));
