@@ -36,9 +36,11 @@ class Gms_term_position extends CI_Controller {
 			'form_header' => 'ตำแหน่งในรุ่นฝึกอบรม'
 		];
 
-		if (empty($this->input->post(NULL)) === TRUE)
+		$post_data = $this->input->post(NULL, TRUE);
+		if (empty($post_data) === TRUE)
 		{
 			$this->template->load('S07-ตำแหน่งในรุ่นฝึกอบรม', 'gms_term_position/create', $page_var);
+			return false;
 		}
 		else
 		{
@@ -48,11 +50,11 @@ class Gms_term_position extends CI_Controller {
 			if ($this->form_validation->run() === FALSE)
 			{
 				$this->template->load('S07-ตำแหน่งในรุ่นฝึกอบรม', 'gms_term_position/create', $page_var);
+				return false;
 			}
 			else
 			{
-				$data = $this->input->post(NULL, TRUE);
-				if ($this->gms_term_position->insert($data) === TRUE)
+				if ($this->gms_term_position->insert($post_data) === TRUE)
 				{
 					$this->session->set_flashdata('flash_message', ['message' => 'ดำเนินการสำเร็จ', 'status' => 'success']);
 					redirect('term_position/update/'.$this->gms_term_position->get_last_id(), 'refresh');
@@ -78,10 +80,11 @@ class Gms_term_position extends CI_Controller {
 			'form_header' => 'แก้ไขตำแหน่งในรุ่นฝึกอบรม'
 		];
 
-		if ($this->input->post(NULL) === FALSE)
+		$post_data = $this->input->post(NULL, TRUE);
+		if (empty($post_data) === TRUE)
 		{
 			$this->template->load('S07-ตำแหน่งในรุ่นฝึกอบรม', 'gms_term_position/update', $page_var);
-			return;
+			return false;
 		}
 		else
 		{
@@ -90,13 +93,11 @@ class Gms_term_position extends CI_Controller {
 			if ($this->form_validation->run() == FALSE)
 			{
 				$this->template->load('S07-ตำแหน่งในรุ่นฝึกอบรม', 'gms_term_position/update', $page_var);
-				return;
+				return false;
 			}
 			else
 			{
-				$data = $this->input->post(NULL, TRUE);
-
-				if ($this->gms_term_position->update($id, $data) === TRUE)
+				if ($this->gms_term_position->update($id, $post_data) === TRUE)
 				{
 					$this->session->set_flashdata('flash_message', ['message' => 'ดำเนินการสำเร็จ', 'status' => 'success']);
 					redirect('term_position/update/'.$id, 'refresh');
