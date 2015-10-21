@@ -550,7 +550,7 @@ foreach ($page_var['member'] as $row) {
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="gmsHistory">
-                        gmsHistory
+                        <iframe class="member-tab-iframe" src="<?php echo site_url(['member', $row['MEMBER_ID'], 'history', 'index']); ?>"></iframe>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="gmsWork">
                         <iframe class="member-tab-iframe" src="<?php echo site_url(['member', $row['MEMBER_ID'], 'work', 'index']); ?>"></iframe>
