@@ -222,6 +222,13 @@ $config = array(
 					'label' => 'lang:GMS_DIRECTOR_PRODUCE_PROD_SUBJECT',
 					'rules' => 'required|trim'
 				)
+			),
+			'gms_history' => array(
+				array(
+					'field' => 'TERM_ID',
+					'label' => 'lang:GMS_HISTORY_TERM_ID',
+					'rules' => 'required|trim'
+				)
 			)
 	);
 
