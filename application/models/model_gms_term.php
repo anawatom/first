@@ -34,11 +34,17 @@ class model_gms_term extends CI_Model {
 
 	public $orderby = '';
 
+    private $table_name;
+    private $primary_key;
+
     /* table GMS_TERM_POSITION */
 
     public function __construct() {
         parent::__construct();
         date_default_timezone_set('Asia/Bangkok');
+
+        $this->table_name = 'GMS_TERM';
+        $this->primary_key = 'TERM_ID';
     }
 
     public function _selectTerm($numF = '', $numL = '') {
@@ -188,4 +194,42 @@ class model_gms_term extends CI_Model {
         }
     }
 
+    public function find_by_id($id)
+    {
+        return $this->find_model($id)->row_array();
+    }
+
+    // This function is used in Gms_term
+    public function get_data_for_dropdown_term($sport_id = 0, $year = 0)
+    {
+        $this->db->select($this->table_name.'.*, GMS_COURSE.COURSE_SUBJECT');
+        $this->db->from($this->table_name);
+        $this->db->join('GMS_COURSE', $this->table_name.'.COURSE_ID = GMS_COURSE.COURSE_ID');
+        $this->db->where('GMS_COURSE.SPORT_ID', $sport_id);
+        $this->db->where($this->table_name.'.TERM_YEAR', $year);
+        $this->db->order_by($this->primary_key, 'ASC');
+
+        return $this->db->get()->result_array();
+    }
+
+    /*
+    * Find this model by id
+    *
+    * @param string
+    * @return object of this model
+    */
+    private function find_model($id)
+    {
+        $this->db->where($this->primary_key, $id);
+        $query = $this->db->get($this->table_name);
+
+        if ($query->num_rows() > 0)
+        {
+            return $query;
+        }
+        else
+        {
+            throw new Exception('Cannot found the model.', 1);
+        }
+    }
 }
