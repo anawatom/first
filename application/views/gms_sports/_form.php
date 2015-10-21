@@ -28,12 +28,15 @@
 				<div class="form-group">
 					<?php echo form_label('รูปภาพ', 'SPORT_IMAGE'); ?>
 					<?php echo form_upload(['name' => 'SPORT_IMAGE', 
-											'class' => 'form-control']); ?>
+											'class' => 'has-preview']); ?>
 					<?php echo form_error('SPORT_IMAGE'); ?>
 					<?php echo isset($page_var['upload_error'])? $page_var['upload_error']: ''; ?>
 				</div>
 				<div class="form-group text-center">
-					<img src="<?php echo isset($page_var['model']['SPORT_IMAGE']) ? base_url('uploads/images/gms_sport/'.$page_var['model']['SPORT_IMAGE']) : base_url('img/no_image.png'); ?>" height="180" id="imgprvw" alt="uploaded image preview" name="pPicture">
+					<?php echo get_element_image_preview( (isset($page_var['model']['SPORT_IMAGE']) === FALSE) ? 
+															'' :
+															base_url('uploads/images/gms_sport/'.$page_var['model']['SPORT_IMAGE']),
+														'SPORT_IMAGE' ); ?>
 				</div>
 			<?php endif; ?>
 		</div>
