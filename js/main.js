@@ -62,6 +62,21 @@ $(function() {
 			filerdr.readAsDataURL(input.files[0]);
 		}
 	});
+
+	// Dependencies dropdown
+	$('.has-dependency[name="TYPE_ID"]').on('change', function(event) {
+		$.ajax({
+			url: $(this).attr('data-url-dependency')+'/' + $(this).val(),
+			dataType: 'json',
+			success: function (data) {
+				$('select[name="SPORT_ID"]').prop('disabled', false);
+				$('select[name="SPORT_ID"]').html(data.data);
+			},
+			error: function (xhr, desc, exceptionobj) {
+				alert("ERROR:" + xhr.responseText);
+			}
+		});
+	});
 });
 
 function getDefaultDateObjec() {
