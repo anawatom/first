@@ -34,7 +34,7 @@ class Gms_sports extends CI_Controller {
 			$page_var['gms_sports'] = $this->gms_sport->search($page_var['search_params'], $page_var['pagination']->per_page, $offset);
 		}
 
-		$page_var['gms_type_list']  = elements_for_dropdown($this->gms_type->get_all(), 'TYPE_ID', 'TYPE_SUBJECT', TRUE);
+		$page_var['gms_type_list']  = elements_for_dropdown($this->gms_type->get_all(), 'TYPE_ID', 'TYPE_SUBJECT', 'ALL');
 
 		$this->template->load('ชนิดกีฬา/ชนิดการฝึกอบรม', 'gms_sports/index', $page_var);
 	}
