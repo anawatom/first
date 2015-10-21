@@ -19,20 +19,43 @@
  * @param	array
  * @param 	string
  * @param 	string
+ * @param 	string
  * @return	$array
  */
 if ( ! function_exists('elements_for_dropdown'))
 {
-	function elements_for_dropdown($array, $key_name = 'ID', $value_name = 'NAME', $include_all = FALSE)
+	function elements_for_dropdown($array, $key_name = 'ID', $value_name = 'NAME', $promt = '')
 	{
 		$result = [];
-		if ($include_all === TRUE)
+		if (empty($promt) === FALSE)
 		{
-			$result['all'] = 'ทั้งหมด';
+			if ($promt === 'ALL')
+			{
+				$result['all'] = 'ทั้งหมด';
+			}
+			else if ($promt === 'ANY')
+			{
+				$result['any'] = 'กรุณาเลือก';
+			}
 		}
 
-		foreach ($array as $key => $value) {
-			$result[$value[$key_name]] = $value[$value_name];
+		foreach ($array as $key => $value) 
+		{
+			$split_value_name = explode(',', $value_name);
+
+			if (count($split_value_name) === 1) 
+			{
+				$result[$value[$key_name]] = $value[$value_name];
+			}
+			else
+			{
+				$concat_value = '';
+				foreach ($split_value_name as $key2 => $value2) {
+					$concat_value .= ' '.$value[$value2];
+				}
+
+				$result[$value[$key_name]] = $concat_value;
+			}
 		}
 
 		return $result;
