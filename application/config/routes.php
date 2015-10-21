@@ -50,6 +50,10 @@ $route['amphur/get_html_options/(:num)'] = 'amphur/get_html_options/$1';
 // Tumbol
 $route['tumbol/get_html_options/(:num)'] = 'tumbol/get_html_options/$1';
 
+// Gms_term
+$route['term/get_html_options_for_dropdown_term/(:num)/(:num)'] = 'gms_term/get_html_options_for_dropdown_term/$1/$2';
+$route['term/get_term_data_by_id/(:num)'] = 'gms_term/get_term_data_by_id/$1';
+
 // Gms_sports
 $route['sports/index'] = 'gms_sports/index/$1';
 $route['sports/index/(:num)'] = 'gms_sports/index/$1';
@@ -95,6 +99,14 @@ $route['term_position/create'] = 'gms_term_position/create';
 $route['term_position/update/(:num)'] = 'gms_term_position/update/$1';
 $route['term_position/view/(:num)'] = 'gms_term_position/view/$1';
 $route['term_position/delete/(:num)'] = 'gms_term_position/delete/$1';
+
+// Gms_history
+// for gms_member
+$route['member/(:num)/history/index'] = 'gms_history/index_for_member/$1/$2';
+$route['member/(:num)/history/index/(:num)'] = 'gms_history/index_for_member/$1/$2';
+$route['member/(:num)/history/create'] = 'gms_history/create_for_member/$1';
+$route['member/(:num)/history/update/(:num)'] = 'gms_history/update_for_member/$1/$2';
+$route['member/(:num)/history/delete/(:num)'] = 'gms_history/delete_for_member/$1/$2';
 
 // Gms_work
 // for gms_member
