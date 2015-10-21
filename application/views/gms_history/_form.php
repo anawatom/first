@@ -8,7 +8,7 @@
 				<?php echo form_hidden('MEMBER_ID', set_form_value('MEMBER_ID', $page_var['model'])); ?>
 
 				<?php echo form_label('ปีงบประมาณ', 'TERM_YEAR'); ?>
-				<input type="text" name="TERM_YEAR" class="form-control" value="<?php echo set_form_value('TERM_YEAR', $page_var['model'], (date('Y') + 543)); ?>">
+				<input type="text" name="TERM_YEAR" class="form-control" value="<?php echo set_form_value('TERM_YEAR', isset($page_var['gms_term'])? $page_var['gms_term']: null, (date('Y') + 543)); ?>">
 			</div>
 			<div class="form-group">
 				<?php echo form_label('ประเภทการฝึกอบรม', 'TYPE_ID'); ?>
