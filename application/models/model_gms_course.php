@@ -14,10 +14,15 @@ class Model_gms_course extends CI_Model {
     public $CREATE_BY;
     public $UPDATE_BY;
     public $VERSION = 3;
+    private $table_name;
+    private $primary_key;
 
     public function __construct() {
         parent::__construct();
         date_default_timezone_set('Asia/Bangkok');
+
+        $this->table_name = 'GMS_COURSE';
+        $this->primary_key = 'COURSE_ID';
     }
 
     // public function _select Course()
@@ -119,5 +124,15 @@ class Model_gms_course extends CI_Model {
         
         $this->db->where("COURSE_ID", $this->COURSE_ID);
         $this->db->update('GMS_COURSE', $data);
+    }
+
+    public function get_by_term_id($term_id)
+    {
+        $this->db->select($this->table_name.'.*');
+        $this->db->from($this->table_name);
+        $this->db->join('GMS_TERM', $this->table_name.'.COURSE_ID = GMS_TERM.COURSE_ID');
+        $this->db->where('GMS_TERM.TERM_ID', $term_id);
+
+        return $this->db->get()->result_array();
     }
 }
