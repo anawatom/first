@@ -20,7 +20,7 @@
 					<?php foreach ($page_var['gms_historys'] as $row) : ?>
 						<tr>
 							<td><?php echo $row['TERM_YEAR']; ?></td>
-							<td><?php echo $row['TERM_YEAR']; ?></td>
+							<td><?php echo $row['TERM_NAME']; ?></td>
 							<td><?php echo $row['TERM_TIME_START'].' - '.$row['TERM_TIME_END']; ?></td>
 							<td>
 								<?php echo anchor(['member', $row['MEMBER_ID'], 'history','update', $row['HISTORY_ID']],

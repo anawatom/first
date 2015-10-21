@@ -213,9 +213,14 @@ class Model_gms_history extends CI_Model {
 
     public function fetch_by_member_id($member_id = '0', $limit = '0', $offset = '0', $order_field = 'HISTORY_ID', $order_type = 'ASC')
     {
+        $this->db->select($this->table_name.'.*,'
+                            .' GMS_TERM.TERM_YEAR,'
+                            .' GMS_TERM.TERM_TIME_START,'
+                            .' GMS_TERM.TERM_TIME_END,'
+                            .' GMS_COURSE.COURSE_SUBJECT || \' รุ่นที่ \' || GMS_TERM.TERM_GEN AS TERM_NAME');
         $this->db->from($this->table_name);
         $this->db->join('GMS_TERM', $this->table_name.'.TERM_ID = GMS_TERM.TERM_ID');
-        // $this->db->join('GMS_COURSE', $this->table_name.'.TERM_ID = GMS_TERM.TERM_ID');
+        $this->db->join('GMS_COURSE', 'GMS_TERM.COURSE_ID = GMS_COURSE.COURSE_ID');
         $this->db->where($this->table_name.'.MEMBER_ID', $member_id);
         $this->db->order_by($order_field, $order_type);
         $this->db->limit($limit, $offset);

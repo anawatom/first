@@ -88,7 +88,7 @@ class Gms_history extends CI_Controller {
 
 		$page_var['term_list'] = elements_for_dropdown($this->gms_term->get_data_for_dropdown_term($gms_course[0]['SPORT_ID'], $page_var['gms_term']['TERM_YEAR']),
 														'TERM_ID',
-														'COURSE_SUBJECT,TERM_GEN');
+														'TERM_NAME');
 		// Sport
 		$gms_sport = $this->gms_sport->find_by_id($gms_course[0]['SPORT_ID']);
 

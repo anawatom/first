@@ -202,7 +202,7 @@ class model_gms_term extends CI_Model {
     // This function is used in Gms_term
     public function get_data_for_dropdown_term($sport_id = 0, $year = 0)
     {
-        $this->db->select($this->table_name.'.*, GMS_COURSE.COURSE_SUBJECT');
+        $this->db->select($this->table_name.'.*, GMS_COURSE.COURSE_SUBJECT || \' รุ่นที่ \' || '.$this->table_name.'.TERM_GEN AS TERM_NAME');
         $this->db->from($this->table_name);
         $this->db->join('GMS_COURSE', $this->table_name.'.COURSE_ID = GMS_COURSE.COURSE_ID');
         $this->db->where('GMS_COURSE.SPORT_ID', $sport_id);

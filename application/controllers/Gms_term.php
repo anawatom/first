@@ -22,7 +22,7 @@ class Gms_term extends CI_Controller {
 		$html = '<option value="0" selected="true"></option>';
 		foreach ($gms_terms as $row) {
 			$html .= '<option value="' . $row['TERM_ID'] . '">' 
-					. $row['COURSE_SUBJECT'].' รุ่นที่ '.$row['TERM_GEN']
+					. $row['TERM_NAME']
 					. '</option>';
 		}
 		$result['data'] = $html;
