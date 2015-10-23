@@ -116,13 +116,13 @@ $route['member/(:num)/work/create'] = 'gms_work/create_for_member/$1';
 $route['member/(:num)/work/update/(:num)'] = 'gms_work/update_for_member/$1/$2';
 $route['member/(:num)/work/delete/(:num)'] = 'gms_work/delete_for_member/$1/$2';
 
-// Gms_director_course
+// Gms_director_term
 // for gms_member
-$route['member/(:num)/director_course/index'] = 'gms_director_course/index_for_member/$1/$2';
-$route['member/(:num)/director_course/index/(:num)'] = 'gms_director_course/index_for_member/$1/$2';
-$route['member/(:num)/director_course/create'] = 'gms_director_course/create_for_member/$1';
-$route['member/(:num)/director_course/update/(:num)'] = 'gms_director_course/update_for_member/$1/$2';
-$route['member/(:num)/director_course/delete/(:num)'] = 'gms_director_course/delete_for_member/$1/$2';
+$route['member/(:num)/director_term/index'] = 'gms_director_term/index_for_member/$1/$2';
+$route['member/(:num)/director_term/index/(:num)'] = 'gms_director_term/index_for_member/$1/$2';
+$route['member/(:num)/director_term/create'] = 'gms_director_term/create_for_member/$1';
+$route['member/(:num)/director_term/update/(:num)'] = 'gms_director_term/update_for_member/$1/$2';
+$route['member/(:num)/director_term/delete/(:num)'] = 'gms_director_term/delete_for_member/$1/$2';
 
 // Gms_director_work
 // for gms_member

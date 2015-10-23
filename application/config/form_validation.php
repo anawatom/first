@@ -194,6 +194,13 @@ $config = array(
 					'rules' => 'required|trim'
 				)
 			),
+			'gms_director_term' => array(
+				array(
+					'field' => 'TERM_ID',
+					'label' => 'lang:GMS_HISTORY_TERM_ID',
+					'rules' => 'required|trim'
+				)
+			),
 			'gms_director_edu' => array(
 				array(
 					'field' => 'EDU_YR',

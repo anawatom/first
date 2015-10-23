@@ -535,7 +535,7 @@ foreach ($page_var['member'] as $row) {
                         <a href="#gmsWork" aria-controls="gmsWork" role="tab" data-toggle="tab">ประวัติการปฏิบัติงาน</a>
                     </li>
                     <li role="presentation">
-                        <a href="#gmsDirectoryCourse" aria-controls="gmsDirectoryCourse" role="tab" data-toggle="tab">ประวัติวิทยากร</a>
+                        <a href="#gmsDirectoryTerm" aria-controls="gmsDirectoryTerm" role="tab" data-toggle="tab">ประวัติวิทยากร</a>
                     </li>
                     <li role="presentation">
                         <a href="#gmsDirectoryWork" aria-controls="gmsDirectoryWork" role="tab" data-toggle="tab">ประวัติการทำงาน</a>
@@ -555,8 +555,8 @@ foreach ($page_var['member'] as $row) {
                     <div role="tabpanel" class="tab-pane" id="gmsWork">
                         <iframe class="member-tab-iframe" src="<?php echo site_url(['member', $row['MEMBER_ID'], 'work', 'index']); ?>"></iframe>
                     </div>
-                    <div role="tabpanel" class="tab-pane" id="gmsDirectoryCourse">
-                        <iframe class="member-tab-iframe" src="<?php echo site_url(['member', $row['MEMBER_ID'], 'director_course', 'index']); ?>"></iframe>
+                    <div role="tabpanel" class="tab-pane" id="gmsDirectoryTerm">
+                        <iframe class="member-tab-iframe" src="<?php echo site_url(['member', $row['MEMBER_ID'], 'director_term', 'index']); ?>"></iframe>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="gmsDirectoryWork">
                          <iframe class="member-tab-iframe" src="<?php echo site_url(['member', $row['MEMBER_ID'], 'director_work', 'index']); ?>"></iframe>
