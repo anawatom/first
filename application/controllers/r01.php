@@ -18,14 +18,8 @@ class R01 extends CI_Controller {
     }
 
     public function select() {
-        $this->load->view("lib/header");
-        
         $data['type'] = $this->gms_type->_getAllType();
-        $this->load->view($this->dir . "/_select", $data);
-        
-        $this->load->view("lib/footer");
+        $this->template->load('R01-จำนวนผู้ผ่านการฝึกอบรม', 'r01/_select', $data);
     }
-
-    
 
 }
