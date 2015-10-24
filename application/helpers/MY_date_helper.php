@@ -3,7 +3,7 @@
 /**
  * This file is used to extend the date helper
  *
- * @package		Library
+ * @package		helpers
  * @author		Anawat Onmee<anawat.om@gmail.com>
  */
 
@@ -24,10 +24,39 @@ if ( ! function_exists('get_oracle_current_timestamp'))
 {
 	function get_oracle_current_timestamp()
 	{
-		return date('d-M-Y g:i:s.u A');
+		// return date('d-M-Y g:i:s.u A');
+		return date('d-M-Y');
+	}
+}
+
+/**
+ * Format date from database to show in views.
+ * Not: The $date parameter should come from database.
+ *
+ * @access	public
+ * @param 	string
+ * @param 	boolean
+ * @return	string
+ */
+if ( ! function_exists('format_db_date_to_show'))
+{
+	function format_db_date_to_show($date, $is_buddhist = TRUE)
+	{
+		$unix_timestamp = strtotime($date);
+		$date = date('d/m/Y', $unix_timestamp);
+
+		if ($is_buddhist === FALSE)
+		{
+			return $date;
+		}
+		else
+		{
+			$split_date = explode('/', $date);
+			return $split_date[0].'/'.$split_date[1].'/'.(intval($split_date[2]) + 543);
+		}
 	}
 }
 
 
-/* End of file upload_form_helper.php */
-/* Location: ./helpers/upload_form_helper.php */
+/* End of file MY_date_helper.php */
+/* Location: ./helpers/MY_date_helper.php */
