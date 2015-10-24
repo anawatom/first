@@ -86,23 +86,26 @@
 					<i class="fa fa-angle-left pull-right"></i>
 				</a>
 				<ul class="treeview-menu">
-					<li><a href="<?php echo base_url(); ?>index.php/r01"> R01-จำนวนผู้ผ่านการฝึกอบรม</a></li>
+					<li>
+						<?php echo anchor('r01/index', 'R01-จำนวนผู้ผ่านการฝึกอบรม'); ?>
+					</li>
+					<li>
+						<?php echo anchor('r02/index', 'R02-รายชื่อผู้ผ่านการฝึกอบรม'); ?>
+					</li>
+					<li>
+						<?php echo anchor('http://ipeshd.dpe.go.th/?actions=report/list', 'R03-ข้อมูลการฝึกอบรม'); ?>
+					</li>
+					<li>
+						<?php echo anchor('http://ipeshd.dpe.go.th/?actions=report/compare', 'R04-ข้อมูลเปรียบเทียบ'); ?>
+					</li>
+					<li>
+						<?php echo anchor('http://ipeshd.dpe.go.th/?actions=report/work', 'R05-ข้อมูลการปฏิบัติงาน'); ?>
+					</li>
+					<li>
+						<?php echo anchor('r06/index', 'R06-พิมพ์วุติบัตรผู้ผ่านการฝึกอบรม'); ?>
+					</li>
 				</ul>
-			</li>
-			<!--<li class="treeview">
-			<a href="#">
-			<i class="fa fa-edit"></i> <span>รายงาน</span>
-			<i class="fa fa-angle-left pull-right"></i>
-			</a>
-			<ul class="treeview-menu">
-			<li><a href="<?php echo base_url(); ?>index.php/r01"> R01-จำนวนผู้ผ่านการฝึกอบรม</a></li>
-			<li><a href="<?php echo base_url(); ?>index.php/r02"> R02-รายชื่อผู้ผ่านการฝึกอบรม</a></li>
-			<li><a href="<?php echo base_url(); ?>index.php/r03"> R03-ข้อมูลการฝึกอบรม</a></li>
-			<li><a href="<?php echo base_url(); ?>index.php/r04"> R04-ข้อมูลเปรียบเทียบ</a></li>
-			<li><a href="<?php echo base_url(); ?>index.php/r05"> R05-ข้อมูลการปฏิบัติงาน</a></li>
-			<li><a href="<?php echo base_url(); ?>index.php/r06"> R06-พิมพ์วุติบัตรผู้ผ่านการฝึกอบรม</a></li>
-			</ul>
-			</li> -->
+			</li> 
 		</ul>
 	</section>
 </aside>
