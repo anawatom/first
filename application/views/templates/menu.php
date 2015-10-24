@@ -80,16 +80,18 @@
 					</li>
 				</ul>
 			</li>
-			<li class="treeview">
+			<li class="treeview <?php echo ($active_menu === 'r01'
+											OR $active_menu === 'r02'
+											OR $active_menu === 'r06')? 'active': ''; ?>">
 				<a href="#">
 					<i class="fa fa-edit"></i> <span>รายงาน</span>
 					<i class="fa fa-angle-left pull-right"></i>
 				</a>
 				<ul class="treeview-menu">
-					<li>
+					<li class="<?php echo ($active_menu === 'r01')? 'active': ''?>">
 						<?php echo anchor('r01/index', 'R01-จำนวนผู้ผ่านการฝึกอบรม'); ?>
 					</li>
-					<li>
+					<li class="<?php echo ($active_menu === 'r02')? 'active': ''?>">
 						<?php echo anchor('r02/index', 'R02-รายชื่อผู้ผ่านการฝึกอบรม'); ?>
 					</li>
 					<li>
@@ -101,7 +103,7 @@
 					<li>
 						<?php echo anchor('http://ipeshd.dpe.go.th/?actions=report/work', 'R05-ข้อมูลการปฏิบัติงาน'); ?>
 					</li>
-					<li>
+					<li class="<?php echo ($active_menu === 'r06')? 'active': ''?>">
 						<?php echo anchor('r06/index', 'R06-พิมพ์วุติบัตรผู้ผ่านการฝึกอบรม'); ?>
 					</li>
 				</ul>
