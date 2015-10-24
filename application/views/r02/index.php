@@ -14,7 +14,12 @@
 				<div class="box-body">
 					<div class="form-group">
 						<?php echo form_label('ปีงบประมาณ', 'TERM_YEAR'); ?>
-						<input type="text" name="TERM_YEAR" class="form-control" value="<?php echo set_form_value('TERM_YEAR', isset($page_var['gms_term'])? $page_var['gms_term']: null, (date('Y') + 543)); ?>">
+						<input type="text" 
+								name="TERM_YEAR" 
+								class="form-control has-dependency" 	
+								data-dependency-for="TERM_ID"
+								data-url-dependency-for-term-id="<?php echo site_url(['term', 'get_html_options_for_dropdown_term']); ?>" 
+								value="<?php echo set_form_value('TERM_YEAR', isset($page_var['gms_term'])? $page_var['gms_term']: null, (date('Y') + 543)); ?>">
 					</div>
 					<div class="form-group">
 						<?php echo form_label('ประเภทการฝึกอบรม', 'TYPE_ID'); ?>
@@ -30,7 +35,8 @@
 													isset($page_var['sport_list'])? $page_var['sport_list']: [], 
 													[], 
 													'class="form-control has-dependency"'
-													.' data-url-dependency="'.site_url(['term', 'get_html_options_for_dropdown_term']).'"'
+													.' data-dependency-for="TERM_ID"'
+													.' data-url-dependency-for-term-id="'.site_url(['term', 'get_html_options_for_dropdown_term']).'"'
 													.' disabled'); ?>
 					</div>
 					<div class="form-group">
