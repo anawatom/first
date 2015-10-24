@@ -13,3 +13,7 @@
 .skin-blue .treeview-menu > li > a:hover {
 	border-left: #357ca5 5px solid;
 }
+
+.right-side > .content-header {
+	padding: 10px 15px 10px 20px;
+}
