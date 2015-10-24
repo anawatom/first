@@ -1,12 +1,14 @@
 $(function() {
 	$('.form-search').on('submit', function(event) {
 		var newact = $(this).attr('action') + '/0/'
-																				// $(this).serialize() outputs param1=value1&param2=value2 string
-																				+ $(this).serialize()
-																				// replace params that havn't value (e.g. param1=& or param=) with ''
-																				.replace(/[A-Za-z_]*=&(?=[A-Za-z_])|[A-Za-z_]*=(?=$)/g, '')
-																				// replace & and = with /
-																				.replace(/&|=/g,"/");
+						// $(this).serialize() outputs param1=value1&param2=value2 string
+						+ $(this).serialize()
+						// replace params that havn't value (e.g. param1=& or param=) with ''
+						.replace(/[A-Za-z_]*=&(?=[A-Za-z_])|[A-Za-z_]*=(?=$)/g, '')
+						// replace space
+						.replace(/\+/g, "")
+						// replace & and = with /
+						.replace(/&|=/g,"/");
 		// 'PREFIX_TH=&PREFIX_TH_SH='.replace(/[A-Za-z_]*(?=\=&)|[A-Za-z_]*(?=\=$)/g, '')
 
 		window.location = newact;
