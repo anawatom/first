@@ -1,4 +1,5 @@
 $(function() {
+	// From
 	$('.form-search').on('submit', function(event) {
 		var newact = $(this).attr('action') + '/0/'
 						// $(this).serialize() outputs param1=value1&param2=value2 string
@@ -15,6 +16,26 @@ $(function() {
 
 		return false;
 	});
+	$('.has-js-validation[name="formReport"]').on('submit', function(event) {
+		var alertText = '';
+		$(this).find('.require-field').each(function(index, value) {
+			var $current = $(value);
+
+			if ( $current.val() === '' 
+				|| $current.val() === 'any') {
+				alertText = $current.attr('data-require-field-alert-text');
+				return false;
+			}
+		});
+
+		if (alertText) {
+			alert(alertText);
+			return false;
+		} else {
+			return true;
+		}
+	});
+	// End
 
 	$('.datepicker[type="text"][data-type="birthdate"]').datepicker({
 		language: 'th',
