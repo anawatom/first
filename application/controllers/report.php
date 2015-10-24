@@ -211,7 +211,7 @@ class report extends CI_Controller {
             
             // Add parameters
             $params = new Java("java.util.HashMap");
-            
+
             $str_term_year= (string) $get_data['TERM_YEAR'];
             $params->put("p_termYear", $str_term_year);
 
@@ -255,6 +255,54 @@ class report extends CI_Controller {
             unlink($outputPath);
         } 
        
+    }
+
+    public function report_TRN1R060() {
+        $get_data = $this->input->get(NULL, TRUE);
+
+        if (empty($get_data) === FALSE)
+        {
+            $this->checkJavaExtension();
+            $compileManager = new JavaClass("net.sf.jasperreports.engine.JasperCompileManager");
+//              $report = $compileManager->compileReport("C:/DPE/apache-tomcat-6.0.32/reports/TRN1I040_Regis_v2.jrxml");
+            $fillManager = new JavaClass("net.sf.jasperreports.engine.JasperFillManager");
+            
+            // Add parameters
+            // p_termId
+            // p_historyNoStart
+            // p_historyNoEnd
+            $params = new Java("java.util.HashMap");
+
+            $str_term_id = (string) $get_data['TERM_ID'];
+            $params->put("p_termId", $str_term_id);
+
+            if ($get_data['HISTORY_NO'] === '1')
+            {
+                $str_history_no_start = (string) $get_data['HISTORY_NO_START'];
+                $params->put("p_historyNoStart", $str_history_no_start);
+
+                $str_history_no_end = (string) $get_data['HISTORY_NO_END'];
+                $params->put("p_historyNoEnd", $str_history_no_end);
+            }
+
+            $class = new JavaClass("java.lang.Class");
+            $class->forName("oracle.jdbc.driver.OracleDriver");
+            $driverManager = new JavaClass("java.sql.DriverManager");
+            $conn = $driverManager->getConnection("jdbc:oracle:thin:@192.168.2.13:1521:OSRDDB2","train","train");
+
+//          $emptyDataSource = new Java("net.sf.jasperreports.engine.JREmptyDataSource");
+//          $jasperPrint = $fillManager->fillReport($report, $params, $conn);
+            $jasperPrint = $fillManager->fillReport("C:/DPE/apache-tomcat-6.0.32/reports/TRN1R060.jasper", $params, $conn);              
+            $filename = uniqid('Report_');
+            $outputPath = "E:/dd/"."{$filename}.pdf";
+
+            $exportManager = new JavaClass("net.sf.jasperreports.engine.JasperExportManager");
+            $exportManager->exportReportToPdfFile($jasperPrint, $outputPath);
+
+            header("Content-type: application/pdf");
+            readfile($outputPath);
+            unlink($outputPath);
+        }
     }
     
 }

@@ -54,17 +54,29 @@
 					</div>
 					<div class="form-group">
 						<div class="form-inline">
-							<?php echo form_label(form_radio(['name' => 'HISTORY',
+							<?php echo form_label(form_radio(['name' => 'HISTORY_NO',
 													'value' => '0',
 													'checked' => TRUE]).' พิมพ์ทั้งหมด',
 													'HISTORY',
 													['class' => 'radio']); ?>
 
-							<?php echo form_label(form_radio(['name' => 'HISTORY',
+							<?php echo form_label(form_radio(['name' => 'HISTORY_NO',
 													'value' => '1']).' เลือกช่วงในการพิมพ์',
 													'HISTORY',
 													['class' => 'radio']); ?>
 						</div>
+					</div>
+					<div class="form-group has-error history-no-1 hidden">
+						<?php echo form_label('เลขวุฒิบัตร *', 'HISTORY_NO_START'); ?>
+						<?php echo form_input('HISTORY_NO_START', '',
+												'class="form-control only-number"'
+												.' data-require-field-alert-text="กรุณาเลือก เลขวุฒิบัตร"'); ?>
+					</div>
+					<div class="form-group has-error history-no-1 hidden">
+						<?php echo form_label('ถึงเลขที่ *', 'HISTORY_NO_END'); ?>
+						<?php echo form_input('HISTORY_NO_END', '',
+												'class="form-control only-number"'
+												.' data-require-field-alert-text="กรุณาเลือก ถึงเลขที่"'); ?>
 					</div>
 				</div><!-- /.box-body -->
 
@@ -78,5 +90,39 @@
 
 <script type="text/javascript">
 	$(function() {
+		$('input[name="HISTORY_NO"]').on('ifClicked', function(event) {
+			var $historyNo1 = $('.history-no-1');
+
+			if ($(this).val() === '1') {
+				$historyNo1
+				.removeClass('hidden')
+				.each(function(index, value) {
+					var $this = $(this);
+
+					$(this)
+						.find('input[name="HISTORY_NO_START"]')
+						.addClass('require-field')
+						.val('');
+					$(this)
+						.find('input[name="HISTORY_NO_END"]')
+						.addClass('require-field')
+						.val('');
+				});
+			}
+			else {
+				$historyNo1
+				.addClass('hidden')
+				.each(function(index, value) {
+					var $this = $(this);
+
+					$(this)
+						.find('input[name="HISTORY_NO_START"]')
+						.removeClass('require-field');
+					$(this)
+						.find('input[name="HISTORY_NO_END"]')
+						.removeClass('require-field');
+				});
+			}
+		});
 	});
 </script>
