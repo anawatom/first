@@ -19,7 +19,7 @@ class Gms_term extends CI_Controller {
 
 		$gms_terms = $this->gms_term->get_data_for_dropdown_term($sport_id, $year);
 
-		$html = '<option value="0" selected="true"></option>';
+		$html = '<option value="" selected="true">กรุณาเลือก</option>';
 		foreach ($gms_terms as $row) {
 			$html .= '<option value="' . $row['TERM_ID'] . '">' 
 					. $row['TERM_NAME']

@@ -179,7 +179,7 @@ class Gms_sports extends CI_Controller {
 
 		$gms_sports = $this->gms_sport->get_by_type_id($type_id);
 
-		$html = '<option value="0" selected="true"></option>';
+		$html = '<option value="" selected="true">กรุณาเลือก</option>';
 		foreach ($gms_sports as $row) {
 		$html .= '<option value="' . $row['SPORT_ID'] . '">' . $row['SPORT_SUBJECT'] . '</option>';
 		}

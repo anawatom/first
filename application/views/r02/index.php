@@ -83,7 +83,6 @@
 				var $current = $(value);
 
 				if ( $current.val() === '' 
-					|| $current.val() === '0'
 					|| $current.val() === 'any') {
 					alertText = $current.attr('data-require-alert-text');
 					return false;
