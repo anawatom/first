@@ -148,6 +148,11 @@ $route['member/(:num)/director_produce/create'] = 'gms_director_produce/create_f
 $route['member/(:num)/director_produce/update/(:num)'] = 'gms_director_produce/update_for_member/$1/$2';
 $route['member/(:num)/director_produce/delete/(:num)'] = 'gms_director_produce/delete_for_member/$1/$2';
 
+// R02
+$route['r02/index'] = 'r02/index';
+
+// R06
+$route['r06/index'] = 'r06/index';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
