@@ -8,7 +8,7 @@
 * @link		http://stackoverflow.com/questions/12164114/codeigniter-bootstrap-pagination
 *
 */
-$config['per_page'] = 20;
+$config['per_page'] = 10;
 
 $config['query_string_segment'] = 'page';
 
