@@ -1,6 +1,23 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 $config = array(
+			'gms_type_validation' => array(
+				array(
+					'field' => 'TYPE_CODE',
+					'label' => 'lang:GMS_TYPE_TYPE_CODE',
+					'rules' => 'required|is_natural_no_zero|trim'
+				),
+				array(
+					'field' => 'TYPE_SUBJECT',
+					'label' => 'lang:GMS_TYPE_TYPE_SUBJECT',
+					'rules' => 'required|trim'
+				),
+				array(
+					'field' => 'TYPE_STATUS',
+					'label' => 'lang:GMS_TYPE_TYPE_STATUS',
+					'rules' => 'trim'
+				),
+			),
 			'gms_sport_validation' => array(
 				array(
 					'field' => 'TYPE_ID',

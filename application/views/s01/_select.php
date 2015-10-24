@@ -62,7 +62,12 @@
                             <td><?php echo $TYPE_SUBJECT; ?></td>
                             <td><?php echo $TYPE_STATUS; ?></td>
                             <td>
-                                <a  class="btn btn-default" onclick="delTypeByID('<?php echo $row['TYPE_ID']; ?>')"><i class='fa fa-times'></i></a></td>
+                                <?php echo anchor(['s01', 'updateType', $row['TYPE_ID']],
+                                                    '<i class="fa fa-edit"></i>',
+                                                    'class="btn btn-default btn-edit" target="_parent"'); ?>
+                                <?php echo anchor(['s01', 'delTypeExc', $row['TYPE_ID']],
+                                                    '<i class="fa fa-times"></i>',
+                                                    'class="btn btn-default btn-delete" data-value="'.$row['TYPE_ID'].'"'); ?>
                         </tr>
                         <?php
                     }

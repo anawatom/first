@@ -14,10 +14,12 @@ class model_gms_type extends CI_Model {
     public $VERSION = 3;
 	public $OrderBy;
     private $table_name;
+    private $primary_key;
 
     public function __construct() {
         parent::__construct();
-        $this->rable_name = 'GMS_TYPE';
+        $this->table_name = 'GMS_TYPE';
+        $this->primary_key = 'TYPE_ID';
         date_default_timezone_set('Asia/Bangkok');
     }
     
@@ -43,7 +45,7 @@ class model_gms_type extends CI_Model {
     public function get_all($order_field = 'TYPE_ID', $order_by = 'ASC')
     {
         $this->db->order_by($order_field, $order_by);
-        $rs = $this->db->get($this->rable_name);
+        $rs = $this->db->get($this->table_name);
 
         return $rs->result_array();
     }
@@ -82,7 +84,6 @@ class model_gms_type extends CI_Model {
             'TYPE_STATUS' => $this->TYPE_STATUS,
             'TYPE_IMAGE' => $this->TYPE_IMAGE,
             'TYPE_CODE' => $this->TYPE_CODE,
-            'UPDATE_DATE' => now(),
             'UPDATE_BY' => $this->UPDATE_BY,
         );
         $this->db->where("TYPE_ID", $this->TYPE_ID);
@@ -91,7 +92,7 @@ class model_gms_type extends CI_Model {
 
     public function _delType() {
         $this->db->where("TYPE_ID", $this->TYPE_ID);
-        $this->db->delete('GMS_TYPE');
+        return $this->db->delete('GMS_TYPE');
     }
 
 	public function _chkVarForOrderBy($data) {
@@ -106,5 +107,11 @@ class model_gms_type extends CI_Model {
         $this->db->where("TYPE_ID", $id);
         $rs = $this->db->get('GMS_TYPE');
         return $rs->result_array();
+    }
+
+    public function find_by_id($id)
+    {
+        $this->db->where($this->primary_key, $id);
+        return $this->db->get($this->table_name)->row_array();
     }
 }
