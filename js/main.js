@@ -78,6 +78,18 @@ $(function() {
 		});
 	});
 
+	$('.has-dependency[data-dependency-for="TERM_ID"][name="TERM_YEAR"]').on('blur', function(event) {
+		setDropdownTerm($(this).attr('data-url-dependency-for-term-id'), 
+							$('.has-dependency[name="SPORT_ID"]').val(), 
+							$(this).val());
+	});
+
+	$('.has-dependency[data-dependency-for="TERM_ID"][name="SPORT_ID"]').on('change', function(event) {
+		setDropdownTerm($(this).attr('data-url-dependency-for-term-id'), 
+							$(this).val(), 
+							$('input[name="TERM_YEAR"]').val());
+	});
+
 	// Detail dropdown
 	$('.has-detail[name="TERM_ID"]').on('change', function(event) {
 		var $termTimeStart = $('.show-detail[data-detail-for="TERM_ID"][name="TERM_TIME_START"]').val(''),
@@ -109,4 +121,20 @@ function getDefaultDateObjec() {
 			month: d.getMonth(),
 			day: d.getDate()
 		};
+}
+
+function setDropdownTerm(url, sportId, year) {
+	if (sportId && year) {
+		$.ajax({
+			url: url + '/' + sportId + '/' + year,
+			dataType: 'json',
+			success: function (data) {
+				$('select[name="TERM_ID"]').prop('disabled', false);
+				$('select[name="TERM_ID"]').html(data.data);
+			},
+			error: function (xhr, desc, exceptionobj) {
+				alert("ERROR:" + xhr.responseText);
+			}
+		});
+	}
 }

@@ -8,14 +8,20 @@
 				<?php echo form_hidden('MEMBER_ID', set_form_value('MEMBER_ID', $page_var['model'])); ?>
 
 				<?php echo form_label('ปีงบประมาณ', 'TERM_YEAR'); ?>
-				<input type="text" name="TERM_YEAR" class="form-control" value="<?php echo set_form_value('TERM_YEAR', isset($page_var['gms_term'])? $page_var['gms_term']: null, (date('Y') + 543)); ?>">
+				<input type="text"
+						name="TERM_YEAR"
+						class="form-control has-dependency"
+						data-dependency-for="TERM_ID"
+						data-url-dependency-for-term-id="<?php echo site_url(['term', 'get_html_options_for_dropdown_term']); ?>" 
+						value="<?php echo set_form_value('TERM_YEAR', isset($page_var['gms_term'])? $page_var['gms_term']: null, (date('Y') + 543)); ?>">
 			</div>
 			<div class="form-group">
 				<?php echo form_label('ประเภทการฝึกอบรม', 'TYPE_ID'); ?>
 				<?php echo form_dropdown('TYPE_ID', 
 										$page_var['gms_type_list'], 
 										set_form_value('TYPE_ID', $page_var['model'], 'any'), 
-										'class="form-control has-dependency" data-url-dependency="'.site_url(['sports', 'get_html_options_by_type_id']).'"'); ?>
+										'class="form-control has-dependency"'
+										.' data-url-dependency="'.site_url(['sports', 'get_html_options_by_type_id']).'"'); ?>
 			</div>
 			<div class="form-group">
 				<?php echo form_label('ชนิดกีฬา', 'SPORT_ID'); ?>
@@ -23,7 +29,8 @@
 											isset($page_var['sport_list'])? $page_var['sport_list']: [], 
 											set_form_value('SPORT_ID', $page_var['model']), 
 											'class="form-control has-dependency"'
-											.' data-url-dependency="'.site_url(['term', 'get_html_options_for_dropdown_term']).'"'
+											.' data-dependency-for="TERM_ID"'
+											.' data-url-dependency-for-term-id="'.site_url(['term', 'get_html_options_for_dropdown_term']).'"'
 											.' disabled' ); ?>
 			</div>
 			<div class="form-group require">
@@ -60,31 +67,3 @@
 		</div>
 	</div>
 <?php echo form_close(); ?>
-
-<script type="text/javascript">
-	$(function() {
-		$('input[name="TERM_YEAR"]').on('blur', function(event) {
-			setDropdownTerm($('.has-dependency[name="SPORT_ID"]').val(), $(this).val());
-		});
-
-		$('.has-dependency[name="SPORT_ID"]').on('change', function(event) {
-			setDropdownTerm($(this).val(), $('input[name="TERM_YEAR"]').val());
-		});
-	});
-
-	function setDropdownTerm(sportId, year) {
-		if (sportId && year) {
-			$.ajax({
-				url: '<?php echo site_url(["term", "get_html_options_for_dropdown_term"]); ?>/' + sportId + '/' + year,
-				dataType: 'json',
-				success: function (data) {
-					$('select[name="TERM_ID"]').prop('disabled', false);
-					$('select[name="TERM_ID"]').html(data.data);
-				},
-				error: function (xhr, desc, exceptionobj) {
-					alert("ERROR:" + xhr.responseText);
-				}
-			});
-		}
-	}
-</script>
