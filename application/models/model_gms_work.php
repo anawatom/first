@@ -72,7 +72,12 @@ class model_gms_work extends CI_Model {
 
 	public function fetch_by_member_id($member_id = '0', $limit = '0', $offset = '0', $order_field = 'WORK_ID', $order_type = 'ASC')
 	{
+		$this->db->select($this->table_name.'.*,'
+						.' GMS_SPORT.SPORT_SUBJECT AS SPORT_SUBJECT,'
+						.' GMS_WORK_LEVEL.LEVEL_DETAIL AS LEVEL_DETAIL');
 		$this->db->from($this->table_name);
+		$this->db->join('GMS_SPORT', $this->table_name.'.SPORT_ID = GMS_SPORT.SPORT_ID');
+		$this->db->join('GMS_WORK_LEVEL', $this->table_name.'.WORK_LEVEL = GMS_WORK_LEVEL.LEVEL_ID');
 		$this->db->where('MEMBER_ID', $member_id);
 		$this->db->order_by($order_field, $order_type);
 		$this->db->limit($limit, $offset);
