@@ -25,7 +25,7 @@
 							<td><?php echo $row['WORK_SUBJECT']; ?></td>
 							<td><?php echo $row['SPORT_ID']; ?></td>
 							<td><?php echo $row['WORK_LEVEL']; ?></td>
-							<td><?php echo $row['WORK_TIME_START']; ?></td>
+							<td><?php echo format_db_date_to_show($row['WORK_TIME_START']); ?></td>
 							<td>
 								<?php echo anchor(['member', $row['MEMBER_ID'], 'work','update', $row['WORK_ID']],
 													'<i class="fa fa-edit"></i>',
