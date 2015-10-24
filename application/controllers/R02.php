@@ -14,7 +14,7 @@ class R02 extends CI_Controller
 	{
 		$page_var = [];
 
-		$page_var['gms_type_list'] = elements_for_dropdown($this->gms_type->get_all(), 'TYPE_ID', 'TYPE_SUBJECT');
+		$page_var['gms_type_list'] = elements_for_dropdown($this->gms_type->get_all(), 'TYPE_ID', 'TYPE_SUBJECT', 'ANY');
 		$this->template->load('R02-รายชื่อผู้ผ่านการฝึกอบรม', 'r02/index', $page_var);
 	}
 
