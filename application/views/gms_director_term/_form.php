@@ -31,22 +31,22 @@
 				<?php echo form_dropdown( 'TERM_ID', 
 											isset($page_var['term_list'])? $page_var['term_list']: [], 
 											set_form_value('TERM_ID', $page_var['model']), 
-											'class="form-control"'
+											'class="form-control has-detail"'
 											.' data-url-dependency="'.site_url(['term', 'get_term_data_by_id']).'"'
 											.' disabled' ); ?>
 				<?php echo form_error('TERM_ID'); ?>
 			</div>
 			<div class="form-group">
 				<?php echo form_label('วันที่อบรม', 'TERM_TIME_START'); ?>
-				<input type="text" name="TERM_TIME_START" class="form-control" readonly value="<?php echo set_form_value('TERM_TIME_START', isset($page_var['gms_term'])? $page_var['gms_term']: null ); ?>">
+				<input type="text" name="TERM_TIME_START" class="form-control show-detail" data-detail-for="TERM_ID" readonly value="<?php echo set_form_value('TERM_TIME_START', isset($page_var['gms_term'])? $page_var['gms_term']: null ); ?>">
 			</div>
 			<div class="form-group">
 				<?php echo form_label('ถึงวันที่ ', 'TERM_TIME_END'); ?>
-				<input type="text" name="TERM_TIME_END" class="form-control" readonly value="<?php echo set_form_value('TERM_TIME_END', isset($page_var['gms_term'])? $page_var['gms_term']: null ); ?>">
+				<input type="text" name="TERM_TIME_END" class="form-control show-detail" data-detail-for="TERM_ID" readonly value="<?php echo set_form_value('TERM_TIME_END', isset($page_var['gms_term'])? $page_var['gms_term']: null ); ?>">
 			</div>
 			<div class="form-group">
 				<?php echo form_label('สถานที่ฝึกอบรม', 'TERM_LOCATION'); ?>
-				<input type="text" name="TERM_LOCATION" class="form-control" readonly value="<?php echo set_form_value('TERM_LOCATION', isset($page_var['gms_term'])? $page_var['gms_term']: null ); ?>">
+				<input type="text" name="TERM_LOCATION" class="form-control show-detail" data-detail-for="TERM_ID" readonly value="<?php echo set_form_value('TERM_LOCATION', isset($page_var['gms_term'])? $page_var['gms_term']: null ); ?>">
 			</div>
 		</div>
 		<div class="box-footer text-center">
@@ -69,27 +69,6 @@
 
 		$('.has-dependency[name="SPORT_ID"]').on('change', function(event) {
 			setDropdownTerm($(this).val(), $('input[name="TERM_YEAR"]').val());
-		});
-
-		$('select[name="TERM_ID"]').on('change', function(event) {
-			$('input[name="TERM_TIME_START"]').val('');
-			$('input[name="TERM_TIME_END"]').val('');
-			$('input[name="TERM_LOCATION"]').val('');
-
-			if ($(this).val() !== '0') {
-				$.ajax({
-					url: $(this).attr('data-url-dependency')+'/' + $(this).val(),
-					dataType: 'json',
-					success: function (data) {
-						$('input[name="TERM_TIME_START"]').val(data.data.TERM_TIME_START);
-						$('input[name="TERM_TIME_END"]').val(data.data.TERM_TIME_END);
-						$('input[name="TERM_LOCATION"]').val(data.data.TERM_LOCATION);
-					},
-					error: function (xhr, desc, exceptionobj) {
-						alert("ERROR:" + xhr.responseText);
-					}
-				});
-			}
 		});
 	});
 

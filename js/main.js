@@ -77,6 +77,28 @@ $(function() {
 			}
 		});
 	});
+
+	// Detail dropdown
+	$('.has-detail[name="TERM_ID"]').on('change', function(event) {
+		var $termTimeStart = $('.show-detail[data-detail-for="TERM_ID"][name="TERM_TIME_START"]').val(''),
+			$termTimeEnd = $('.show-detail[data-detail-for="TERM_ID"][name="TERM_TIME_END"]').val(''),
+			$termLocation = $('.show-detail[data-detail-for="TERM_ID"][name="TERM_LOCATION"]').val('');
+
+		if ($(this).val() !== '0') {
+			$.ajax({
+				url: $(this).attr('data-url-dependency')+'/' + $(this).val(),
+				dataType: 'json',
+				success: function (data) {
+					$termTimeStart.val(data.data.TERM_TIME_START);
+					$termTimeEnd.val(data.data.TERM_TIME_END);
+					$termLocation.val(data.data.TERM_LOCATION);
+				},
+				error: function (xhr, desc, exceptionobj) {
+					alert("ERROR:" + xhr.responseText);
+				}
+			});
+		}
+	});
 });
 
 function getDefaultDateObjec() {
