@@ -211,31 +211,27 @@ class report extends CI_Controller {
             
             // Add parameters
             $params = new Java("java.util.HashMap");
+            
             $str_term_year= (string) $get_data['TERM_YEAR'];
             $params->put("p_termYear", $str_term_year);
 
-            $params = new Java("java.util.HashMap");
             $str_type_id = (string) $get_data['TYPE_ID'];
             $params->put("p_typeId", $str_type_id);
 
             // GMS_SPORT
             $gms_sport = $this->gms_sport->find_by_id($get_data['SPORT_ID']);
-            $params = new Java("java.util.HashMap");
             $str_sport_id = (string) $gms_sport['SPORT_ID'];
             $params->put("p_sportId", $str_sport_id);
 
-            $params = new Java("java.util.HashMap");
             $str_sport_subject = (string) $gms_sport['SPORT_SUBJECT'];
             $params->put("p_sportSubject", $str_sport_subject);
             // End
 
             // GMS_TERM
             $gms_term = $this->gms_term->find_by_id($get_data['TERM_ID']);
-            $params = new Java("java.util.HashMap");
             $str_term_gen = (string) $gms_term['TERM_GEN'];
             $params->put("p_termGen", $str_term_gen);
 
-            $params = new Java("java.util.HashMap");
             $str_course_id = (string) $gms_term['COURSE_ID'];
             $params->put("p_courseId", $str_course_id);
             // End
@@ -247,7 +243,7 @@ class report extends CI_Controller {
 
 //          $emptyDataSource = new Java("net.sf.jasperreports.engine.JREmptyDataSource");
 //          $jasperPrint = $fillManager->fillReport($report, $params, $conn);
-            $jasperPrint = $fillManager->fillReport("C:/DPE/apache-tomcat-6.0.32/reports/TRN1I040_Tumneab.jasper", $params, $conn);              
+            $jasperPrint = $fillManager->fillReport("C:/DPE/apache-tomcat-6.0.32/reports/TRN1R020.jasper", $params, $conn);              
             $filename = uniqid('Report_');
             $outputPath = "E:/dd/"."{$filename}.pdf";
 
