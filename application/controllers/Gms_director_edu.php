@@ -39,7 +39,7 @@ class Gms_director_edu extends CI_Controller {
 		$post_data = $this->input->post(NULL, TRUE);
 		if (empty($post_data) === TRUE)
 		{
-			$this->template->load('ประวัติการปฏิบัติงาน', 'gms_director_edu/create', $page_var);
+			$this->template->load('ประวัติการศึกษา', 'gms_director_edu/create', $page_var);
 			return false;
 		}
 		else
@@ -48,7 +48,7 @@ class Gms_director_edu extends CI_Controller {
 
 			if ($this->form_validation->run() === FALSE)
 			{
-				$this->template->load('ประวัติการปฏิบัติงาน', 'gms_director_edu/create', $page_var);
+				$this->template->load('ประวัติการศึกษา', 'gms_director_edu/create', $page_var);
 				return false;
 			}
 			else
@@ -82,7 +82,7 @@ class Gms_director_edu extends CI_Controller {
 		$post_data = $this->input->post(NULL, TRUE);
 		if (empty($post_data) === TRUE)
 		{
-			$this->template->load('ประวัติการปฏิบัติงาน', 'gms_director_edu/update', $page_var);
+			$this->template->load('ประวัติการศึกษา', 'gms_director_edu/update', $page_var);
 			return false;
 		}
 		else
@@ -91,7 +91,7 @@ class Gms_director_edu extends CI_Controller {
 
 			if ($this->form_validation->run() == FALSE)
 			{
-				$this->template->load('ประวัติการปฏิบัติงาน', 'gms_director_edu/update', $page_var);
+				$this->template->load('ประวัติการศึกษา', 'gms_director_edu/update', $page_var);
 				return false;
 			}
 			else
