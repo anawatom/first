@@ -27,7 +27,7 @@ class Gms_director_produce extends CI_Controller {
 	{
 		$page_var = [
 			'form_url' => site_url(['member', $member_id, 'director_produce', 'create']),
-			'form_header' => 'เพิ่มประวัติการทำงาน',
+			'form_header' => 'เพิ่มหัวข้อการบรรยาย',
 			'model' => []
 		];
 		$page_var['model']['MEMBER_ID'] = $member_id;
@@ -39,7 +39,7 @@ class Gms_director_produce extends CI_Controller {
 		$post_data = $this->input->post(NULL, TRUE);
 		if (empty($post_data) === TRUE)
 		{
-			$this->template->load('ประวัติการปฏิบัติงาน', 'gms_director_produce/create', $page_var);
+			$this->template->load('หัวข้อการบรรยาย', 'gms_director_produce/create', $page_var);
 			return false;
 		}
 		else
@@ -48,7 +48,7 @@ class Gms_director_produce extends CI_Controller {
 
 			if ($this->form_validation->run() === FALSE)
 			{
-				$this->template->load('ประวัติการปฏิบัติงาน', 'gms_director_produce/create', $page_var);
+				$this->template->load('หัวข้อการบรรยาย', 'gms_director_produce/create', $page_var);
 				return false;
 			}
 			else
@@ -72,7 +72,7 @@ class Gms_director_produce extends CI_Controller {
 		$page_var = [
 			'form_url' => site_url(['member', $member_id, 'director_produce', 'update', $director_produce_id]),
 			'model' => $this->gms_director_produce->find_by_id($director_produce_id),
-			'form_header' => 'แก้ไขประวัติการทำงาน'
+			'form_header' => 'แก้ไขหัวข้อการบรรยาย'
 		];
 
 		$this->breadcrumbs->push($this->config->item('dashboard_icon').' Dashboard', 'dashboard');
@@ -82,7 +82,7 @@ class Gms_director_produce extends CI_Controller {
 		$post_data = $this->input->post(NULL, TRUE);
 		if (empty($post_data) === TRUE)
 		{
-			$this->template->load('ประวัติการปฏิบัติงาน', 'gms_director_produce/update', $page_var);
+			$this->template->load('หัวข้อการบรรยาย', 'gms_director_produce/update', $page_var);
 			return false;
 		}
 		else
@@ -91,7 +91,7 @@ class Gms_director_produce extends CI_Controller {
 
 			if ($this->form_validation->run() == FALSE)
 			{
-				$this->template->load('ประวัติการปฏิบัติงาน', 'gms_director_produce/update', $page_var);
+				$this->template->load('หัวข้อการบรรยาย', 'gms_director_produce/update', $page_var);
 				return false;
 			}
 			else
