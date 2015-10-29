@@ -109,18 +109,18 @@
                                 <tr>
                                     <td><label> วันที่เริ่มรับสมัคร</label></td>
                                     <td>
-                                        <input placeholder="วัน/เดือน/ปี" type="text" name="TERM_TIME_OPEN" id="TERM_TIME_OPEN" value="" class="form-control txt_input">
+                                        <input placeholder="วัน/เดือน/ปี" type="text" name="TERM_TIME_OPEN" id="TERM_TIME_OPEN" value="" class="form-control txt_input datepicker" data-type="normal-date">
                                     </td>
                                     <td> <label>ถึงวันที่ </label></td>
-                                    <td><input placeholder="วัน/เดือน/ปี" type="text" name="TERM_TIME_CLOSE" id="TERM_TIME_CLOSE" value="" class="form-control txt_input"></td>
+                                    <td><input placeholder="วัน/เดือน/ปี" type="text" name="TERM_TIME_CLOSE" id="TERM_TIME_CLOSE" value="" class="form-control txt_input datepicker" data-type="normal-date"></td>
                                 </tr>
                                 <tr>
                                     <td><label> วันที่อบรม</label></td>
                                     <td>
-                                        <input placeholder="วัน/เดือน/ปี" type="text" name="TERM_TIME_START" id="TERM_TIME_START" value="" class="form-control txt_input">
+                                        <input placeholder="วัน/เดือน/ปี" type="text" name="TERM_TIME_START" id="TERM_TIME_START" value="" class="form-control txt_input datepicker" data-type="normal-date">
                                     </td>
                                     <td> <label>ถึงวันที่ </label></td>
-                                    <td><input placeholder="วัน/เดือน/ปี" type="text" name="TERM_TIME_END" id="TERM_TIME_END" value="" class="form-control txt_input"></td>
+                                    <td><input placeholder="วัน/เดือน/ปี" type="text" name="TERM_TIME_END" id="TERM_TIME_END" value="" class="form-control txt_input datepicker" data-type="normal-date"></td>
                                 </tr>
                                 <tr>
                                     <td><label> จังหวัด</label></td>
@@ -203,73 +203,17 @@
 <script src="<?php echo base_url(); ?>js/plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>js/plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>js/plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
-<!-- date-range-picker -->
-<script src="<?php echo base_url(); ?>js/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
-<!-- bootstrap color picker -->
-<script src="<?php echo base_url(); ?>js/plugins/colorpicker/bootstrap-colorpicker.min.js" type="text/javascript"></script>
-<!-- bootstrap time picker -->
-<script src="<?php echo base_url(); ?>js/plugins/timepicker/bootstrap-timepicker.min.js" type="text/javascript"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url(); ?>js/AdminLTE/app.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="<?php echo base_url(); ?>js/jquery.datetimepicker.css">  
-<script src="<?php echo base_url(); ?>js/jquery.datetimepicker.js"></script>  
+<script type="text/javascript" src="<?php echo base_url('js/bootstrap-datepicker-1.4.0/js/bootstrap-datepicker.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('js/bootstrap-datepicker-1.4.0/locales/bootstrap-datepicker.th.min.js'); ?>"></script>
+
+<script type="text/javascript" src="<?php echo base_url('js/main.js'); ?>"></script>
+
 <script language="JavaScript">
                                             $(function () {
-                                                //$("#BIRTH_DATE").inputmask("", {"placeholder": "dd/mm/yyyy"});
-                                                //$("[data-mask]").inputmask();
-
-                                                var thaiYear = function (ct) {
-                                                    var leap = 3;
-                                                    var dayWeek = ["พฤ.", "ศ.", "ส.", "อา.", "จ.", "อ.", "พ."];
-                                                    if (ct) {
-                                                        var yearL = new Date(ct).getFullYear() - 543;
-                                                        leap = (((yearL % 4 == 0) && (yearL % 100 != 0)) || (yearL % 400 == 0)) ? 2 : 3;
-                                                        if (leap == 2) {
-                                                            dayWeek = ["ศ.", "ส.", "อา.", "จ.", "อ.", "พ.", "พฤ."];
-                                                        }
-                                                    }
-                                                    this.setOptions({
-                                                        i18n: {th: {dayOfWeek: dayWeek}}, dayOfWeekStart: leap,
-                                                    })
-                                                };
-
-                                                $("#TERM_TIME_OPEN").datetimepicker({
-                                                    timepicker: false,
-                                                    format: 'd/m/Y', // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000              
-                                                    lang: 'th', // แสดงภาษาไทย  
-                                                    onChangeMonth: thaiYear,
-                                                    onShow: thaiYear,
-                                                    yearOffset: 543, // ใช้ปี พ.ศ. บวก 543 เพิ่มเข้าไปในปี ค.ศ  
-                                                    closeOnDateSelect: true,
-                                                });
-                                                $("#TERM_TIME_CLOSE").datetimepicker({
-                                                    timepicker: false,
-                                                    format: 'd/m/Y', // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000              
-                                                    lang: 'th', // แสดงภาษาไทย  
-                                                    onChangeMonth: thaiYear,
-                                                    onShow: thaiYear,
-                                                    yearOffset: 543, // ใช้ปี พ.ศ. บวก 543 เพิ่มเข้าไปในปี ค.ศ  
-                                                    closeOnDateSelect: true,
-                                                });
-                                                $("#TERM_TIME_START").datetimepicker({
-                                                    timepicker: false,
-                                                    format: 'd/m/Y', // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000              
-                                                    lang: 'th', // แสดงภาษาไทย  
-                                                    onChangeMonth: thaiYear,
-                                                    onShow: thaiYear,
-                                                    yearOffset: 543, // ใช้ปี พ.ศ. บวก 543 เพิ่มเข้าไปในปี ค.ศ  
-                                                    closeOnDateSelect: true,
-                                                });
-                                                $("#TERM_TIME_END").datetimepicker({
-                                                    timepicker: false,
-                                                    format: 'd/m/Y', // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000              
-                                                    lang: 'th', // แสดงภาษาไทย  
-                                                    onChangeMonth: thaiYear,
-                                                    onShow: thaiYear,
-                                                    yearOffset: 543, // ใช้ปี พ.ศ. บวก 543 เพิ่มเข้าไปในปี ค.ศ  
-                                                    closeOnDateSelect: true,
-                                                });
+                                                
                                             });
 //                                            document.onkeydown = chkEvent
 //

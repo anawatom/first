@@ -108,12 +108,19 @@ foreach ($term as $row) {
                                     <td valign="top"><label> หัวหน้าวิทยากร</label></td>
                                     <td>
                                         <div id="selectDIRECTOR">
-                                            <table border="0" style="width: 90%; height: 50px">
+                                            <table class="table table-hover" style="width: 90%; height: 50px">
                                                 <thead>
                                                     <tr>
-                                                        <th style="background-color: #F5F5F5; width: 80%">วิทยากร</th>
+                                                        <th style="background-color: #F5F5F5; width: 60%">วิทยากร</th>
                                                         <th style="background-color: #F5F5F5; width: 20%">หัวหน้า</th>
+                                                        <th style="background-color: #F5F5F5; width: 20%">
+                                                            <button class="btn btn-sm btn-default btn-create" title="เพิ่มข้อมูล">
+                                                                <i class="fa fa-plus"></i>
+                                                            </button>
+                                                        </th>
                                                     </tr>
+                                                </thead>
+                                                <tbody>
                                                     <?php
                                                     $this->director_term->TERM_ID = $row['TERM_ID'];
                                                     $director_term = $this->director_term->_selectAllDirectorTerm();
@@ -126,11 +133,16 @@ foreach ($term as $row) {
                                                         echo '  <td>' . $rd['FIRST_NAME'] . ' ' . $rd['LAST_NAME'] . '</td>';
                                                         echo '  <td valign="center"><input ' . $MASTER . ' type="radio" name="DIRECTOR_TERM_ID" value="' . $rd['DIRECTOR_TERM_ID'] . '">';
                                                         echo '  </td>';
+                                                        echo '  <td>'
+                                                                .anchor(['certificate_sign', 'delete', $row['SIGN_ID']],
+                                                                                '<i class="fa fa-times"></i>',
+                                                                                'class="btn btn-default btn-delete" data-value="'.$row['SIGN_ID'].'"')
+                                                                .'</td>';
                                                         echo '</tr>';
                                                     }
                                                     ?>
-                                                </thead>
-                                            </table> 
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </td>
                                     <td></td>
@@ -154,18 +166,18 @@ foreach ($term as $row) {
                                 <tr>
                                     <td><label> วันที่เริ่มรับสมัคร</label></td>
                                     <td>
-                                        <input placeholder="วัน/เดือน/ปี" type="text" name="TERM_TIME_OPEN" id="TERM_TIME_OPEN" value="<?php echo $this->configAll->_dbToDate($row['TERM_TIME_OPEN']); ?>" class="form-control txt_input">
+                                        <input placeholder="วัน/เดือน/ปี" type="text" name="TERM_TIME_OPEN" id="TERM_TIME_OPEN" value="<?php echo $this->configAll->_dbToDate($row['TERM_TIME_OPEN']); ?>" class="form-control txt_input datepicker" data-type="normal-date">
                                     </td>
                                     <td> <label>ถึงวันที่ </label></td>
-                                    <td><input placeholder="วัน/เดือน/ปี" type="text" name="TERM_TIME_CLOSE" id="TERM_TIME_CLOSE" value="<?php echo $this->configAll->_dbToDate($row['TERM_TIME_CLOSE']); ?>" class="form-control txt_input"></td>
+                                    <td><input placeholder="วัน/เดือน/ปี" type="text" name="TERM_TIME_CLOSE" id="TERM_TIME_CLOSE" value="<?php echo $this->configAll->_dbToDate($row['TERM_TIME_CLOSE']); ?>" class="form-control txt_input datepicker" data-type="normal-date"></td>
                                 </tr>
                                 <tr>
                                     <td><label> วันที่อบรม</label></td>
                                     <td>
-                                        <input placeholder="วัน/เดือน/ปี" type="text" name="TERM_TIME_START" id="TERM_TIME_START" value="<?php echo $this->configAll->_dbToDate($row['TERM_TIME_START']); ?>" class="form-control txt_input">
+                                        <input placeholder="วัน/เดือน/ปี" type="text" name="TERM_TIME_START" id="TERM_TIME_START" value="<?php echo $this->configAll->_dbToDate($row['TERM_TIME_START']); ?>" class="form-control txt_input datepicker" data-type="normal-date">
                                     </td>
                                     <td> <label>ถึงวันที่ </label></td>
-                                    <td><input placeholder="วัน/เดือน/ปี" type="text" name="TERM_TIME_END" id="TERM_TIME_END" value="<?php echo $this->configAll->_dbToDate($row['TERM_TIME_END']); ?>" class="form-control txt_input"></td>
+                                    <td><input placeholder="วัน/เดือน/ปี" type="text" name="TERM_TIME_END" id="TERM_TIME_END" value="<?php echo $this->configAll->_dbToDate($row['TERM_TIME_END']); ?>" class="form-control txt_input datepicker" data-type="normal-date"></td>
                                 </tr>
                                 <tr>
                                     <td><label> จังหวัด</label></td>
@@ -280,74 +292,19 @@ foreach ($term as $row) {
 <script src="<?php echo base_url(); ?>js/plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>js/plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>js/plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
-<!-- date-range-picker -->
-<script src="<?php echo base_url(); ?>js/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
-<!-- bootstrap color picker -->
-<script src="<?php echo base_url(); ?>js/plugins/colorpicker/bootstrap-colorpicker.min.js" type="text/javascript"></script>
-<!-- bootstrap time picker -->
-<script src="<?php echo base_url(); ?>js/plugins/timepicker/bootstrap-timepicker.min.js" type="text/javascript"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url(); ?>js/AdminLTE/app.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="<?php echo base_url(); ?>js/jquery.datetimepicker.css">  
-<script src="<?php echo base_url(); ?>js/jquery.datetimepicker.js"></script>  
+<script type="text/javascript" src="<?php echo base_url('js/bootstrap-datepicker-1.4.0/js/bootstrap-datepicker.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('js/bootstrap-datepicker-1.4.0/locales/bootstrap-datepicker.th.min.js'); ?>"></script>
+
+<script type="text/javascript" src="<?php echo base_url('js/main.js'); ?>"></script>
 <script language="JavaScript">
-                                            $(function () {
-                                                //$("#BIRTH_DATE").inputmask("", {"placeholder": "dd/mm/yyyy"});
-                                                //$("[data-mask]").inputmask();
-
-                                                var thaiYear = function (ct) {
-                                                    var leap = 3;
-                                                    var dayWeek = ["พฤ.", "ศ.", "ส.", "อา.", "จ.", "อ.", "พ."];
-                                                    if (ct) {
-                                                        var yearL = new Date(ct).getFullYear() - 543;
-                                                        leap = (((yearL % 4 == 0) && (yearL % 100 != 0)) || (yearL % 400 == 0)) ? 2 : 3;
-                                                        if (leap == 2) {
-                                                            dayWeek = ["ศ.", "ส.", "อา.", "จ.", "อ.", "พ.", "พฤ."];
-                                                        }
-                                                    }
-                                                    this.setOptions({
-                                                        i18n: {th: {dayOfWeek: dayWeek}}, dayOfWeekStart: leap,
-                                                    })
-                                                };
-
-                                                $("#TERM_TIME_OPEN").datetimepicker({
-                                                    timepicker: false,
-                                                    format: 'd/m/Y', // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000              
-                                                    lang: 'th', // แสดงภาษาไทย  
-                                                    onChangeMonth: thaiYear,
-                                                    onShow: thaiYear,
-                                                    yearOffset: 543, // ใช้ปี พ.ศ. บวก 543 เพิ่มเข้าไปในปี ค.ศ  
-                                                    closeOnDateSelect: true,
-                                                });
-                                                $("#TERM_TIME_CLOSE").datetimepicker({
-                                                    timepicker: false,
-                                                    format: 'd/m/Y', // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000              
-                                                    lang: 'th', // แสดงภาษาไทย  
-                                                    onChangeMonth: thaiYear,
-                                                    onShow: thaiYear,
-                                                    yearOffset: 543, // ใช้ปี พ.ศ. บวก 543 เพิ่มเข้าไปในปี ค.ศ  
-                                                    closeOnDateSelect: true,
-                                                });
-                                                $("#TERM_TIME_START").datetimepicker({
-                                                    timepicker: false,
-                                                    format: 'd/m/Y', // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000              
-                                                    lang: 'th', // แสดงภาษาไทย  
-                                                    onChangeMonth: thaiYear,
-                                                    onShow: thaiYear,
-                                                    yearOffset: 543, // ใช้ปี พ.ศ. บวก 543 เพิ่มเข้าไปในปี ค.ศ  
-                                                    closeOnDateSelect: true,
-                                                });
-                                                $("#TERM_TIME_END").datetimepicker({
-                                                    timepicker: false,
-                                                    format: 'd/m/Y', // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000              
-                                                    lang: 'th', // แสดงภาษาไทย  
-                                                    onChangeMonth: thaiYear,
-                                                    onShow: thaiYear,
-                                                    yearOffset: 543, // ใช้ปี พ.ศ. บวก 543 เพิ่มเข้าไปในปี ค.ศ  
-                                                    closeOnDateSelect: true,
-                                                });
-                                            });
+    $(function () {
+        $('btn-create').on('click', '#selectDIRECTOR', function(e) {
+            alert('OK');
+        });
+    });
 //                                            document.onkeydown = chkEvent
 //
 //                                            function chkEvent(e) {
@@ -361,124 +318,124 @@ foreach ($term as $row) {
 //                                                    return false;
 //                                                }
 //                                            }
-                                            function searchSPORT(e) {
-                                                if (e != '') {
-                                                    jQuery.ajax({
-                                                        url: '<?php echo base_url(); ?>index.php/<?php echo $this->router->class; ?>/searchSportByType/' + e,
-                                                        async: false,
-                                                        success: function (data) {
-                                                            //var arrData = new Array();
-                                                            //arrData = data.split(',');
-                                                            document.getElementById("selectSPORT").innerHTML = data;
-                                                        },
-                                                        error: function (xhr, desc, exceptionobj) {
-                                                            alert("ERROR:" + xhr.responseText);
-                                                        }
+    function searchSPORT(e) {
+        if (e != '') {
+            jQuery.ajax({
+                url: '<?php echo base_url(); ?>index.php/<?php echo $this->router->class; ?>/searchSportByType/' + e,
+                async: false,
+                success: function (data) {
+                    //var arrData = new Array();
+                    //arrData = data.split(',');
+                    document.getElementById("selectSPORT").innerHTML = data;
+                },
+                error: function (xhr, desc, exceptionobj) {
+                    alert("ERROR:" + xhr.responseText);
+                }
 
-                                                    });
-                                                }
-                                            }//
+            });
+        }
+    }//
 
-                                            function searchCOURSE(e) {
-                                                if (e != '') {
-                                                    jQuery.ajax({
-                                                        url: '<?php echo base_url(); ?>index.php/<?php echo $this->router->class; ?>/searchCourseBySport/' + e,
-                                                        async: false,
-                                                        success: function (data) {
-                                                            //var arrData = new Array();
-                                                            //arrData = data.split(',');
-                                                            document.getElementById("selectCOURSE").innerHTML = data;
-                                                        },
-                                                        error: function (xhr, desc, exceptionobj) {
-                                                            alert("ERROR:" + xhr.responseText);
-                                                        }
+    function searchCOURSE(e) {
+        if (e != '') {
+            jQuery.ajax({
+                url: '<?php echo base_url(); ?>index.php/<?php echo $this->router->class; ?>/searchCourseBySport/' + e,
+                async: false,
+                success: function (data) {
+                    //var arrData = new Array();
+                    //arrData = data.split(',');
+                    document.getElementById("selectCOURSE").innerHTML = data;
+                },
+                error: function (xhr, desc, exceptionobj) {
+                    alert("ERROR:" + xhr.responseText);
+                }
 
-                                                    });
-                                                }
-                                            }
+            });
+        }
+    }
 
-                                            function searchPROV(e) {
-                                                if (e != '') {
-                                                    jQuery.ajax({
-                                                        url: '<?php echo base_url(); ?>index.php/<?php echo $this->router->class; ?>/searchAMPHUR/' + e,
-                                                        async: false,
-                                                        success: function (data) {
-                                                            var arrData = new Array();
-                                                            arrData = data.split(',');
-                                                            document.getElementById("selectAMPHUR").innerHTML = data;
-                                                        },
-                                                        error: function (xhr, desc, exceptionobj) {
-                                                            alert("ERROR:" + xhr.responseText);
-                                                        }
+    function searchPROV(e) {
+        if (e != '') {
+            jQuery.ajax({
+                url: '<?php echo base_url(); ?>index.php/<?php echo $this->router->class; ?>/searchAMPHUR/' + e,
+                async: false,
+                success: function (data) {
+                    var arrData = new Array();
+                    arrData = data.split(',');
+                    document.getElementById("selectAMPHUR").innerHTML = data;
+                },
+                error: function (xhr, desc, exceptionobj) {
+                    alert("ERROR:" + xhr.responseText);
+                }
 
-                                                    });
-                                                }
-                                            }
+            });
+        }
+    }
 
-                                            function searchAMPHUR(e) {
-                                                if (e != '') {
-                                                    var PROVINCE_ID = document.getElementById("PROVINCE_ID").value;
-                                                    jQuery.ajax({
-                                                        url: '<?php echo base_url(); ?>index.php/<?php echo $this->router->class; ?>/searchTUMBOL/' + e + '/' + PROVINCE_ID,
-                                                        async: false,
-                                                        success: function (data) {
-                                                            //var arrData = new Array();
-                                                            //arrData = data.split(',');
-                                                            document.getElementById("selectTUMBOL").innerHTML = data;
-                                                        },
-                                                        error: function (xhr, desc, exceptionobj) {
-                                                            alert("ERROR:" + xhr.responseText);
-                                                        }
+    function searchAMPHUR(e) {
+        if (e != '') {
+            var PROVINCE_ID = document.getElementById("PROVINCE_ID").value;
+            jQuery.ajax({
+                url: '<?php echo base_url(); ?>index.php/<?php echo $this->router->class; ?>/searchTUMBOL/' + e + '/' + PROVINCE_ID,
+                async: false,
+                success: function (data) {
+                    //var arrData = new Array();
+                    //arrData = data.split(',');
+                    document.getElementById("selectTUMBOL").innerHTML = data;
+                },
+                error: function (xhr, desc, exceptionobj) {
+                    alert("ERROR:" + xhr.responseText);
+                }
 
-                                                    });
-                                                }
-                                            }
+            });
+        }
+    }
 
-                                            function searchDIRECTOR(e) {
-                                                if (e != '') {
-                                                    jQuery.ajax({
-                                                        url: '<?php echo base_url(); ?>index.php/<?php echo $this->router->class; ?>/searchDIRECTOR/' + e,
-                                                        async: false,
-                                                        success: function (data) {
-                                                            //var arrData = new Array();
-                                                            //arrData = data.split(',');
-                                                            document.getElementById("selectDIRECTOR").innerHTML = data;
-                                                        },
-                                                        error: function (xhr, desc, exceptionobj) {
-                                                            alert("ERROR:" + xhr.responseText);
-                                                        }
+    function searchDIRECTOR(e) {
+        if (e != '') {
+            jQuery.ajax({
+                url: '<?php echo base_url(); ?>index.php/<?php echo $this->router->class; ?>/searchDIRECTOR/' + e,
+                async: false,
+                success: function (data) {
+                    //var arrData = new Array();
+                    //arrData = data.split(',');
+                    document.getElementById("selectDIRECTOR").innerHTML = data;
+                },
+                error: function (xhr, desc, exceptionobj) {
+                    alert("ERROR:" + xhr.responseText);
+                }
 
-                                                    });
-                                                }
-                                            }
+            });
+        }
+    }
 
-                                            function fncSubmit() {
-                                                //TERM_YEAR,TYPE_ID,SPORT_ID,COURSE_ID
-                                                if (document.form1.TERM_YEAR.value == '')
-                                                {
-                                                    alert('กรุณากรอก ปีงบประมาณ');
-                                                    document.form1.TERM_YEAR.focus();
-                                                    return false;
-                                                }
-                                                if (document.form1.TYPE_ID.value == '')
-                                                {
-                                                    alert('กรุณาเลือก ประเภทการฝึกอบรม');
-                                                    document.form1.TYPE_ID.focus();
-                                                    return false;
-                                                }
-                                                if (document.form1.SPORT_ID.value == '')
-                                                {
-                                                    alert('กรุณาเลือก ชนิดกีฬา/ชนิดการฝึกอบรม');
-                                                    document.form1.SPORT_ID.focus();
-                                                    return false;
-                                                }
-                                                if (document.form1.COURSE_ID.value == '')
-                                                {
-                                                    alert('กรุณาเลือก ชื่อหลักสูตร');
-                                                    document.form1.COURSE_ID.focus();
-                                                    return false;
-                                                }
-                                            }
+    function fncSubmit() {
+        //TERM_YEAR,TYPE_ID,SPORT_ID,COURSE_ID
+        if (document.form1.TERM_YEAR.value == '')
+        {
+            alert('กรุณากรอก ปีงบประมาณ');
+            document.form1.TERM_YEAR.focus();
+            return false;
+        }
+        if (document.form1.TYPE_ID.value == '')
+        {
+            alert('กรุณาเลือก ประเภทการฝึกอบรม');
+            document.form1.TYPE_ID.focus();
+            return false;
+        }
+        if (document.form1.SPORT_ID.value == '')
+        {
+            alert('กรุณาเลือก ชนิดกีฬา/ชนิดการฝึกอบรม');
+            document.form1.SPORT_ID.focus();
+            return false;
+        }
+        if (document.form1.COURSE_ID.value == '')
+        {
+            alert('กรุณาเลือก ชื่อหลักสูตร');
+            document.form1.COURSE_ID.focus();
+            return false;
+        }
+    }
 
 </script>
 
