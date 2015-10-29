@@ -123,6 +123,8 @@ $route['member/(:num)/director_term/index/(:num)'] = 'gms_director_term/index_fo
 $route['member/(:num)/director_term/create'] = 'gms_director_term/create_for_member/$1';
 $route['member/(:num)/director_term/update/(:num)'] = 'gms_director_term/update_for_member/$1/$2';
 $route['member/(:num)/director_term/delete/(:num)'] = 'gms_director_term/delete_for_member/$1/$2';
+// Ajax functions
+$route['director_term/ajax_post_create'] = 'gms_director_term/ajax_post_create';
 
 // Gms_director_work
 // for gms_member
@@ -153,6 +155,9 @@ $route['r02/index'] = 'r02/index';
 
 // R06
 $route['r06/index'] = 'r06/index';
+
+// View_member_detail_all
+$route['view_member_detail_all/ajax_get_data_by_name'] = 'view_member_detail_all/ajax_get_data_by_name';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
