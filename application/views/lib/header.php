@@ -20,6 +20,9 @@
         <link href="<?php echo base_url(); ?>css/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
         <!-- bootstrap wysihtml5 - text editor -->
         <link href="<?php echo base_url(); ?>css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
+
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/bootstrap-datepicker-1.4.0/bootstrap-datepicker.css'); ?>">
+        
         <!-- Theme style -->
         <link href="<?php echo base_url(); ?>css/AdminLTE.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url(); ?>css/override.css" rel="stylesheet" type="text/css" />
