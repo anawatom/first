@@ -13,13 +13,14 @@ class Model_view_member_detail_all extends CI_Model {
 		$this->primary_key = 'MEMBER_ID';
 	}
 
-	public function get_data_by_name($name, $limit = 10, $order_field = 'MEMBER_ID')
+	public function get_data_by_name($name, $limit = 15, $order_field = 'MEMBER_ID')
 	{
 		$this->db->like('FIRST_NAME', $name);
 		$this->db->or_like('LAST_NAME', $name);
 		$this->db->limit($limit);
+		$query = $this->db->get($this->table_name);
 
-		return $this->db->get($this->table_name)->result_array();
+		return $query->result_array();
 	}
 
 }

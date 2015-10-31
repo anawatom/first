@@ -11,7 +11,7 @@ foreach ($term as $row) {
 <aside class="right-side"> 
     <section class="content-header">
         <h1>
-            <?php echo $this->router->class . '-หลักสูตรฝึกอบรม'; ?>
+            D01-หลักสูตรฝึกอบรม
         </h1>
         <ol class="breadcrumb">
             <li><a href="<?php echo base_url(); ?>index.php/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -27,10 +27,8 @@ foreach ($term as $row) {
                     <div class="box-header">
                         <h3 class="box-title">แก้ไขหลักสูตรฝึกอบรม</h3>
                     </div>
-
-                    <form action="<?php echo base_url(); ?>index.php/<?php echo $this->router->class; ?>/updateExc" method="post" name="form1" id="form1" enctype="multipart/form-data" onSubmit="JavaScript:return fncSubmit();">
+                     <form action="<?php echo base_url(); ?>index.php/<?php echo $this->router->class; ?>/updateExc" method="post" name="form1" id="form1" enctype="multipart/form-data" onSubmit="JavaScript:return fncSubmit();">
                         <div class="box-body">
-
                             <table style="width: 100%" >
                                 <tr class="form-group has-error">
                                     <td style="width: 20%;"><label> ปีงบประมาณ*</label></td>
@@ -114,7 +112,7 @@ foreach ($term as $row) {
                                                         <th style="background-color: #F5F5F5; width: 60%">วิทยากร</th>
                                                         <th style="background-color: #F5F5F5; width: 20%">หัวหน้า</th>
                                                         <th style="background-color: #F5F5F5; width: 20%">
-                                                            <button class="btn btn-sm btn-default btn-create" title="เพิ่มข้อมูล">
+                                                            <button class="btn btn-default btn-create" type="button" title="เพิ่มข้อมูล" data-toggle="modal" data-target="#modalAddDirector">
                                                                 <i class="fa fa-plus"></i>
                                                             </button>
                                                         </th>
@@ -134,9 +132,11 @@ foreach ($term as $row) {
                                                         echo '  <td valign="center"><input ' . $MASTER . ' type="radio" name="DIRECTOR_TERM_ID" value="' . $rd['DIRECTOR_TERM_ID'] . '">';
                                                         echo '  </td>';
                                                         echo '  <td>'
-                                                                .anchor(['certificate_sign', 'delete', $row['SIGN_ID']],
+                                                                .anchor(['director_term', 'delete', $rd['DIRECTOR_TERM_ID']],
                                                                                 '<i class="fa fa-times"></i>',
-                                                                                'class="btn btn-default btn-delete" data-value="'.$row['SIGN_ID'].'"')
+                                                                                'class="btn btn-default btn-delete"'
+                                                                                .' data-redirect-path="d01___update___'.$row['TERM_ID'].'"'
+                                                                                .' data-value="'.$rd['DIRECTOR_TERM_ID'].'"')
                                                                 .'</td>';
                                                         echo '</tr>';
                                                     }
@@ -271,8 +271,7 @@ foreach ($term as $row) {
                                 </tr>
 
                             </table>
-                            <div class="box-footer">
-
+                            <div class="box-footer text-center">
                                 <button type="submit" class="btn btn-primary">บันทึก</button>
                             </div>
                         </div>
@@ -280,6 +279,46 @@ foreach ($term as $row) {
                 </div>
             </div>
         </div>
+
+        <div id="modalAddDirector" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <?php echo form_open('d01/ajax_add_director', 
+                                        ['name' => 'formDirectorTerm',
+                                            'method' => 'POST'],
+                                        ['TERM_ID' => $row['TERM_ID'],
+                                            'MEMBER_ID' => '']); ?>
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">วิทยากร</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <?php echo form_label('ชื่อ/นามสกุล วิยากร', 'MEMBER_NAME'); ?>
+                                        <div class="input-group">
+                                            <input type="text" name="MEMBER_NAME" class="form-control">
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <?php echo form_label('ตำแหน่ง', 'JOB_POSITION'); ?>
+                                        <input type="text" name="JOB_POSITION" class="form-control" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary btn-save">บันทึก</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
+                        </div>
+                    <?php echo form_close(); ?>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
     </section>
 </aside>
 <!-- jQuery 2.0.2 -->
@@ -301,8 +340,47 @@ foreach ($term as $row) {
 <script type="text/javascript" src="<?php echo base_url('js/main.js'); ?>"></script>
 <script language="JavaScript">
     $(function () {
-        $('btn-create').on('click', '#selectDIRECTOR', function(e) {
-            alert('OK');
+        // $('#selectDIRECTOR').on('click', '.btn-create', function(e) {
+        //     alert('OK');
+        // });
+
+        $('input[name="MEMBER_NAME"]').autocomplete({
+            source: '<?php echo site_url('view_member_detail_all/ajax_get_autocomplete_data'); ?>',
+            minLength: 2,
+            select: function(e, ui) {
+                $('input[name="MEMBER_ID"]').val(ui.item.data.MEMBER_ID);
+                if (ui.item.data.JOB_POSITION) {
+                    $('input[name="JOB_POSITION"]').val(ui.item.data.JOB_POSITION);
+                }
+                else {
+                    $('input[name="JOB_POSITION"]').val('');
+                }
+            }
+        });
+
+        $('form[name="formDirectorTerm"').on('submit', function(e) {
+            e.preventDefault();
+            var $form = $(this);
+            
+            $.ajax({
+                method: $form.attr('method'),
+                url: $form.attr('action'),
+                dataType: 'JSON',
+                data: {
+                    MEMBER_ID: $form.find('input[name="MEMBER_ID"]').val(),
+                    TERM_ID: $form.find('input[name="TERM_ID"]').val()
+                },
+                success: function(data, textStatus, jqXHR) {
+                    alert(data.message);
+
+                    if (data.status === true) {
+                        window.location.reload();
+                    }
+                },
+                error: function(jqXHR, textStatus, error) {
+                    alert('เกิดข้อผิดพลาด');
+                }
+            });
         });
     });
 //                                            document.onkeydown = chkEvent

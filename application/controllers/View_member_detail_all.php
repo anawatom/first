@@ -9,18 +9,16 @@ class View_member_detail_all extends CI_Controller {
 		$this->load->model('model_view_member_detail_all', 'view_member_detail_all');
 	}
 
-	public function ajax_get_data_by_name()
+	public function ajax_get_autocomplete_data()
 	{
 		$result = [];
-		$term = $this->input->get('term');
+		$term = $this->input->get('term', TRUE);
 		if (empty($term) === FALSE)
 		{
 			$member_data = $this->view_member_detail_all->get_data_by_name($term);
-			// [{"id":"Falco subbuteo","label":"Eurasian Hobby","value":"Eurasian Hobby"}]
 			foreach ($member_data as $key => $value) {
-				$result[] = ['id' => $value['MEMBER_ID'],
-								'lebal' => $value['FIRST_NAME'].' '.$value['LAST_NAME'],
-								'value' => $value['MEMBER_ID']];
+				$result[] = ['value' => $value['FIRST_NAME'].' '.$value['LAST_NAME'],
+								'data' => $value];
 			}
 		}
 

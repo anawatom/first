@@ -266,4 +266,44 @@ class D01 extends CI_Controller {
         echo '<META HTTP-EQUIV="REFRESH" CONTENT="0;URL=' . base_url() . 'index.php/' . $this->dir . '">';
     }
 
+    /***
+    * Ajax functions
+    */
+    public function ajax_add_director()
+    {
+        $result = [];
+        $post_data = $this->input->post(NULL, TRUE);
+
+        if (empty($post_data) === TRUE)
+        {
+            throw new Exception('Not found data', 1);
+        }
+        else
+        {
+            $old_data = $this->director_term->get_data_by_params(['MEMBER_ID' => $post_data['MEMBER_ID'],
+                                                                    'TERM_ID' => $post_data['TERM_ID']]);
+            if (count($old_data) > 0)
+            {
+                $result = ['status' => false,
+                                'message' => 'คนนี้มีรายชื่ออยู่แล้ว'];
+            }
+            else
+            {
+                if ($this->director_term->insert($post_data) === TRUE)
+                {
+
+                    $result = ['status' => true,
+                                'message' => 'ดำเนินการสำเร็จ'];
+                }
+                else
+                {
+                    $result = ['status' => false,
+                                'message' => 'เกิดข้อผิดพลาด'];
+                }
+            }
+
+            $this->output->set_output(json_encode($result));
+        }
+    }
+
 }

@@ -50,6 +50,9 @@ $route['amphur/get_html_options/(:num)'] = 'amphur/get_html_options/$1';
 // Tumbol
 $route['tumbol/get_html_options/(:num)'] = 'tumbol/get_html_options/$1';
 
+// View_member_detail_all
+$route['view_member_detail_all/ajax_get_autocomplete_data'] = 'view_member_detail_all/ajax_get_autocomplete_data';
+
 // Gms_term
 $route['term/get_html_options_for_dropdown_term/(:num)/(:num)'] = 'gms_term/get_html_options_for_dropdown_term/$1/$2';
 $route['term/get_term_data_by_id/(:num)'] = 'gms_term/get_term_data_by_id/$1';
@@ -116,7 +119,9 @@ $route['member/(:num)/work/create'] = 'gms_work/create_for_member/$1';
 $route['member/(:num)/work/update/(:num)'] = 'gms_work/update_for_member/$1/$2';
 $route['member/(:num)/work/delete/(:num)'] = 'gms_work/delete_for_member/$1/$2';
 
-// Gms_director_term
+/* ** Gms_director_term ** */
+$route['director_term/delete/(:num)'] = 'gms_director_term/delete/$1';
+$route['director_term/delete/(:num)/(:any)'] = 'gms_director_term/delete/$1';
 // for gms_member
 $route['member/(:num)/director_term/index'] = 'gms_director_term/index_for_member/$1/$2';
 $route['member/(:num)/director_term/index/(:num)'] = 'gms_director_term/index_for_member/$1/$2';
@@ -124,7 +129,7 @@ $route['member/(:num)/director_term/create'] = 'gms_director_term/create_for_mem
 $route['member/(:num)/director_term/update/(:num)'] = 'gms_director_term/update_for_member/$1/$2';
 $route['member/(:num)/director_term/delete/(:num)'] = 'gms_director_term/delete_for_member/$1/$2';
 // Ajax functions
-$route['director_term/ajax_post_create'] = 'gms_director_term/ajax_post_create';
+$route['director_term/ajax_create'] = 'gms_director_term/ajax_create';
 
 // Gms_director_work
 // for gms_member
@@ -150,14 +155,15 @@ $route['member/(:num)/director_produce/create'] = 'gms_director_produce/create_f
 $route['member/(:num)/director_produce/update/(:num)'] = 'gms_director_produce/update_for_member/$1/$2';
 $route['member/(:num)/director_produce/delete/(:num)'] = 'gms_director_produce/delete_for_member/$1/$2';
 
+// D01
+$route['d01/ajax_add_director'] = 'd01/ajax_add_director';
+
+
 // R02
 $route['r02/index'] = 'r02/index';
 
 // R06
 $route['r06/index'] = 'r06/index';
-
-// View_member_detail_all
-$route['view_member_detail_all/ajax_get_data_by_name'] = 'view_member_detail_all/ajax_get_data_by_name';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

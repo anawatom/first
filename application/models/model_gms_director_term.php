@@ -144,6 +144,17 @@ class Model_gms_director_term extends CI_Model {
 
         return $this->db->get()->result_array();
     }
+
+    public function get_data_by_params($params, $order_field = 'DIRECTOR_TERM_ID', $order_type = 'ASC')
+    {
+        foreach ($params as $key => $value) {
+            $this->db->where($key, $value);
+        }
+
+        $query = $this->db->get($this->table_name);
+
+        return $query->result_array();
+    }
     
     /*
     * Get id for inserting.
