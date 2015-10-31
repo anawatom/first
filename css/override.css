@@ -17,3 +17,10 @@
 .right-side > .content-header {
 	padding: 10px 15px 10px 20px;
 }
+
+/* **
+* jQuery UI
+** */
+.ui-front {
+	z-index: 1051;
+}
