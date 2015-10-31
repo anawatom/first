@@ -6,12 +6,14 @@
 <aside class="right-side"> 
     <section class="content-header">
         <h1>
-            <?php echo $this->router->class . '-หลักสูตรฝึกอบรม'; ?>
+            D01-หลักสูตรฝึกอบรม
         </h1>
         <ol class="breadcrumb">
             <li><a href="<?php echo base_url(); ?>index.php/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">ตารางรหัส</a></li>
-            <li class="active"><?php echo $this->router->class . '-เพิ่มหลักสูตรฝึกอบรม'; ?></li>
+            <li>
+                <?php echo anchor('d01/index', 'หลักสูตรฝึกอบรม'); ?>
+            </li>
+            <li class="active">เพิ่มหลักสูตรฝึกอบรม</li>
         </ol> 
     </section>
 
@@ -74,7 +76,7 @@
                                     <td></td>
                                     <td></td>
                                 </tr>
-                                <tr>
+                               <!--  <tr>
                                     <td valign="top"><label> หัวหน้าวิทยากร</label></td>
                                     <td>
                                         <div id="selectDIRECTOR">
@@ -90,7 +92,7 @@
                                     </td>
                                     <td></td>
                                     <td></td>
-                                </tr>
+                                </tr> -->
                                 <tr>
                                     <td><label> รุ่นที่</label></td>
                                     <td>
@@ -182,8 +184,7 @@
                                 </tr>
 
                             </table>
-                            <div class="box-footer">
-
+                            <div class="box-footer text-center">
                                 <button type="submit" class="btn btn-primary">บันทึก</button>
                             </div>
                         </div>
