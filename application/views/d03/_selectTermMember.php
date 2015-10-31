@@ -78,16 +78,20 @@ foreach ($term as $rd) {
                                         $arrayData['TERM_ID'] = str_replace( 'ID' , '' , $TERM_ID);
                                         $search = base64_encode(serialize($arrayData)); 
 						?>
-						<td><a href="<?php echo base_url(); ?>index.php/report/report_trn1i0140_tumneab?<?=$search?>"  class="btn btn-success btn-sm" style="width: 100%"  target="_blank">ทำเนียบรุ่น (PDF)</a></td>
+						<td><a href="<?php echo base_url(); ?>index.php/report/report_trn1i0140_tumneab?<?=$search?>"  class="btn btn-success btn-sm" style="width: 100%"  target="_blank"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> ทำเนียบรุ่น (PDF)</a></td>
                        					
                     </tr>
 
                     <tr>
-                        <td colspan="2"><a href="#" onclick="getTrainedListReport();"  class="btn btn-success btn-sm" style="width: 100%" >รายชื่อสมาชิกที่ผ่านการอบรม (Excel)</a></td>
+                        <td colspan="2">
+                            <a href="#" onclick="getTrainedListReport();"  class="btn btn-success btn-sm" style="width: 100%" ><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> รายชื่อสมาชิกที่ผ่านการอบรม (Excel)</a>
+                        </td>
                     </tr>
 
 					<tr>
-                        <td colspan="2"><a href="#" onclick="getTrainMemberReportDetail();"  class="btn btn-success btn-sm" style="width: 100%" >รายชื่อสมาชิกที่เข้าร่วมการอบรม (Excel)</a></td>
+                        <td colspan="2">
+                            <a href="#" onclick="getTrainMemberReportDetail();"  class="btn btn-success btn-sm" style="width: 100%" ><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> รายชื่อสมาชิกที่เข้าร่วมการอบรม (Excel)</a>
+                        </td>
 					</tr>
 
 <!--                    <tr>
