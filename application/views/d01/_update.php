@@ -15,8 +15,12 @@ foreach ($term as $row) {
         </h1>
         <ol class="breadcrumb">
             <li><a href="<?php echo base_url(); ?>index.php/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">ตารางรหัส</a></li>
-            <li class="active"><?php echo $this->router->class . '-เพิ่มหลักสูตรฝึกอบรม'; ?></li>
+            <li>
+                <?php echo anchor('d01/index', 'ข้อมูลหลักสูตรฝึกอบรม'); ?>
+            </li>
+            <li class="active">
+                แก้ไขหลักสูตรฝึกอบรม
+            </li>
         </ol> 
     </section>
 
