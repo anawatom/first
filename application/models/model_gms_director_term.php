@@ -193,7 +193,7 @@ class Model_gms_director_term extends CI_Model {
 
         $data[$this->primary_key] = $this->get_inserting_id();
         $data['DIRECTOR_TERM_STATUS'] ='1';
-        $data['DIRECTOR_TERM_MASTER'] = '1';
+        $data['DIRECTOR_TERM_MASTER'] = '0';
         $data['CREATE_BY'] = $this->session->userdata('LOGIN_USERNAME');
         $data['CREATE_DATE'] = get_oracle_current_timestamp();
         $data['UPDATE_BY'] = $this->session->userdata('LOGIN_USERNAME');
