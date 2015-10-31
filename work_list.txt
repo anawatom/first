@@ -1,0 +1,85 @@
+ipeshd.dpe.go.th
+http://ipeshd.dpe.go.th/trnWeb/login.jsf?prev=aHR0cDovLzE5Mi4xNjguMi4xMTo4MDgwL3RybldlYi90cm4vdHJuMGkwMTAvaW5kZXguanNm
+User: khanakorn.p
+Password: Arsen@l2438
+
+Work summary trnAdmin.
+- ตารางรหัส
+	- รหัสประเภทอบรม - *Already have(ประเภทการฝึกอบรม) - Done
+		- Cann't to upload the file.
+		- Cann't to go to view/edit page.
+	- รหัสชนิดกีฬา/ชนิดการฝึกอบรม - Done
+	- หลักสูตรและวิทยากร - *Already have
+	- รหัสคำนห้านาม - Done
+		- GMS_PREFIX
+		- Doesn't have the upload file
+	- รหัสเหตุผลที่ไม่อนุมัติ - Done
+		- GMS_CANCEL_RESULT
+		- Doesn't have the upload file
+	- ผู้มีอำนวจลงนามในใบประกาศ - Done
+		- GMS_CERTIFICATE_SIGN
+		- Have the upload image
+	- รหัสตำแหน่งในรุ่นฝึกอบรม - Done
+		- - GMS_TERM_POSITION
+		- Haven't the upload file
+- บันทึกข้อมูล
+	- หลักสูตรการฝึกอบรมประจำปี - *Already have(หลักสูตรฝึกอบรม)
+	- อนุมัติ/สละสิทธิการลงทะเบียนเข้าอบรม - *Already have(อนุมัติ/สละสิทธิ)
+	- รายละเอียดหลักสูตรที่จัดอบรม - *Already have(รายละเอียดหลักสูตร)
+	- ทะเบียนประวัติการฝึกอบรม - *Already have(ทะเบียนประวัติ)
+		- Main table => GMS_MEMBER
+		- Sub table.
+			- ประวัติการฝึกอบรม - DONE
+				- GMS_HISTORY
+				- หลักสูตร = GMS_COUTSE.name GMS_TERM.term_gen
+				- Questions
+					- HISTORY_STATUS, HISTORY_STATUS_REGIS, HISTORY_STATUS_APPROVE ตอน insert
+					ลง GMS_HISTORY ควร set เป็นอะไร
+			- ประวัติการปฏิบัติงาน - Done
+				- GMS_WORK
+			- ประวัติวิทยากร - Done
+				- GMS_DIRECTOR_COURSE
+			- ประวัติการทำงาน - Done
+				- GMS_DIRECTOR_WORK
+			- ประวัติการศึกษา - Done
+				- GMS_DIRECTOR_EDU
+			- หัวข้อที่บรรยาย - Done
+				- GMS_DIRECTOR_PRODUCE
+- พิมพ์รายงาน
+	- จำนวนผู้ผ่านการฝึกอบรมในแต่ละประเภทการฝึกอบรม - *Already have(จำนวนผู้ผ่านการฝึกอบรมในแต่ละประเภท)
+	- รายชื่อผู้ผ่านการฝึกอบรมแต่ละหลักสูตร - Done
+	- ข้อมูลการฝึกอบรม - Done
+	- เปรียบเทียบข้อมูลการฝึกอบรม - Done
+	- ข้อมูลการปฏิบัติงาน - Done
+	- พิมพ์วุฒืบัตรผู้ผ่านการฝึกอบรม - Done
+
+* Didn't to check in the detail.
+
+CRUD generator
+- https://github.com/rougin/combustor
+- https://github.com/amrew/nip-igniter
+
+https://dzone.com/articles/how-paginate-search-results
+http://stackoverflow.com/questions/5815171/how-to-create-search-form-with-into-codeigniter-uri-format
+http://www.askaboutphp.com/58/codeigniter-mixing-segment-based-url-with-querystrings.html
+http://www.robertmullaney.com/2012/11/13/extending-codeigniter-uri-class-simplify-pagination-base_url-option/
+
+Oracle Timestamp
+https://gatalriset.wordpress.com/2014/07/16/codeigniter-oracle-xe/
+http://stackoverflow.com/questions/14688834/php-oci8-how-set-oracle-timestamp-returned-format
+
+-------------------------------------------------------------------------------------------------------
+
+Bug list(28/10/2015)
+- D01 - Done
+	- ไม่มีเมนูแอดวิทยากร
+		Note
+			- Selecting from VIEW_MEMBER_DETAIL_ALL(Use auto complete), Show in modal.
+- D03
+	- ไม่มีปุ่ม "รายชื่อสมาชิกที่ผ่านการอบรม (Excel)"
+		Note
+			- Find the approach to export excel from old code.
+- D02
+	- กดอนุมัติ แล้ววันที่คลาดเคลื่อนไป 1 เดือน
+		Note 
+			Insert date to db is correct. I think it is incorrect because using javascript to format date to show.

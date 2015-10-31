@@ -82,9 +82,12 @@ foreach ($term as $rd) {
                        					
                     </tr>
 
+                    <tr>
+                        <td colspan="2"><a href="#" onclick="getTrainedListReport();"  class="btn btn-success btn-sm" style="width: 100%" >รายชื่อสมาชิกที่ผ่านการอบรม (Excel)</a></td>
+                    </tr>
 
 					<tr>
-                        <td><a href="#" onclick="getTrainMemberReportDetail();"  class="btn btn-success btn-sm" style="width: 100%" >รายชื่อสมาชิกที่เข้าร่วมการอบรม (Excel)</a></td>
+                        <td colspan="2"><a href="#" onclick="getTrainMemberReportDetail();"  class="btn btn-success btn-sm" style="width: 100%" >รายชื่อสมาชิกที่เข้าร่วมการอบรม (Excel)</a></td>
 					</tr>
 
 <!--                    <tr>
@@ -96,12 +99,6 @@ foreach ($term as $rd) {
                         <td><a  class="btn btn-success btn-sm" style="width: 100%" >รายชื่อสมาชิกที่เข้าาร่วม (XLS)</a></td>
                     </tr>-->
                 </table>
-
-
-
-
-
-
             </div><!--/.col (left) -->
         </div>   <!-- /.row -->
         <div class="row">
@@ -198,18 +195,34 @@ foreach ($term as $rd) {
 </aside><!-- /.right-side -->
 </div><!-- ./wrapper -->
 
-    <form name="FormClearReports" action="http://report.dpe.go.th" method="POST" target="_blank" >
-        <input type="hidden" name="report" >
-	<input type="hidden" name="promptTERM_ID" >
-        <script type="text/javascript">
-            function getTrainMemberReportDetail(){                 
-                var form = jQuery('form[name="FormClearReports"]');                
-                form.find('[name="report"]').val("file:/C:/Program Files (x86)/i-net Clear Reports/startpage/TRAIN/TrainMember.xls");
-                form.find('[name="promptTERM_ID"]').val(<?=str_replace( 'ID' , '' , $TERM_ID)?>);                
-                form.submit() ;
-            }
-        </script>
-    </form>
+<?php echo form_open('http://report.dpe.go.th',
+                        ['name' => 'formTrainedListReport',
+                            'method' => 'POST',
+                            'target' => '_blank'],
+                        ['report' => '',
+                            'promptTERM_ID' => '']); ?>
+    <script type="text/javascript">
+        function getTrainedListReport() {
+            var $form = $('form[name="formTrainedListReport"]');
+            $form.find('[name="report"]').val("file:/C:/Program Files (x86)/i-net Clear Reports/startpage/TRAIN/TrainedList.xls");
+            $form.find('[name="promptTERM_ID"]').val('<?php echo str_replace('ID' , '' , $TERM_ID); ?>');
+            $form.submit();
+        }
+    </script>
+<?php echo form_close(); ?>
+
+<form name="FormClearReports" action="http://report.dpe.go.th" method="POST" target="_blank" >
+    <input type="hidden" name="report" >
+    <input type="hidden" name="promptTERM_ID" >
+    <script type="text/javascript">
+        function getTrainMemberReportDetail(){                 
+            var form = jQuery('form[name="FormClearReports"]');                
+            form.find('[name="report"]').val("file:/C:/Program Files (x86)/i-net Clear Reports/startpage/TRAIN/TrainMember.xls");
+            form.find('[name="promptTERM_ID"]').val(<?=str_replace( 'ID' , '' , $TERM_ID)?>);                
+            form.submit() ;
+        }
+    </script>
+</form>
 
 <!-- jQuery 2.0.2 -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
