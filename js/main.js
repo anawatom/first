@@ -58,12 +58,19 @@ $(function() {
 
 	$('.btn-delete').on('click', function(event) {
 		event.preventDefault();
+		var url;
 
 		if (confirm('กรุณายืนยัน')) {
+			url = $(this).attr('href');
+
+			if ($(this).attr('data-redirect-path') !== undefined) {
+				url += '/redirect_path/' + $(this).attr('data-redirect-path');
+			}
+
 			if ($(this).attr('data-target') === '_parent') {
-				window.top.location.href = $(this).attr('href');
+				window.top.location.href = url;
 			} else {
-				window.location.replace($(this).attr('href'));
+				window.location.replace(url);
 			}
 		}
 	});

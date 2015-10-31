@@ -145,6 +145,29 @@ class Gms_director_term extends CI_Controller {
 		redirect('d04/updateMember/'.$member_id, 'location');
 	}
 
+	public function delete($id = 0)
+	{
+		$query_params = $this->uri->uri_to_assoc(4);
+
+		if ( $this->gms_director_term->delete($id) )
+		{
+			$this->session->set_flashdata('flash_message', ['message' => 'ดำเนินการสำเร็จ', 'status' => 'success']);
+		}
+		else
+		{
+			$this->session->set_flashdata('flash_message', ['message' => 'เกิดข้อผิดพลาด', 'status' => 'error']);
+		}
+
+		if (isset($query_params['redirect_path']))
+		{
+			redirect(str_replace('___', '/', $query_params['redirect_path']), 'location');
+		}
+		else
+		{
+			redirect('d04/updateMember/'.$member_id, 'location');
+		}
+	}
+
 }
 /* End of file Gms_director_term.php */
 /* Location: ./application/controllers/Gms_director_term.php */

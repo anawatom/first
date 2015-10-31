@@ -3,12 +3,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            <?php echo $this->router->class . '-หลักสูตรฝึกอบรม'; ?>
+            D01-หลักสูตรฝึกอบรม
         </h1>
         <ol class="breadcrumb">
             <li><a href="<?php echo base_url(); ?>index.php/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">บันทึกข้อมูล</a></li>
-            <li class="active"><?php echo $this->router->class . '-หลักสูตรฝึกอบรม'; ?></li>
+            <li class="active"><a href="#">ข้อมูลหลักสูตรฝึกอบรม</a></li>
         </ol> 
     </section>
 
