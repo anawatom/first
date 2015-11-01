@@ -79,7 +79,7 @@
 				</div><!-- /.box-body -->
 
 				<div class="box-footer text-center">
-					<input type="submit" value="พิมพ์" class="btn btn-primary">
+					<input type="submit" value="พิมพ์" class="btn btn-primary btn-export-report">
 				</div>
 			<?php echo form_close(); ?>
 		</div><!-- /.box -->
