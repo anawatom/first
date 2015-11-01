@@ -273,7 +273,7 @@ class report extends CI_Controller {
             // p_historyNoEnd
             $params = new Java("java.util.HashMap");
 
-            $str_term_id = (string) $get_data['TERM_ID'];
+            $str_term_id = (string) $get_data['TERM_GEN'];
             $params->put("p_termId", $str_term_id);
 
             if ($get_data['HISTORY_NO'] === '1')
