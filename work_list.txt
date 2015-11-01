@@ -69,7 +69,6 @@ https://gatalriset.wordpress.com/2014/07/16/codeigniter-oracle-xe/
 http://stackoverflow.com/questions/14688834/php-oci8-how-set-oracle-timestamp-returned-format
 
 -------------------------------------------------------------------------------------------------------
-
 Bug list(28/10/2015)
 - D01 - Done
 	- ไม่มีเมนูแอดวิทยากร
@@ -83,3 +82,17 @@ Bug list(28/10/2015)
 	- กดอนุมัติ แล้ววันที่คลาดเคลื่อนไป 1 เดือน
 		Note 
 			Insert date to db is correct. I think it is incorrect because using javascript to format date to show.
+
+-------------------------------------------------------------------------------------------------------
+Fixed list(01/11/2015)
+- S06 - Done
+	- รูปไม่ขึ้น
+	- แก้ path ตอน upload ด้วย
+- R02 - Done
+	- Sperate TERM_GEN from COURSE_SUBJECT.
+- R06 - Done
+	- Sperate TERM_GEN from COURSE_SUBJECT.
+	- Add property to select alignment of report
+		- TRN1I060_Certifys_Vertical
+		- TRN1I060_Certifys
+		*** Used old path
