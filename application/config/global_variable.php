@@ -2,6 +2,7 @@
 
 $config['UPLOAD_PATH_GMS_CERTIFICATE_SIGN'] = '../files/member/certificate/';
 $config['STATUSES'] = array('0' => 'ยกเลิก', '1' => 'ใช้งาน');
+$config['REPORT_TYPE'] = array('vertical' => 'แนวตั้ง', '1' => 'แนวนอน');
 
 /* End of file global_variable.php */
 /* Location: ./application/config/global_variable.php */
