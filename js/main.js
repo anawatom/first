@@ -227,7 +227,7 @@ function setDropdownTerm(url, sportId, year) {
 }
 
 function setDropdownTermGen(url, courseId, year) {
-	courseId = (typeof courseId !== undefined)? courseId: 0;
+	courseId = courseId? courseId: 0;
 
 	if ( ! year ) {
 		alert('กรุณาเลือกปี');
