@@ -7,7 +7,7 @@
 				<h3 class="box-title">เงื่อนไขการค้นหา</h3>
 			</div><!-- /.box-header -->
 			<!-- form start -->
-			<?php echo form_open('report/report_TRN1R060',
+			<?php echo form_open('report/report_TRN1I060',
 								['name' => 'formReport',
 									'class' => 'has-js-validation',
 									'method' => 'GET',

@@ -257,7 +257,7 @@ class report extends CI_Controller {
        
     }
 
-    public function report_TRN1R060() {
+    public function report_TRN1I060() {
         $get_data = $this->input->get(NULL, TRUE);
 
         if (empty($get_data) === FALSE)
@@ -292,7 +292,18 @@ class report extends CI_Controller {
 
 //          $emptyDataSource = new Java("net.sf.jasperreports.engine.JREmptyDataSource");
 //          $jasperPrint = $fillManager->fillReport($report, $params, $conn);
-            $jasperPrint = $fillManager->fillReport("C:/DPE/apache-tomcat-6.0.32/reports/TRN1R060.jasper", $params, $conn);              
+
+            $report_name = '';
+            if ($get_data['REPORT_TYPE'] === 'vertical')
+            {
+                $report_name = 'TRN1I060_Certifys_Vertical.jasper';
+            }
+            else if ($get_data['REPORT_TYPE'] === 'horizontal')
+            {
+                $report_name = 'TRN1I060_Certifys.jasper';
+            }
+
+            $jasperPrint = $fillManager->fillReport("C:/DPE/apache-tomcat-6.0.32/reports/".$report_name, $params, $conn);              
             $filename = uniqid('Report_');
             $outputPath = "E:/dd/"."{$filename}.pdf";
 
