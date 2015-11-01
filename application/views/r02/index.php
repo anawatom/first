@@ -19,8 +19,8 @@
 								name="TERM_YEAR" 
 								class="form-control require-field has-dependency"
 								data-require-field-alert-text="กรุณาเลือก ปีงบประมาณ"
-								data-dependency-for="TERM_ID"
-								data-url-dependency-for-term-id="<?php echo site_url(['term', 'get_html_options_for_dropdown_term']); ?>" 
+								data-dependency-for="TERM_GEN"
+								data-url-dependency-for-term-gen="<?php echo site_url(['term', 'get_html_options_for_dropdown_term_gen']); ?>" 
 								value="<?php echo set_form_value('TERM_YEAR', isset($page_var['gms_term'])? $page_var['gms_term']: null, (date('Y') + 543)); ?>">
 					</div>
 					<div class="form-group has-error">
@@ -38,19 +38,29 @@
 													[], 
 													'class="form-control require-field has-dependency"'
 													.' data-require-field-alert-text="กรุณาเลือก ชนิดกีฬา"'
-													.' data-dependency-for="TERM_ID"'
-													.' data-url-dependency-for-term-id="'.site_url(['term', 'get_html_options_for_dropdown_term']).'"'
+													.' data-dependency-for="COURSE_ID"'
+													.' data-url-dependency-for-course-id="'.site_url(['course', 'get_html_options']).'"'
 													.' disabled'); ?>
 					</div>
 					<div class="form-group has-error">
-						<?php echo form_label('หลักสูตร *', 'TERM_ID'); ?>
-						<?php echo form_dropdown( 'TERM_ID', 
-													isset($page_var['term_list'])? $page_var['term_list']: [], 
+						<?php echo form_label('หลักสูตร *', 'COURSE_ID'); ?>
+						<?php echo form_dropdown( 'COURSE_ID', 
+													[], 
+													[], 
+													'class="form-control require-field has-dependency"'
+													.' data-require-field-alert-text="กรุณาเลือก หลักสูตร"'
+													.' data-dependency-for="TERM_GEN"'
+													.' data-url-dependency-for-term-gen="'.site_url(['term', 'get_html_options_for_dropdown_term_gen']).'"'
+													.' disabled'); ?>
+					</div>
+					<div class="form-group has-error">
+						<?php echo form_label('รุ่น *', 'TERM_GEN'); ?>
+						<?php echo form_dropdown( 'TERM_GEN', 
+													[], 
 													[], 
 													'class="form-control require-field"'
-													.' data-require-field-alert-text="กรุณาเลือก หลักสูตร"'
-													.' disabled'); ?>
-						<?php echo form_error('TERM_ID'); ?>
+													.' data-require-field-alert-text="กรุณาเลือก รุ่น"'
+													.' disabled' ); ?>
 					</div>
 					<!-- <div class="form-group">
 						<div class="form-inline">
