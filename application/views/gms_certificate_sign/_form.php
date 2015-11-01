@@ -37,7 +37,7 @@
 			<div class="form-group text-left">
 				<?php echo get_element_image_preview( (isset($page_var['model']['MANAGER_SIGN']) === FALSE) ? 
 															'' :
-															base_url('uploads/images/gms_certificate_sign/'.$page_var['model']['MANAGER_SIGN']),
+															base_url($UPLOAD_PATH_GMS_CERTIFICATE_SIGN.$page_var['model']['MANAGER_SIGN']),
 														'MANAGER_SIGN' ); ?>
 			</div>
 			<div class="form-group require">

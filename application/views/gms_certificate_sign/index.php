@@ -44,13 +44,13 @@
 							<td>
 								<?php echo get_element_image( empty($row['GENERAL_SIGN']) === TRUE ?
 																'':
-																base_url('uploads/images/gms_certificate_sign/'.$row['GENERAL_SIGN']) ); ?>
+																base_url($UPLOAD_PATH_GMS_CERTIFICATE_SIGN.$row['GENERAL_SIGN']) ); ?>
 							</td>
 							<td><?php echo $row['MANAGER_NAME']; ?></td>
 							<td>
 								<?php echo get_element_image( empty($row['MANAGER_SIGN']) === TRUE ?
 																'':
-																base_url('uploads/images/gms_certificate_sign/'.$row['MANAGER_SIGN']) ); ?>
+																base_url($UPLOAD_PATH_GMS_CERTIFICATE_SIGN.$row['MANAGER_SIGN']) ); ?>
 							</td>
 							<td>
 								<?php echo anchor('certificate_sign/update/'.$row['SIGN_ID'],

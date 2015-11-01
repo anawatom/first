@@ -6,7 +6,14 @@ if ( ! function_exists('upload_image'))
 	{
 		$ci =& get_instance();
 
-		$config['upload_path'] = './uploads/images/'.$path;
+		if ($path === 'gms_certificate_sign')
+		{
+			$config['upload_path'] = $ci->load->get_var('UPLOAD_PATH_GMS_CERTIFICATE_SIGN');
+		}
+		else
+		{
+			$config['upload_path'] = './uploads/images/'.$path;
+		}
 		$config['allowed_types'] = 'gif|jpg|png';
 		$config['max_size']	= '2048';
 		$config['overwrite'] = $overwrite;
