@@ -256,9 +256,9 @@ foreach ($term as $row) {
                                             <?php
                                             foreach ($sign as $rd) {
                                                 if ($rd['SIGN_ID'] == $row['SIGN_ID']) {
-                                                    echo '<option selected="true" value="' . $rd['SIGN_ID'] . '">' . $rd['GENERAL_NAME'] . '</option>';
+                                                    echo '<option selected="true" value="' . $rd['SIGN_ID'] . '">'.$rd['SIGN_ID'].' ' . $rd['GENERAL_NAME'] .' '. $rd['MANAGER_NAME']. '</option>';
                                                 }else{
-                                                    echo '<option value="' . $rd['SIGN_ID'] . '">' . $rd['GENERAL_NAME'] . '</option>';
+                                                    echo '<option value="' . $rd['SIGN_ID'] . '">' .$rd['SIGN_ID'].' '. $rd['GENERAL_NAME'] .' '. $rd['MANAGER_NAME']. '</option>';
                                                 }
                                                 
                                             }
