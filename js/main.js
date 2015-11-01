@@ -113,7 +113,7 @@ $(function() {
 		}
 	});
 
-	// Dependencies dropdown
+	/* ** Dependency dropdowns ** */
 	$('.has-dependency[name="TYPE_ID"]').on('change', function(event) {
 		$.ajax({
 			url: $(this).attr('data-url-dependency')+'/' + $(this).val(),
@@ -128,17 +128,54 @@ $(function() {
 		});
 	});
 
-	$('.has-dependency[data-dependency-for="TERM_ID"][name="TERM_YEAR"]').on('blur', function(event) {
-		setDropdownTerm($(this).attr('data-url-dependency-for-term-id'), 
-							$('.has-dependency[name="SPORT_ID"]').val(), 
-							$(this).val());
+	$('.has-dependency[data-dependency-for="COURSE_ID"][name="SPORT_ID"]').on('change', function(e) {
+		var $this = $(this);
+
+		if ($this.val()) {
+			$.ajax({
+				url: $(this).attr('data-url-dependency-for-course-id') + '/' + $this.val(),
+				dataType: 'json',
+				success: function (data) {
+					$('select[name="COURSE_ID"]').prop('disabled', false);
+					$('select[name="COURSE_ID"]').html(data.data);
+				},
+				error: function (xhr, desc, exceptionobj) {
+					alert("ERROR:" + xhr.responseText);
+				}
+			});
+		}
 	});
 
+	// For TERM_ID
 	$('.has-dependency[data-dependency-for="TERM_ID"][name="SPORT_ID"]').on('change', function(event) {
 		setDropdownTerm($(this).attr('data-url-dependency-for-term-id'), 
 							$(this).val(), 
 							$('input[name="TERM_YEAR"]').val());
 	});
+	$('.has-dependency[data-dependency-for="TERM_ID"][name="TERM_YEAR"]').on('blur', function(event) {
+		setDropdownTerm($(this).attr('data-url-dependency-for-term-id'), 
+							$('.has-dependency[name="SPORT_ID"]').val(), 
+							$(this).val());
+	});
+	$('.has-dependency[data-dependency-for="TERM_ID"][name="SPORT_ID"]').on('change', function(event) {
+		setDropdownTerm($(this).attr('data-url-dependency-for-term-id'), 
+							$(this).val(), 
+							$('input[name="TERM_YEAR"]').val());
+	});
+
+	// For TERM_GEN
+	$('.has-dependency[data-dependency-for="TERM_GEN"][name="TERM_YEAR"]').on('change', function(e) {
+		setDropdownTermGen($(this).attr('data-url-dependency-for-term-gen'), 
+							$('.has-dependency[data-dependency-for="TERM_GEN"][name="COURSE_ID"]').val(), 
+							$(this).val());
+	});
+	$('.has-dependency[data-dependency-for="TERM_GEN"][name="COURSE_ID"]').on('change', function(e) {
+		setDropdownTermGen($(this).attr('data-url-dependency-for-term-gen'),
+							$(this).val(),
+							$('.has-dependency[data-dependency-for="TERM_GEN"][name="TERM_YEAR"]').val());
+	});
+	/* ** 
+	* End Dependency dropdowns ** */
 
 	// Detail dropdown
 	$('.has-detail[name="TERM_ID"]').on('change', function(event) {
@@ -187,4 +224,25 @@ function setDropdownTerm(url, sportId, year) {
 			}
 		});
 	}
+}
+
+function setDropdownTermGen(url, courseId, year) {
+	courseId = (typeof courseId !== undefined)? courseId: 0;
+
+	if ( ! year ) {
+		alert('กรุณาเลือกปี');
+		return;
+	}
+
+	$.ajax({
+		url: url + '/' + courseId + '/' + year,
+		dataType: 'json',
+		success: function (data) {
+			$('select[name="TERM_GEN"]').prop('disabled', false);
+			$('select[name="TERM_GEN"]').html(data.data);
+		},
+		error: function (xhr, desc, exceptionobj) {
+			alert("ERROR:" + xhr.responseText);
+		}
+	});
 }

@@ -30,6 +30,23 @@ class Gms_term extends CI_Controller {
 		$this->output->set_output(json_encode($result));
 	}
 
+	public function get_html_options_for_dropdown_term_gen($course_id = 0, $term_year = 0)
+	{
+		$result = [];
+
+		$gms_terms = $this->gms_term->get_data_for_dropdown_term_gen($course_id, $term_year);
+
+		$html = '<option value="" selected="true">กรุณาเลือก</option>';
+		foreach ($gms_terms as $row) {
+			$html .= '<option value="' . $row['TERM_ID'] . '">' 
+					. $row['TERM_GEN_NAME']
+					. '</option>';
+		}
+		$result['data'] = $html;
+
+		$this->output->set_output(json_encode($result));
+	}
+
 	public function get_term_data_by_id($term_id = 0)
 	{
 		$result = [];

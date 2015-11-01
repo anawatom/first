@@ -53,8 +53,12 @@ $route['tumbol/get_html_options/(:num)'] = 'tumbol/get_html_options/$1';
 // View_member_detail_all
 $route['view_member_detail_all/ajax_get_autocomplete_data'] = 'view_member_detail_all/ajax_get_autocomplete_data';
 
+// Gms_course
+$route['course/get_html_options/(:num)'] = 'gms_course/get_html_options/$1';
+
 // Gms_term
 $route['term/get_html_options_for_dropdown_term/(:num)/(:num)'] = 'gms_term/get_html_options_for_dropdown_term/$1/$2';
+$route['term/get_html_options_for_dropdown_term_gen/(:num)/(:num)'] = 'gms_term/get_html_options_for_dropdown_term_gen/$1/$2';
 $route['term/get_term_data_by_id/(:num)'] = 'gms_term/get_term_data_by_id/$1';
 
 // Gms_sports
