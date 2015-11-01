@@ -98,8 +98,8 @@
 					</div>
 				</div><!-- /.box-body -->
 
-				<div class="box-footer">
-					<input type="submit" value="ค้นหา" class="btn btn-primary">
+				<div class="box-footer text-center">
+					<input type="submit" value="พิมพ์" class="btn btn-primary btn-export-report">
 				</div>
 			<?php echo form_close(); ?>
 		</div><!-- /.box -->
