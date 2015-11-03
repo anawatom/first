@@ -3,12 +3,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            <?php echo $this->router->class . '-หลักสูตรและวิทยากร'; ?>
+            S03-หลักสูตรและวิทยากร
         </h1>
         <ol class="breadcrumb">
             <li><a href="<?php echo base_url(); ?>index.php/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="#">ตารางรหัส</a></li>
-            <li class="active"><?php echo $this->router->class . '-หลักสูตรและวิทยากร'; ?></li>
+            <li class="active">S03-หลักสูตรและวิทยากร</li>
         </ol> 
     </section>
 
@@ -47,7 +47,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">ชื่อหลักสูตร</label>
-                                <input type="text" class="form-control" id="COURSE_SUBJECT" name="COURSE_SUBJECT" placeholder="ชื่อหลักสูตร">
+                                <input type="text" 
+                                        class="form-control" 
+                                        id="COURSE_SUBJECT" 
+                                        name="COURSE_SUBJECT" 
+                                        placeholder="ชื่อหลักสูตร">
                             </div>
                         </div><!-- /.box-body -->
 

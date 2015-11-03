@@ -24,26 +24,38 @@ class S03 extends CI_Controller {
 
     public function selectCourse($numL = 0) {
         $this->load->view("lib/header");
-        if ($this->input->post('search')) {
-            $session = array(
-                'TYPE_ID' => $this->input->post('TYPE_ID'),
-                'SPORT_ID' => $this->input->post('SPORT_ID'),
-                'COURSE_SUBJECT' => $this->input->post('COURSE_SUBJECT')
-            );
-            $this->session->set_userdata($session); //สร้างตัวแปร sessio
-        }
+        $data = array();
+        
+        // if ($this->input->post('search')) {
+        //     $session = array(
+        //         'TYPE_ID' => $this->input->post('TYPE_ID'),
+        //         'SPORT_ID' => $this->input->post('SPORT_ID'),
+        //         'COURSE_SUBJECT' => $this->input->post('COURSE_SUBJECT')
+        //     );
+        //     $this->session->set_userdata($session); //สร้างตัวแปร sessio
+        // }
 
-        if (($this->session->userdata('dir') == NULL)or ( $this->session->userdata('dir') != $this->dir)) {
-            $session = array(
-                'TYPE_ID' => '',
-                'SPORT_ID' => '',
-                'COURSE_SUBJECT' => '',
-                'dir' => $this->dir,
-            );
-            $this->session->set_userdata($session); //สร้างตัวแปร sessio
-            $this->gms_sport->TYPE_ID = 1;
-        } else {
-            $this->gms_sport->TYPE_ID = $this->session->userdata('TYPE_ID');
+        // if (($this->session->userdata('dir') == NULL)or ( $this->session->userdata('dir') != $this->dir)) {
+        //     $session = array(
+        //         'TYPE_ID' => '',
+        //         'SPORT_ID' => '',
+        //         'COURSE_SUBJECT' => '',
+        //         'dir' => $this->dir,
+        //     );
+        //     $this->session->set_userdata($session); //สร้างตัวแปร sessio
+        //     $this->gms_sport->TYPE_ID = 1;
+        // } else {
+        //     $this->gms_sport->TYPE_ID = $this->session->userdata('TYPE_ID');
+        // }
+
+        $post_data = $this->input->post(NULL, TRUE);
+        
+        $data['search_params'] = array();
+        if (empty($post_data) === FALSE)
+        {
+            $data['search_params']['TYPE_ID'] = $this->gms_course->TYPE_ID = $this->input->post('TYPE_ID');
+            $data['search_params']['SPORT_ID'] = $this->gms_course->SPORT_ID = $this->input->post('SPORT_ID');
+            $data['search_params']['COURSE_SUBJECT'] = $this->gms_course->COURSE_SUBJECT = $this->input->post('COURSE_SUBJECT');
         }
 
         $numF = 10;
@@ -51,6 +63,7 @@ class S03 extends CI_Controller {
         $data['sport'] = $this->gms_sport->_searchByType();
         @$data['count'] = $this->gms_course->_selectCountViewCourse();
         @$data['course'] = $this->gms_course->_selectViewCourse($numF, $numL);
+        
         $this->load->view($this->dir . "/_select", $data);
         $this->load->view("lib/footer");
     }
