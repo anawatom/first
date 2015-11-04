@@ -76,6 +76,11 @@ $route['sports/view/(:num)'] = 'gms_sports/view/$1';
 $route['sports/delete/(:num)'] = 'gms_sports/delete/$1';
 $route['sports/get_html_options_by_type_id/(:num)'] = 'gms_sports/get_html_options_by_type_id/$1';
 
+// Gms_course
+$route['s03/index'] = 's03/index';
+$route['s03/index/(:num)'] = 's03/index/$1';
+$route['s03/index/(:num)/(:any)'] = 's03/index/$1';
+
 // Gms_prefix
 $route['prefix/index'] = 'gms_prefix/index/$1';
 $route['prefix/index/(:num)'] = 'gms_prefix/index/$1';

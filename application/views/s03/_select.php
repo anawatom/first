@@ -1,5 +1,5 @@
 <!-- Right side column. Contains the navbar and content of the page -->
-<aside class="right-side">                
+<aside class="right-side">
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
@@ -9,7 +9,7 @@
             <li><a href="<?php echo base_url(); ?>index.php/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="#">ตารางรหัส</a></li>
             <li class="active">S03-หลักสูตรและวิทยากร</li>
-        </ol> 
+        </ol>
     </section>
 
     <!-- Main content -->
@@ -23,42 +23,37 @@
                         <h3 class="box-title">เงื่อนไขการค้นหา</h3>
                     </div><!-- /.box-header -->
                     <!-- form start -->
-                    <form action="<?php echo base_url(); ?>index.php/<?php echo $this->router->class; ?>/selectCourse" method="post">
+                    <?php echo form_open('s03/index', ['method' => 'GET', 'class' => 'form-search']); ?>
                         <div class="box-body">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">ประเภทการฝึกอบรม</label>
-                                <select name="TYPE_ID" id="TYPE_ID" class="form-control" onchange="searchSport(this.value)">
-                                    <option value="" selected="true">กรุณาเลือกข้อมูล</option>
-                                    <?php
-                                    foreach ($type as $row) {
-                                        echo '<option value="' . $row['TYPE_ID'] . '">' . $row['TYPE_SUBJECT'] . '</option>';
-                                    }
-                                    ?>
-
-                                </select>
+                                <?php echo form_label('ประเภทการฝึกอบรม', 'TYPE_ID'); ?>
+                                <?php echo form_dropdown('TYPE_ID',
+                                                        isset($gms_type_list)? $gms_type_list: [],
+                                                        set_form_value('TYPE_ID', $search_params),
+                                                        'id="TYPE_ID" class="form-control"'); ?>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">ชนิดกีฬา/ชนิดการฝึกอบรม</label>
-                                <div id="selectSPORT">
-                                    <select name="SPORT_ID" id="SPORT_ID" class="form-control txt_input">
-                                        <option value="" selected="true"></option>
-                                    </select>
-                                </div>
+                                <?php echo form_label('ชนิดกีฬา/ชนิดการฝึกอบรม', 'SPORT_ID'); ?>
+                                <?php echo form_dropdown('SPORT_ID',
+                                                        isset($gms_sport_list)? $gms_sport_list: ['all' => 'ทั้งหมด'],
+                                                        set_form_value('SPORT_ID', $search_params),
+                                                        'id="SPORT_ID" class="form-control"'); ?>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">ชื่อหลักสูตร</label>
-                                <input type="text" 
-                                        class="form-control" 
-                                        id="COURSE_SUBJECT" 
-                                        name="COURSE_SUBJECT" 
-                                        placeholder="ชื่อหลักสูตร">
+                                <?php echo form_label('ชื่อหลักสูตร', 'COURSE_SUBJECT'); ?>
+                                <input type="text"
+                                        class="form-control"
+                                        id="COURSE_SUBJECT"
+                                        name="COURSE_SUBJECT"
+                                        placeholder="ชื่อหลักสูตร"
+                                        value="<?php echo set_form_value('COURSE_SUBJECT', $search_params); ?>">
                             </div>
                         </div><!-- /.box-body -->
 
                         <div class="box-footer">
                             <input type="submit" name="search" value="ค้นหา" class="btn btn-primary">
                         </div>
-                    </form>
+                    <?php echo form_close(); ?>
                 </div><!-- /.box -->
 
 
@@ -109,23 +104,11 @@
                                 <?php
                             }
                             ?>
-                            <tr>
-                                <td colspan="5">
-                                    <ul class="pagination pagination-sm no-margin pull-right">
-                                        <?php
-                                        $config['base_url'] = base_url() . 'index.php/' . $this->router->class . '/selectCourse/';
-                                        $config['total_rows'] = $count;
-                                        $config['per_page'] = 10;
-
-                                        $this->pagination->initialize($config);
-                                        echo $this->pagination->create_links();
-                                        ?>
-                                    </ul>
-                                </td>
-                            </tr>
-
                         </table>
                     </div><!-- /.box-body -->
+                    <div class="body-footer">
+                      <?php echo $pagination->create_links(); ?>
+                    </div><!-- /.body-footer -->
                 </div><!-- /.box -->
             </div>
         </div>
@@ -151,28 +134,32 @@
 
 <!-- AdminLTE App -->
 <script src="<?php echo base_url(); ?>js/AdminLTE/app.js" type="text/javascript"></script>
-
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="<?php echo base_url(); ?>js/AdminLTE/dashboard.js" type="text/javascript"></script> 
-<script language="JavaScript">
-                                        function searchSport(e) {
-                                            jQuery.ajax({
-                                                url: '<?php echo base_url(); ?>index.php/<?php echo $this->router->class; ?>/searchSportByType/' + e,
-                                                async: false,
-                                                success: function (data) {
-                                                    var arrData = new Array();
-                                                    arrData = data.split(',');
-                                                    document.getElementById("selectSPORT").innerHTML = arrData[0];
-                                                },
-                                                error: function (xhr, desc, exceptionobj) {
-                                                    alert("ERROR:" + xhr.responseText);
-                                                }
+<!-- <script src="<?php echo base_url(); ?>js/AdminLTE/dashboard.js" type="text/javascript"></script> -->
 
-                                            });
-                                        }
-                                        function delCourseByID(e) {
-                                            if (confirm('ต้องการลบ ID นี้หรือไม่ ?')) {
-                                                window.location.href = '<?php echo base_url(); ?>index.php/<?php echo $this->router->class; ?>/delCourseExc/' + e;
-                                            }
-                                        }
+<script src="<?php echo base_url('js/main.js'); ?>" type="text/javascript"></script>
+<script language="JavaScript">
+  jQuery('select[name="TYPE_ID"]').on('change', function(e) {
+    var value = $(this).val();
+
+    if (value !== 'all') {
+      jQuery.ajax({
+          url: '<?php echo base_url(); ?>index.php/<?php echo $this->router->class; ?>/searchSportByType/' + value,
+          async: false,
+          success: function (data) {
+              var arrData = new Array();
+              arrData = data.split(',');
+              jQuery('select[name="SPORT_ID"]').html(arrData[0]);
+          },
+          error: function (xhr, desc, exceptionobj) {
+              alert("ERROR:" + xhr.responseText);
+          }
+      });
+    }
+  });
+  function delCourseByID(e) {
+      if (confirm('ต้องการลบ ID นี้หรือไม่ ?')) {
+          window.location.href = '<?php echo base_url(); ?>index.php/<?php echo $this->router->class; ?>/delCourseExc/' + e;
+      }
+  }
 </script>
