@@ -7,22 +7,32 @@
                 <h3 class="box-title">เงื่อนไขการค้นหา</h3>
             </div><!-- /.box-header -->
             <!-- form start -->
-            <form action="<?php echo base_url(); ?>index.php/<?php echo $this->router->class; ?>/selectType" method="post">
+            <?php echo form_open('s01/index', ['method' => 'GET', 'class' => 'form-search']) ?>
                 <div class="box-body">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">รหัสประเภท</label>
-                        <input type="text" class="form-control" id="TYPE_CODE" name="TYPE_CODE" placeholder="รหัสประเภท">
+                        <?php echo form_label('รหัสประเภท', 'TYPE_CODE'); ?>
+                        <input type="text"
+                                class="form-control"
+                                id="TYPE_CODE"
+                                name="TYPE_CODE"
+                                placeholder="รหัสประเภท"
+                                value="<?php echo set_form_value('TYPE_CODE', $page_var['search_params']); ?>">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">ชื่อประเภท</label>
-                        <input type="text" class="form-control" id="TYPE_SUBJECT" name="TYPE_SUBJECT" placeholder="ชื่อประเภท">
+                        <?php echo form_label('ชื่อประเภท', 'TYPE_SUBJECT'); ?>
+                        <input type="text"
+                              class="form-control"
+                              id="TYPE_SUBJECT"
+                              name="TYPE_SUBJECT"
+                              placeholder="ชื่อประเภท"
+                              value="<?php echo set_form_value('TYPE_SUBJECT', $page_var['search_params']); ?>">
                     </div>
                 </div><!-- /.box-body -->
 
                 <div class="box-footer">
                     <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> ค้นหา</button>
                 </div>
-            </form>
+            <?php echo form_close(); ?>
         </div><!-- /.box -->
     </div><!--/.col (left) -->
 </div>   <!-- /.row -->

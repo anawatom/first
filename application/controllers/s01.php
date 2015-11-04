@@ -19,21 +19,37 @@ class S01 extends CI_Controller {
         $this->breadcrumbs->push($this->config->item('dashboard_icon').' Dashboard', 'dashboard');
         $this->breadcrumbs->push('ประเภทการฝึกอบรม', 's01/index');
 
-        $this->selectType();
-    }
-
-    public function selectType() {
         $page_var = [];
-        if (!$this->input->post('TYPE_CODE') and ! $this->input->post('TYPE_SUBJECT')) {
-            $page_var['type'] = $this->gms_type->_getAllType();
-        } else {
-            $this->gms_type->TYPE_CODE = $this->input->post('TYPE_CODE');
-            $this->gms_type->TYPE_SUBJECT = $this->input->post('TYPE_SUBJECT');
-            $page_var['type'] = $this->gms_type->_getSearchType();
+        
+        $page_var['search_params'] = $this->uri->uri_to_assoc(4);
+        if (empty($page_var['search_params']['TYPE_CODE']) == FALSE)
+        {
+            $this->gms_type->TYPE_CODE = $page_var['search_params']['TYPE_CODE'];
         }
+        if (empty($page_var['search_params']['TYPE_SUBJECT']) == FALSE)
+        {
+            $this->gms_type->TYPE_SUBJECT = $page_var['search_params']['TYPE_SUBJECT'];
+        }
+        $page_var['type'] = $this->gms_type->_getSearchType();
 
         $this->template->load('S01-ประเภทการฝึกอบรม', $this->dir . "/_select", $page_var);
+        // $this->selectType();
     }
+
+    // public function selectType() {
+    //     $page_var = [];
+
+    //     $page_var['search_params'] = $this->uri->uri_to_assoc(4);
+    //     if (!$this->input->post('TYPE_CODE') and ! $this->input->post('TYPE_SUBJECT')) {
+    //         $page_var['type'] = $this->gms_type->_getAllType();
+    //     } else {
+    //         $this->gms_type->TYPE_CODE = $this->input->post('TYPE_CODE');
+    //         $this->gms_type->TYPE_SUBJECT = $this->input->post('TYPE_SUBJECT');
+    //         $page_var['type'] = $this->gms_type->_getSearchType();
+    //     }
+
+    //     $this->template->load('S01-ประเภทการฝึกอบรม', $this->dir . "/_select", $page_var);
+    // }
 
     public function insertType() {
         $page_var = [];
