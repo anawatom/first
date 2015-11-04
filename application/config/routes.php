@@ -61,6 +61,11 @@ $route['term/get_html_options_for_dropdown_term/(:num)/(:num)'] = 'gms_term/get_
 $route['term/get_html_options_for_dropdown_term_gen/(:num)/(:num)'] = 'gms_term/get_html_options_for_dropdown_term_gen/$1/$2';
 $route['term/get_term_data_by_id/(:num)'] = 'gms_term/get_term_data_by_id/$1';
 
+// Gms_type
+$route['s01/index'] = 's01/index';
+$route['s01/index/(:num)'] = 's01/index/$1';
+$route['s01/index/(:num)/(:any)'] = 's01/index/$1';
+
 // Gms_sports
 $route['sports/index'] = 'gms_sports/index/$1';
 $route['sports/index/(:num)'] = 'gms_sports/index/$1';
