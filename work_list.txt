@@ -80,7 +80,7 @@ Bug list(28/10/2015)
 			- Find the approach to export excel from old code.
 - D02
 	- กดอนุมัติ แล้ววันที่คลาดเคลื่อนไป 1 เดือน
-		Note 
+		Note
 			Insert date to db is correct. I think it is incorrect because using javascript to format date to show.
 
 -------------------------------------------------------------------------------------------------------
@@ -96,3 +96,18 @@ Fixed list(01/11/2015)
 		- TRN1I060_Certifys_Vertical
 		- TRN1I060_Certifys
 		*** Used old path
+
+-------------------------------------------------------------------------------------------------------
+Bug List(03/11/2015)
+- S03
+	- Cannot search. - Done
+
+-------------------------------------------------------------------------------------------------------
+Bug List(04/11/2015)
+- Search word cannot retain
+	- S01 - Done
+	- S03 - Done
+	- D01
+	- D02
+	- D03
+	- D04
