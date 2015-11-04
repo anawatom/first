@@ -20,7 +20,7 @@ class S01 extends CI_Controller {
         $this->breadcrumbs->push('ประเภทการฝึกอบรม', 's01/index');
 
         $page_var = [];
-        
+
         $page_var['search_params'] = $this->uri->uri_to_assoc(4);
         if (empty($page_var['search_params']['TYPE_CODE']) == FALSE)
         {
@@ -33,23 +33,7 @@ class S01 extends CI_Controller {
         $page_var['type'] = $this->gms_type->_getSearchType();
 
         $this->template->load('S01-ประเภทการฝึกอบรม', $this->dir . "/_select", $page_var);
-        // $this->selectType();
     }
-
-    // public function selectType() {
-    //     $page_var = [];
-
-    //     $page_var['search_params'] = $this->uri->uri_to_assoc(4);
-    //     if (!$this->input->post('TYPE_CODE') and ! $this->input->post('TYPE_SUBJECT')) {
-    //         $page_var['type'] = $this->gms_type->_getAllType();
-    //     } else {
-    //         $this->gms_type->TYPE_CODE = $this->input->post('TYPE_CODE');
-    //         $this->gms_type->TYPE_SUBJECT = $this->input->post('TYPE_SUBJECT');
-    //         $page_var['type'] = $this->gms_type->_getSearchType();
-    //     }
-
-    //     $this->template->load('S01-ประเภทการฝึกอบรม', $this->dir . "/_select", $page_var);
-    // }
 
     public function insertType() {
         $page_var = [];
@@ -89,9 +73,9 @@ class S01 extends CI_Controller {
             } else {
                 $this->gms_type->TYPE_IMAGE = '';
             }
-            
+
             $this->gms_type->_insertType();
-            
+
             $this->session->set_flashdata('flash_message', ['message' => 'ดำเนินการสำเร็จ', 'status' => 'success']);
             redirect('/s01/updateType/'.$this->gms_type->TYPE_ID, 'refresh');
         }
@@ -106,7 +90,7 @@ class S01 extends CI_Controller {
         $this->breadcrumbs->push($this->config->item('dashboard_icon').' Dashboard', 'dashboard');
         $this->breadcrumbs->push('ประเภทการฝึกอบรม', 's01/index');
         $this->breadcrumbs->push($page_var['form_title'], 's01/updateTypeExc');
-        
+
         $this->template->load('S01-ประเภทการฝึกอบรม', $this->dir . "/update", $page_var);
     }
 
@@ -134,17 +118,17 @@ class S01 extends CI_Controller {
             } else {
                 $this->gms_type->TYPE_IMAGE = '';
             }
-            
+
             $this->gms_type->_updateType();
-            
+
             $this->session->set_flashdata('flash_message', ['message' => 'ดำเนินการสำเร็จ', 'status' => 'success']);
             redirect('/s01/updateType/'.$this->gms_type->TYPE_ID, 'refresh');
         }
     }
-    
+
     public function delTypeExc($id) {
         $this->gms_type->TYPE_ID = $id;
-        
+
         if ($this->gms_type->_delType())
         {
             $this->session->set_flashdata('flash_message', ['message' => 'ดำเนินการสำเร็จ', 'status' => 'success']);
