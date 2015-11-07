@@ -20,16 +20,16 @@ class model_gms_sport extends CI_Model {
         $this->table_name = 'GMS_SPORT';
         date_default_timezone_set('Asia/Bangkok');
     }
-    
+
     public function _searchByType(){
-        if($this->TYPE_ID!=0 or $this->TYPE_ID!=''){
+        if($this->TYPE_ID!=0 or $this->TYPE_ID!='' or $this->TYPE_ID != 'all'){
             $this->db->where("TYPE_ID",$this->TYPE_ID);
         }
         $this->db->order_by("TYPE_ID",'ASC');
         $rs = $this->db->get('GMS_SPORT');
         return $rs->result_array();
     }
-    
+
     public function _searchById($id){
         $this->db->where("SPORT_ID", $id);
         $rs = $this->db->get('GMS_SPORT');
@@ -41,12 +41,12 @@ class model_gms_sport extends CI_Model {
         return $this->find_model($id)->row_array();
     }
 
-    public function get_total_rows() 
+    public function get_total_rows()
     {
         return $this->db->count_all($this->table_name);
     }
 
-    public function get_search_rows($params) 
+    public function get_search_rows($params)
     {
         $this->add_search_conditions($params);
         return $this->db->count_all_results($this->table_name);
@@ -152,10 +152,10 @@ class model_gms_sport extends CI_Model {
     public function update($id, $data = [])
     {
         $this->load->helper('date');
-        
+
         $model_data = $this->find_model($id)->row_array();
 
-        if (isset($data['SPORT_IMAGE']) === FALSE) 
+        if (isset($data['SPORT_IMAGE']) === FALSE)
         {
             $data['SPORT_IMAGE'] = $model_data['SPORT_IMAGE'];
         }

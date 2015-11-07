@@ -62,7 +62,7 @@ class model_gms_term extends CI_Model {
 			$this->db->order_by($this->orderby);
 		}
 
-        
+
 
         if ($numF == '' and $numL == '') {
             $rs = $this->db->get('VIEW_GMS_TERM');
@@ -89,7 +89,7 @@ class model_gms_term extends CI_Model {
         $rs = $this->db->get('GMS_TYPE');
         return $rs->result_array();
     }
-    
+
     public function _selectIDTerm(){
         $this->db->select('TERM_ID');
         $this->db->order_by('TERM_ID desc');
@@ -101,7 +101,7 @@ class model_gms_term extends CI_Model {
         }
         return $id;
     }
-    
+
     public function _selectIDBLOG(){
         $this->db->select('BLOG_ID');
         $this->db->where("BLOG_ID IS NOT NULL");
@@ -155,7 +155,7 @@ class model_gms_term extends CI_Model {
         );
         $this->db->insert('GMS_TERM', $data);
     }
-    
+
     public function _updateTerm() {
         $data = array(
             'TERM_GEN' => $this->TERM_GEN,
@@ -182,14 +182,14 @@ class model_gms_term extends CI_Model {
         $this->db->where("TERM_ID", $this->TERM_ID);
         $this->db->update('GMS_TERM', $data);
     }
-    
+
     public function _delTerm(){
         $this->db->where("TERM_ID", $this->TERM_ID);
         $this->db->delete('GMS_TERM');
     }
 
     public function _chkVarForWhere($var, $data) {
-        if ($data != '') {
+        if ($data != '' && $data != 'all') {
             return $this->db->where($var, $data);
         }
     }
@@ -210,6 +210,19 @@ class model_gms_term extends CI_Model {
         $this->db->order_by($this->primary_key, 'ASC');
 
         return $this->db->get()->result_array();
+    }
+
+    public function get_data_for_dropdown_term_gen($course_id, $term_year)
+    {
+        $this->db->select($this->table_name.'.*, CONCAT( \'รุ่นที่ \', '.$this->table_name.'.TERM_GEN ) AS TERM_GEN_NAME');
+        $this->db->from($this->table_name);
+        $this->db->where('COURSE_ID', $course_id);
+        $this->db->where('TERM_YEAR', $term_year);
+        $this->db->order_by('TERM_GEN');
+
+        $query = $this->db->get();
+
+        return $query->result_array();
     }
 
     /*
