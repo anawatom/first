@@ -55,12 +55,20 @@ class D01 extends CI_Controller {
         }
 
         $this->gms_term->TERM_YEAR = $this->session->userdata('TERM_YEAR');
-        $this->gms_term->SPORT_ID = $this->session->userdata('SPORT_ID');
         $this->gms_term->TYPE_ID = $this->session->userdata('TYPE_ID');
+        $this->gms_term->SPORT_ID = $this->session->userdata('SPORT_ID');
 
+
+        $data['gms_type_list'] = elements_for_dropdown($this->gms_type->_getAllType(),
+                                                        'TYPE_ID',
+                                                        'TYPE_SUBJECT',
+                                                        'ALL');
+        $data['gms_sport_list'] = elements_for_dropdown($this->gms_sport->_searchByType(),
+                                                        'SPORT_ID',
+                                                        'SPORT_SUBJECT',
+                                                        'ALL');
+                                                        
         $numF = 10;
-
-        $data['type'] = $this->gms_type->_getAllType();
         $data['sport'] = $this->gms_sport->_searchByType();
         @$data['count'] = $this->gms_term->_selectCountTerm();
         @$data['term'] = $this->gms_term->_selectTerm($numF, $numL);
@@ -73,12 +81,12 @@ class D01 extends CI_Controller {
         $this->gms_sport->TYPE_ID = $type;
         $sport = $this->gms_sport->_searchByType();
 
-        echo '<select name="SPORT_ID" id="SPORT_ID" class="form-control txt_input" onclick="searchCOURSE(this.value);">';
-        echo '<option value="" selected="true"></option>';
+        // echo '<select name="SPORT_ID" id="SPORT_ID" class="form-control txt_input" onclick="searchCOURSE(this.value);">';
+        echo '<option value="all" selected="true">ทั้งหมด</option>';
         foreach ($sport as $row) {
             echo '<option value="' . $row['SPORT_ID'] . '">' . $row['SPORT_SUBJECT'] . '</option>';
         }
-        echo '</select>';
+        // echo '</select>';
     }
 
     public function searchCourseBySport($sport) {
@@ -241,7 +249,7 @@ class D01 extends CI_Controller {
 
         echo '<META HTTP-EQUIV="REFRESH" CONTENT="0;URL=' . base_url() . 'index.php/' . $this->dir . '">';
     }
-    
+
     public function delExc($id){
         echo '<meta charset="UTF-8">';
         $this->gms_history->TERM_ID = $id;
@@ -262,7 +270,7 @@ class D01 extends CI_Controller {
             $this->gms_term->TERM_ID = $id;
             $this->gms_term->_delTerm();
         }
-        
+
         echo '<META HTTP-EQUIV="REFRESH" CONTENT="0;URL=' . base_url() . 'index.php/' . $this->dir . '">';
     }
 
