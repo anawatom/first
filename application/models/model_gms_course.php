@@ -1,7 +1,7 @@
 <?php
 
 class Model_gms_course extends CI_Model {
-    
+
     public $COURSE_ID;
     public $SPORT_ID;
     public $LEVEL_ID = 1;
@@ -47,7 +47,7 @@ class Model_gms_course extends CI_Model {
         }
         return $rs->result_array();
     }
-    
+
     public function _selectCountViewCourse($numF = '', $numL = '') {
         $this->_chkVarForWhere('TYPE_ID', $this->TYPE_ID);
         $this->_chkVarForWhere('SPORT_ID', $this->SPORT_ID);
@@ -55,7 +55,7 @@ class Model_gms_course extends CI_Model {
         $this->db->from('VIEW_GMS_COURSE');
         return $this->db->count_all_results();
     }
-    
+
     public function _selectIDCourse(){
         $this->db->select('COURSE_ID');
         $this->db->order_by('COURSE_ID desc');
@@ -67,7 +67,7 @@ class Model_gms_course extends CI_Model {
         }
         return $id;
     }
-    
+
     public function _insertCourse(){
         $data = array(
             'COURSE_ID' => $this->COURSE_ID,
@@ -85,7 +85,7 @@ class Model_gms_course extends CI_Model {
         );
         $this->db->insert('GMS_COURSE', $data);
     }
-    
+
     public function _delCourse(){
         $this->db->where("COURSE_ID", $this->COURSE_ID);
         $this->db->delete('GMS_COURSE');
@@ -102,7 +102,7 @@ class Model_gms_course extends CI_Model {
             return $this->db->where($var, $data);
         }
     }
-    
+
     public function _selectCourseById() {
         $this->db->where("COURSE_ID", $this->COURSE_ID);
         $rs = $this->db->get('GMS_COURSE');
@@ -110,20 +110,28 @@ class Model_gms_course extends CI_Model {
     }
 
     public function _updateCourse() {
-                
+
         $data = array(
             'COURSE_SUBJECT' => $this->COURSE_SUBJECT,
             'COURSE_SUBJECT_EN' => $this->COURSE_SUBJECT_EN,
             'COURSE_STATUS' => $this->COURSE_STATUS,
             'COURSE_CODE' => $this->COURSE_CODE,
-            'COURSE_DETAIL' => $this->COURSE_DETAIL,        
-            'UPDATE_BY' => $this->UPDATE_BY,        
+            'COURSE_DETAIL' => $this->COURSE_DETAIL,
+            'UPDATE_BY' => $this->UPDATE_BY,
         );
-       
+
         $this->db->set('UPDATE_DATE', 'SYSDATE', FALSE);
-        
+
         $this->db->where("COURSE_ID", $this->COURSE_ID);
         $this->db->update('GMS_COURSE', $data);
+    }
+
+    public function get_by_sport_id($sport_id, $order_field = 'COURSE_ID', $order_type = 'ASC')
+    {
+        $this->db->where('SPORT_ID', $sport_id);
+        $query = $this->db->get($this->table_name);
+
+        return $query->result_array();
     }
 
     public function get_by_term_id($term_id)
