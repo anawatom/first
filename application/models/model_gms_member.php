@@ -112,7 +112,7 @@ class model_gms_member extends CI_Model {
         $this->db->from('VIEW_MEMBER_DETAIL_ALL');
         return $this->db->count_all_results();
     }
-    
+
     public function _searchIDGmsMember(){
         $this->db->select('MEMBER_ID');
         $this->db->order_by("MEMBER_ID", 'DESC');
@@ -131,7 +131,7 @@ class model_gms_member extends CI_Model {
         $rs = $this->db->get('VIEW_MEMBER_DETAIL_ALL');
         return $rs->result_array();
     }
-    
+
     public function _searchViewMember() {
         //VIEW_MEMBER_DETAIL_ALL
         $this->_chkVarForWhere('MEMBER_ID', $this->MEMBER_ID);
@@ -151,18 +151,18 @@ class model_gms_member extends CI_Model {
     }
 
     public function _chkVarForLike($var, $data) {
-        if ($data != '') {
+        if ($data != '' && $data != 'all') {
             return $this->db->like($var, $data);
         }
     }
 
     /* NuttaV Add function 20150716 */
 	public function _searchHrsIdOsrtHrs(){
-        $this->db->where("HRS_ID", $this->HRS_ID);       
+        $this->db->where("HRS_ID", $this->HRS_ID);
         $rs = $this->db->get('OSRT_HRS');
         return $rs->result_array();
-    }	
-	
+    }
+
     public function _insertOsrtHrs() {
         $data = array(
             'HRS_ID' => $this->HRS_ID,
@@ -243,7 +243,7 @@ class model_gms_member extends CI_Model {
         );
         $this->db->insert('GMS_MEMBER', $data);
     }
-    
+
     public function _updateOsrtHrs() {
         $data = array(
             'HR_TYPE' => $this->HR_TYPE,
@@ -299,7 +299,7 @@ class model_gms_member extends CI_Model {
         $this->db->where("HRS_ID", $this->HRS_ID);
         $this->db->update('OSRT_HRS', $data);
     }
-    
+
     public function _updateGmsMember() {
         $data = array(
             'MEMBER_USERNAME' => $this->MEMBER_USERNAME,
@@ -323,7 +323,7 @@ class model_gms_member extends CI_Model {
         $this->db->where("MEMBER_ID", $this->MEMBER_ID);
         $this->db->update('GMS_MEMBER', $data);
     }
-    
+
     public function _delOsrtHrs() {
         if ($this->HRS_ID != '') {
             $this->db->where("HRS_ID", $this->HRS_ID);
@@ -331,7 +331,7 @@ class model_gms_member extends CI_Model {
             $this->_delGmsMember();
         }
     }
-    
+
     public function _delGmsMember() {
         if ($this->HRS_ID != '') {
             $this->db->where("MEMBER_ID", $this->MEMBER_ID);

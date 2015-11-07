@@ -11,7 +11,7 @@ class D04 extends CI_Controller {
             echo '<META HTTP-EQUIV="REFRESH" CONTENT="0;URL=' . base_url() . 'index.php/login">';
         }
         $this->load->model('model_gms_type', 'gms_type');
-        //$this->load->model('model_gms_sport', 'gms_sport');
+        // $this->load->model('model_gms_sport', 'gms_sport');
         //$this->load->model('model_gms_term', 'gms_term');
         //$this->load->model('model_gms_course', 'gms_course');
         $this->load->model('model_gms_history', 'gms_history');
@@ -58,8 +58,13 @@ class D04 extends CI_Controller {
         $this->gms_member->MEMBER_USERNAME = $this->session->userdata('MEMBER_USERNAME');
         $this->gms_member->TYPE_ID = $this->session->userdata('TYPE_ID');
 
+        $data['gms_type_list'] = elements_for_dropdown($this->gms_type->_getAllType(),
+                                                        'TYPE_ID',
+                                                        'TYPE_SUBJECT',
+                                                        'ALL');
+
         $numF = 10;
-        
+
         $data['type'] = $this->gms_type->_getAllType();
         $data['count'] = $this->gms_member->_selectCountViewMember();
         $data['member'] = $this->gms_member->_selectViewMember($numF, $numL);
@@ -127,8 +132,8 @@ class D04 extends CI_Controller {
         $this->gms_member->DPE_OFFICER = $this->input->post('DPE_OFFICER'); //เจ้าหน้าที่พลศึกษา
 
         $this->input->post('MEMBER_IMAGE');
-        $this->input->post('MEMBER_AVARTAR'); 
-        $this->input->post('MEMBER_CARD'); 
+        $this->input->post('MEMBER_AVARTAR');
+        $this->input->post('MEMBER_CARD');
         //
         if ($_FILES['MEMBER_IMAGE']['name'] != NULL) {
             $file_name = $_FILES['MEMBER_IMAGE']['name'];
@@ -154,26 +159,26 @@ class D04 extends CI_Controller {
             copy($_FILES['MEMBER_CARD']['tmp_name'], $path);
             $this->gms_member->MEMBER_CARD = $new_name;
         }
-        
+
         $id = $this->gms_member->_searchIDGmsMember();
         foreach ($id as $rd){
             $key = $rd['MEMBER_ID']+1;
         }
         $this->gms_member->MEMBER_ID = $key;
-        
+
 		/* NuttaV mod 20150716 */
 		$rs = $this->gms_member->_searchHrsIdOsrtHrs() ;
         if (count($rs) == 0) {
             $this->gms_member->_insertOsrtHrs();
         }
-		
+
         $this->gms_member->_insertGmsMember();
-       
+
        echo '<META HTTP-EQUIV="REFRESH" CONTENT="0;URL=' . base_url() . 'index.php/' . $this->dir . '">';
 
         //MEMBER_ID
     }
-    
+
     public function updateMember($id){
         $this->gms_member->MEMBER_ID = $id;
         $data['prefix'] = $this->gms_prefix->_selectAllPrefix();
@@ -183,10 +188,10 @@ class D04 extends CI_Controller {
         $data['type'] = $this->gms_type->_getAllType();
         $data['member'] = $this->gms_member->_searchViewMember();
         $data['id'] = $id;
-        
+
         $this->template->load('D04-ทะเบียนประวัติ', $this->dir . "/_update", $data);
     }
-    
+
     public function updateMemberExc(){
         $HRS_ID = $this->input->post('HRS_ID');
         $this->gms_member->HRS_ID = $this->input->post('HRS_ID');
@@ -236,8 +241,8 @@ class D04 extends CI_Controller {
         $this->gms_member->DPE_OFFICER = $this->input->post('DPE_OFFICER'); //เจ้าหน้าที่พลศึกษา
 
         $MEMBER_IMAGE_BK = $this->input->post('MEMBER_IMAGE_BK');
-        $MEMBER_AVARTAR_BK = $this->input->post('MEMBER_AVARTAR_BK'); 
-        $MEMBER_CARD_BK = $this->input->post('MEMBER_CARD_BK'); 
+        $MEMBER_AVARTAR_BK = $this->input->post('MEMBER_AVARTAR_BK');
+        $MEMBER_CARD_BK = $this->input->post('MEMBER_CARD_BK');
         //
         if ($_FILES['MEMBER_IMAGE']['name'] != NULL) {
             $file_name = $_FILES['MEMBER_IMAGE']['name'];
@@ -269,19 +274,19 @@ class D04 extends CI_Controller {
         }else{
             $this->gms_member->MEMBER_CARD = $MEMBER_CARD_BK;
         }
-        
+
        $this->gms_member->MEMBER_ID = $this->input->post('MEMBER_ID');
        $this->gms_member->_updateOsrtHrs();
        $this->gms_member->_updateGmsMember();
-       
+
        echo '<META HTTP-EQUIV="REFRESH" CONTENT="0;URL=' . base_url() . 'index.php/' . $this->dir . '">';
     }
-    
+
     public function delMemberExc($id,$HRS_ID){
         echo '<meta charset="UTF-8">';
         $this->gms_history->MEMBER_ID = $id;
         $history = $this->gms_history->_selectViewHistory(2,0);
-        
+
         if($history!=NULL){
             echo '<script language="JavaScript">';
             echo "alert('ขออภัย เนื่องจาก บุคคลนี้เคยมีการผ่านการฝึกอบรมเรียบร้อยแล้ว ไม่สามารถ ลบข้อมูลได้');";
@@ -289,10 +294,10 @@ class D04 extends CI_Controller {
         }else{
             $this->gms_member->HRS_ID = $HRS_ID;
             $this->gms_member->MEMBER_ID = $id;
-            
+
             $this->gms_member->_delOsrtHrs();
         }
-        
+
         echo '<META HTTP-EQUIV="REFRESH" CONTENT="0;URL=' . base_url() . 'index.php/' . $this->dir . '">';
     }
 
@@ -319,7 +324,7 @@ class D04 extends CI_Controller {
         }
         echo '</select>';
     }
-    
+
     public function searchIDCard($HRS_ID){
         $this->gms_member->HRS_ID = $HRS_ID;
         $data = $this->gms_member->_searchMember();
@@ -327,7 +332,7 @@ class D04 extends CI_Controller {
             echo 'Yes';
         }
     }
-    
+
     public function searchHistory($MEMBER_ID){
         $this->gms_history->MEMBER_ID = $MEMBER_ID;
         $data['history'] = $this->gms_history->_selectViewHistory();

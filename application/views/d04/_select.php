@@ -11,37 +11,50 @@
                 <div class="box-body">
                     <div class="form-group">
                         <label for="HRS_ID">เลขบัตรประชาชน</label>
-                        <input type="text" class="form-control" id="HRS_ID" name="HRS_ID" placeholder="เลขบัตรประชาชน" value="">
+                        <input type="text"
+                                class="form-control"
+                                id="HRS_ID"
+                                name="HRS_ID"
+                                placeholder="เลขบัตรประชาชน"
+                                value="<?php echo $this->session->userdata('HRS_ID'); ?>">
                     </div>
                     <div class="form-group">
                         <label for="FIRST_NAME">ชื่อ</label>
-                        <input type="text" class="form-control" id="FIRST_NAME" name="FIRST_NAME" placeholder="ชื่อ" value="">
+                        <input type="text"
+                                class="form-control"
+                                id="FIRST_NAME"
+                                name="FIRST_NAME"
+                                placeholder="ชื่อ"
+                                value="<?php echo $this->session->userdata('FIRST_NAME'); ?>">
                     </div>
                     <div class="form-group">
                         <label for="LAST_NAME">นามสกุล</label>
-                        <input type="text" class="form-control" id="LAST_NAME" name="LAST_NAME" placeholder="นามสกุล" value="">
+                        <input type="text"
+                                class="form-control"
+                                id="LAST_NAME"
+                                name="LAST_NAME"
+                                placeholder="นามสกุล"
+                                value="<?php echo $this->session->userdata('LAST_NAME'); ?>">
                     </div>
                     <div class="form-group">
                         <label for="MEMBER_USERNAME">ชื่อ Login</label>
-                        <input type="text" class="form-control" id="MEMBER_USERNAME" name="MEMBER_USERNAME" placeholder="ชื่อ Login" value="">
+                        <input type="text"
+                                class="form-control"
+                                id="MEMBER_USERNAME"
+                                name="MEMBER_USERNAME"
+                                placeholder="ชื่อ Login"
+                                value="<?php echo $this->session->userdata('MEMBER_USERNAME'); ?>">
                     </div>
                     <div class="form-group">
                         <label for="TYPE_ID">กลุ่ม</label>
-                        <select name="TYPE_ID" id="TYPE_ID" class="form-control">
-                            <option value="" selected="true">กรุณาเลือกข้อมูล</option>
-                            <?php
-                            foreach ($type as $row) {
-                                echo '<option value="' . $row['TYPE_ID'] . '">' . $row['TYPE_SUBJECT'] . '</option>';
-                            }
-                            ?>
-
-                        </select>
+                        <?php
+                          $search_type_id = $this->session->userdata('TYPE_ID');
+                          echo form_dropdown('TYPE_ID',
+                                              isset($page_var['gms_type_list'])? $page_var['gms_type_list']: ['all' => 'ทั้งหมด'],
+                                              ( empty($search_type_id) )? 'all': $search_type_id,
+                                              'id="TYPE_ID" class="form-control"');
+                        ?>
                     </div>
-
-
-
-
-
                 </div><!-- /.box-body -->
 
                 <div class="box-footer">
