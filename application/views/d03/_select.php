@@ -32,9 +32,7 @@
                                         id="TERM_YEAR"
                                         name="TERM_YEAR"
                                         placeholder="ปีงบประมาณ"
-                                        value="<?php
-                                                $search_term_year = $this->session->userdata('TERM_YEAR');
-                                                echo ( empty($search_term_year)? date('Y') + 543: $search_term_year ); ?>">
+                                        value="<?php echo $this->session->userdata('TERM_YEAR'); ?>">
                             </div>
                             <div class="form-group">
                                 <label for="type_id">ประเภทการฝึกอบรม</label>
