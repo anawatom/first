@@ -22,7 +22,7 @@ class model_gms_sport extends CI_Model {
     }
 
     public function _searchByType(){
-        if($this->TYPE_ID!=0 or $this->TYPE_ID!='' or $this->TYPE_ID != 'all'){
+        if($this->TYPE_ID!=0 && $this->TYPE_ID!='' && $this->TYPE_ID != 'all'){
             $this->db->where("TYPE_ID",$this->TYPE_ID);
         }
         $this->db->order_by("TYPE_ID",'ASC');

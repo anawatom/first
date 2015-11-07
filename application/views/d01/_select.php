@@ -154,7 +154,7 @@
       jQuery('select[name="TYPE_ID"]').on('change', function(e) {
         var value = jQuery(this).val();
 
-        if (value) {
+        if (value !== 'all') {
           searchSport(value);
         }
       });
