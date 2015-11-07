@@ -19,7 +19,7 @@
 			<div class="form-group text-left">
 				<?php echo get_element_image_preview( (isset($page_var['model']['GENERAL_SIGN']) === FALSE) ? 
 															'' :
-															base_url('uploads/images/gms_certificate_sign/'.$page_var['model']['GENERAL_SIGN']),
+															base_url($UPLOAD_PATH_GMS_CERTIFICATE_SIGN.$page_var['model']['GENERAL_SIGN']),
 														'GENERAL_SIGN' ); ?>
 			</div>
 			<div class="form-group require">
@@ -50,7 +50,7 @@
 			<div class="form-group text-left">
 				<?php echo get_element_image_preview( (isset($page_var['model']['TEMPLATE_USE']) === FALSE) ? 
 															'' :
-															base_url('uploads/images/gms_certificate_sign/'.$page_var['model']['TEMPLATE_USE']),
+															base_url($UPLOAD_PATH_GMS_CERTIFICATE_SIGN.$page_var['model']['TEMPLATE_USE']),
 														'TEMPLATE_USE' ); ?>
 			</div>
 		</div>
