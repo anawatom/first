@@ -1,5 +1,5 @@
 <!-- Right side column. Contains the navbar and content of the page -->
-<aside class="right-side">                
+<aside class="right-side">
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
@@ -9,7 +9,7 @@
             <li><a href="<?php echo base_url(); ?>index.php/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="#">บันทึกข้อมูล</a></li>
             <li class="active"><?php echo $this->router->class . '-รายละเอียดหลักสูตรที่จัดฝึกอบรม'; ?></li>
-        </ol> 
+        </ol>
     </section>
 
     <!-- Main content -->
@@ -27,49 +27,60 @@
                         <div class="box-body">
                             <div class="form-group">
                                 <label for="TERM_YEAR">ปีงบประมาณ</label>
-                                <input type="text" class="form-control" id="TERM_YEAR" name="TERM_YEAR" placeholder="ปีงบประมาณ" value="<?php echo date('Y') + 543; ?>">
+                                <input type="text"
+                                        class="form-control"
+                                        id="TERM_YEAR"
+                                        name="TERM_YEAR"
+                                        placeholder="ปีงบประมาณ"
+                                        value="<?php
+                                                $search_term_year = $this->session->userdata('TERM_YEAR');
+                                                echo ( empty($search_term_year)? date('Y') + 543: $search_term_year ); ?>">
                             </div>
                             <div class="form-group">
                                 <label for="type_id">ประเภทการฝึกอบรม</label>
-                                <select name="TYPE_ID" id="TYPE_ID" class="form-control" onchange="searchSport(this.value)">
-                                    <option value="" selected="true">กรุณาเลือกข้อมูล</option>
-                                    <?php
-                                    foreach ($type as $row) {
-                                        echo '<option value="' . $row['TYPE_ID'] . '">' . $row['TYPE_SUBJECT'] . '</option>';
-                                    }
-                                    ?>
-
-                                </select>
+                                <?php
+                                  $search_type_id = $this->session->userdata('TYPE_ID');
+                                  echo form_dropdown('TYPE_ID',
+                                                    isset($gms_type_list)? $gms_type_list: ['all' => 'ทั้งหมด'],
+                                                    ( empty($search_type_id) )? 'all': $search_type_id,
+                                                    'id="TYPE_ID" class="form-control"');
+                                ?>
                             </div>
                             <div class="form-group">
                                 <label for="SPORT_ID">ชนิดกีฬา/ชนิดการฝึกอบรม</label>
-                                <div id="selectSPORT">
-                                    <select name="SPORT_ID" id="SPORT_ID" class="form-control" onchange="searchCourse(this.value)">
-                                        <option value="" selected="true"></option>
-                                    </select>
-                                </div>
+                                <?php
+                                  $search_sport_id = $this->session->userdata('SPORT_ID');
+                                  echo form_dropdown('SPORT_ID',
+                                                  isset($gms_sport_list)? $gms_sport_list: ['all' => 'ทั้งหมด'],
+                                                  ( empty($search_sport_id) )? 'all': $search_sport_id,
+                                                  'id="sport_ID" class="form-control"');
+                                ?>
                             </div>
-
                             <div class="form-group">
                                 <label for="COURSE_ID">ชื่อหลักสูตร</label>
-                                <div id="selectCourse">
-                                    <select name="COURSE_ID" id="COURSE_ID" class="form-control">
-                                        <option value="" selected="true"></option>
-                                    </select>
-                                </div>
+                                <?php
+                                  $search_course_id = $this->session->userdata('COURSE_ID');
+                                  echo form_dropdown('COURSE_ID',
+                                                  isset($gms_course_list)? $gms_course_list: ['all' => 'ทั้งหมด'],
+                                                  ( empty($search_course_id) )? 'all': $search_course_id,
+                                                  'id="COURSE_ID" class="form-control"');
+                                ?>
                             </div>
 
                             <div class="form-group">
                                 <label for="TERM_GEN">รุ่นที่</label>
-                                <input type="text" class="form-control" id="TERM_GEN" name="TERM_GEN" placeholder="รุ่นที่" value="">
+                                <input type="text"
+                                        class="form-control"
+                                        id="TERM_GEN"
+                                        name="TERM_GEN"
+                                        placeholder="รุ่นที่"
+                                        value="<?php echo $this->session->userdata('TERM_GEN'); ?>">
                             </div>
-
-
                         </div><!-- /.box-body -->
 
                         <div class="box-footer">
                             <input type="submit" name="search" value="ค้นหา" class="btn btn-primary">
-                            
+
                         </div>
                     </form>
                 </div><!-- /.box -->
@@ -79,17 +90,17 @@
             </div><!--/.col (left) -->
 
             <!--            <div class="col-md-6">
-                             general form elements 
+                             general form elements
                             <div class="box box-solid box-primary">
                                 <div class="box-header">
                                     <h3 class="box-title">ผลการค้นหา</h3>
-                                </div> /.box-header 
-                                 form start 
-                                
-                            </div> /.box 
-            
-            
-            
+                                </div> /.box-header
+                                 form start
+
+                            </div> /.box
+
+
+
                         </div>/.col (left) -->
         </div>   <!-- /.row -->
         <div class="row">
@@ -172,42 +183,50 @@
 <script src="<?php echo base_url(); ?>js/AdminLTE/app.js" type="text/javascript"></script>
 
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="<?php echo base_url(); ?>js/AdminLTE/dashboard.js" type="text/javascript"></script> 
+<!-- <script src="<?php echo base_url(); ?>js/AdminLTE/dashboard.js" type="text/javascript"></script> -->
 <script>
-                                        function searchSport(e) {
-                                            if (e != '') {
-                                                jQuery.ajax({
-                                                    url: '<?php echo base_url(); ?>index.php/<?php echo $this->router->class; ?>/searchSportByType/' + e,
-                                                    async: false,
-                                                    success: function (data) {
-                                                        var arrData = new Array();
-                                                        arrData = data.split(',');
-                                                        document.getElementById("selectSPORT").innerHTML = arrData[0];
-                                                    },
-                                                    error: function (xhr, desc, exceptionobj) {
-                                                        alert("ERROR:" + xhr.responseText);
-                                                    }
+  jQuery(function() {
+    jQuery('select[name="TYPE_ID"]').on('change', function(e) {
+      searchSport(jQuery(this).val());
+    });
 
-                                                });
-                                            }
-                                        }
+    jQuery('select[name="SPORT_ID"]').on('change', function(e) {
+      searchCourse(jQuery(this).val());
+    });
+  });
 
-                                        function searchCourse(e) {
-                                            if (e != '') {
-                                                jQuery.ajax({
-                                                    url: '<?php echo base_url(); ?>index.php/<?php echo $this->router->class; ?>/searchCourseBySport/' + e,
-                                                    async: false,
-                                                    success: function (data) {
-                                                        // alert(data);
-                                                        var arrData = new Array();
-                                                        arrData = data.split(',');
-                                                        document.getElementById("selectCourse").innerHTML = arrData[0];
-                                                    },
-                                                    error: function (xhr, desc, exceptionobj) {
-                                                        alert("ERROR:" + xhr.responseText);
-                                                    }
+  function searchSport(e) {
+      if (e !== 'all') {
+          jQuery.ajax({
+              url: '<?php echo base_url(); ?>index.php/<?php echo $this->router->class; ?>/searchSportByType/' + e,
+              async: false,
+              success: function (data) {
+                  var arrData = new Array();
+                  arrData = data.split(',');
+                  jQuery('select[name="SPORT_ID"]').html(arrData[0]);
+              },
+              error: function (xhr, desc, exceptionobj) {
+                  alert("ERROR:" + xhr.responseText);
+              }
 
-                                                });
-                                            }
-                                        }
+          });
+      }
+  }
+  function searchCourse(e) {
+      if (e !== 'all') {
+          jQuery.ajax({
+              url: '<?php echo base_url(); ?>index.php/<?php echo $this->router->class; ?>/searchCourseBySport/' + e,
+              async: false,
+              success: function (data) {
+                  var arrData = new Array();
+                  arrData = data.split(',');
+                  jQuery('select[name="COURSE_ID"]').html(arrData[0]);
+              },
+              error: function (xhr, desc, exceptionobj) {
+                  alert("ERROR:" + xhr.responseText);
+              }
+
+          });
+      }
+  }
 </script>

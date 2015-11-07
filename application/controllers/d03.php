@@ -58,10 +58,30 @@ class D03 extends CI_Controller {
         $this->gms_term->SPORT_ID = $this->session->userdata('SPORT_ID');
         $this->gms_term->TYPE_ID = $this->session->userdata('TYPE_ID');
         $this->gms_term->TERM_GEN = $this->session->userdata('TERM_GEN');
-		$this->gms_term->HISTORY_STATUS_REGIS = 1;
+		    $this->gms_term->HISTORY_STATUS_REGIS = 1;
+
+        // Data for dropdown
+        $data['gms_type_list'] = elements_for_dropdown($this->gms_type->_getAllType(),
+                                                        'TYPE_ID',
+                                                        'TYPE_SUBJECT',
+                                                        'ALL');
+        if ( ! empty($this->gms_term->TYPE_ID)
+            && $this->gms_term->TYPE_ID !== 'all') {
+          $data['gms_sport_list'] = elements_for_dropdown($this->gms_sport->get_by_type_id($this->gms_term->TYPE_ID),
+                                                          'SPORT_ID',
+                                                          'SPORT_SUBJECT',
+                                                          'ALL');
+        }
+        if ( ! empty($this->gms_term->SPORT_ID)
+            && $this->gms_term->SPORT_ID !== 'all' ) {
+          $data['gms_course_list'] = elements_for_dropdown($this->gms_course->get_by_sport_id($this->gms_term->SPORT_ID),
+                                                          'COURSE_ID',
+                                                          'COURSE_SUBJECT',
+                                                          'ALL');
+        }
 
         $numF = 10;
-		//$this->gms_term->order_by = '';
+		      //$this->gms_term->order_by = '';
 
         $data['type'] = $this->gms_type->_getAllType();
         $data['sport'] = $this->gms_sport->_searchByType();
@@ -76,24 +96,24 @@ class D03 extends CI_Controller {
         $this->gms_sport->TYPE_ID = $type;
         $sport = $this->gms_sport->_searchByType();
 
-        echo '<select name="SPORT_ID" id="SPORT_ID" class="form-control" onchange="searchCourse(this.value)">';
-        echo '<option value="" selected="true"></option>';
+        // echo '<select name="SPORT_ID" id="SPORT_ID" class="form-control" onchange="searchCourse(this.value)">';
+        echo '<option value="all" selected="true">ทั้งหมด</option>';
         foreach ($sport as $row) {
             echo '<option value="' . $row['SPORT_ID'] . '">' . $row['SPORT_SUBJECT'] . '</option>';
         }
-        echo '</select>';
+        // echo '</select>';
     }
 
     public function searchCourseBySport($sport) {
         $this->gms_course->SPORT_ID = $sport;
         $course = $this->gms_course->_searchGmsCourse();
 
-        echo '<select name="COURSE_ID" id="SPORT_ID" class="form-control">';
-        echo '<option value="" selected="true"></option>';
+        // echo '<select name="COURSE_ID" id="SPORT_ID" class="form-control">';
+        echo '<option value="all" selected="true">ทั้งหมด</option>';
         foreach ($course as $row) {
             echo '<option value="' . $row['COURSE_ID'] . '">' . $row['COURSE_SUBJECT'] . '</option>';
         }
-        echo '</select>';
+        // echo '</select>';
     }
 
     public function selectTerm($numL = 0) {
@@ -119,7 +139,7 @@ class D03 extends CI_Controller {
         $numF = 10;
         $data['TERM_ID'] = $this->configAll->_varToID($TERM_ID);
         $data['term'] = $this->gms_term->_selectTerm();
-        
+
         $data['history'] = $this->gms_history->_selectViewHistory($numF, $numL);
         $data['count'] = $this->gms_history->_selectCountViewHistory();
         $this->load->view($this->dir . "/_selectTermMember", $data);
@@ -167,7 +187,7 @@ class D03 extends CI_Controller {
     public function insertExc() {
         $key = $this->gms_history->_getIDHistory();
         foreach ($key as $row) {
-            
+
         }
         $HISTORY_ID = $row['HISTORY_ID'] + 1;
         $TERM_ID = $this->configAll->_idToVar($this->input->post('TERM_ID'));
@@ -236,7 +256,7 @@ class D03 extends CI_Controller {
         $numL = $numL + 10;
         echo '<META HTTP-EQUIV="REFRESH" CONTENT="0;URL=' . base_url() . 'index.php/' . $this->dir . '/updateHistoryNo/">';
     }
-    
+
     public function updatePositionID($numL = 0) {
         $this->load->view("lib/header");
 
@@ -265,7 +285,7 @@ class D03 extends CI_Controller {
         $this->load->view($this->dir . "/_selectPositionID", $data);
         $this->load->view("lib/footer");
     }
-    
+
     public function updatePositionIDExc(){
         $HISTORY_ID = $this->input->post('HISTORY_ID');
         $numL = $this->input->post('numL');
