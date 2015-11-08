@@ -65,8 +65,27 @@ class D02 extends CI_Controller {
         $this->gms_history->TERM_GEN = $this->session->userdata('TERM_GEN');
         $this->gms_history->HISTORY_STATUS_REGIS = $this->session->userdata('HISTORY_STATUS_REGIS');
 
+        // Data for dropdown
+        $data['gms_type_list'] = elements_for_dropdown($this->gms_type->_getAllType(),
+                                                        'TYPE_ID',
+                                                        'TYPE_SUBJECT',
+                                                        'ALL');
+        if ( ! empty($this->gms_history->TYPE_ID)
+            && $this->gms_history->TYPE_ID !== 'all') {
+          $data['gms_sport_list'] = elements_for_dropdown($this->gms_sport->get_by_type_id($this->gms_history->TYPE_ID),
+                                                          'SPORT_ID',
+                                                          'SPORT_SUBJECT',
+                                                          'ALL');
+        }
+        if ( ! empty($this->gms_history->SPORT_ID)
+            && $this->gms_history->SPORT_ID !== 'all' ) {
+          $data['gms_course_list'] = elements_for_dropdown($this->gms_course->get_by_sport_id($this->gms_history->SPORT_ID),
+                                                          'COURSE_ID',
+                                                          'COURSE_SUBJECT',
+                                                          'ALL');
+        }
+
         $numF = 10;
-        $data['type'] = $this->gms_type->_getAllType();
         $data['sport'] = $this->gms_sport->_searchByType();
         @$data['count'] = $this->gms_history->_selectCountViewHistory();
         @$data['history'] = $this->gms_history->_selectViewHistory($numF, $numL);
@@ -79,24 +98,20 @@ class D02 extends CI_Controller {
         $this->gms_sport->TYPE_ID = $type;
         $sport = $this->gms_sport->_searchByType();
 
-        echo '<select name="SPORT_ID" id="SPORT_ID" class="form-control" onchange="searchCourse(this.value)">';
-        echo '<option value="" selected="true"></option>';
+        echo '<option value="all" selected="true">ทั้งหมด</option>';
         foreach ($sport as $row) {
             echo '<option value="' . $row['SPORT_ID'] . '">' . $row['SPORT_SUBJECT'] . '</option>';
         }
-        echo '</select>';
     }
 
     public function searchCourseBySport($sport) {
         $this->gms_course->SPORT_ID = $sport;
         $course = $this->gms_course->_searchGmsCourse();
 
-        echo '<select name="COURSE_ID" id="SPORT_ID" class="form-control">';
-        echo '<option value="" selected="true"></option>';
+        echo '<option value="all" selected="true">ทั้งหมด</option>';
         foreach ($course as $row) {
             echo '<option value="' . $row['COURSE_ID'] . '">' . $row['COURSE_SUBJECT'] . '</option>';
         }
-        echo '</select>';
     }
 
     public function searchMember($member_id) {

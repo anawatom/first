@@ -158,15 +158,15 @@ class Model_gms_history extends CI_Model {
             $this->db->delete('GMS_HISTORY');
         }
     }
-    
+
     public function _chkVarForLike($var, $data) {
-        if ($data != '') {
+        if ($data != '' && $data != 'all') {
             return $this->db->like($var, $data);
         }
     }
 
     public function _chkVarForWhere($var, $data) {
-        if ($data != '') {
+        if ($data != '' && $data != 'all') {
             return $this->db->where($var, $data);
         }
     }
@@ -227,7 +227,7 @@ class Model_gms_history extends CI_Model {
 
         return $this->db->get()->result_array();
     }
-    
+
     /*
     * Get id for inserting.
     */
@@ -293,7 +293,7 @@ class Model_gms_history extends CI_Model {
         $data['UPDATE_DATE'] = get_oracle_current_timestamp();
 
         $this->db->where($this->primary_key, $model_data[$this->primary_key]);
-        
+
         return $this->db->update($this->table_name, $this->permit_update_params($data));
     }
 

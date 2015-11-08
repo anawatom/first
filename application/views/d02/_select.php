@@ -1,5 +1,5 @@
 <!-- Right side column. Contains the navbar and content of the page -->
-<aside class="right-side">                
+<aside class="right-side">
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
@@ -9,7 +9,7 @@
             <li><a href="<?php echo base_url(); ?>index.php/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="#">บันทึกข้อมูล</a></li>
             <li class="active"><?php echo $this->router->class . '-อนุมัติ/ สละสิทธิ์'; ?></li>
-        </ol> 
+        </ol>
     </section>
 
     <!-- Main content -->
@@ -31,55 +31,66 @@
                                 <table style="width: 100%">
                                     <tr>
                                         <td><label for="TERM_YEAR">ปีงบประมาณ</label></td>
-                                        <td><input type="text" class="form-control" id="TERM_YEAR" name="TERM_YEAR" placeholder="ปีงบประมาณ" value="<?php echo date('Y') + 543; ?>"></td>
+                                        <td><input type="text"
+                                              class="form-control"
+                                              id="TERM_YEAR"
+                                              name="TERM_YEAR"
+                                              placeholder="ปีงบประมาณ"
+                                              value="<?php echo $this->session->userdata('TERM_YEAR'); ?>"></td>
                                     </tr>
                                     <tr>
                                         <td><label for="type_id">ประเภทการฝึกอบรม</label></td>
                                         <td>
-                                            <select name="TYPE_ID" id="TYPE_ID" class="form-control" onchange="searchSport(this.value)">
-                                                <option value="" selected="true">กรุณาเลือกข้อมูล</option>
-                                                <?php
-                                                foreach ($type as $row) {
-                                                    echo '<option value="' . $row['TYPE_ID'] . '">' . $row['TYPE_SUBJECT'] . '</option>';
-                                                }
-                                                ?>
-                                            </select>
+                                          <?php
+                                            $search_type_id = $this->session->userdata('TYPE_ID');
+                                            echo form_dropdown('TYPE_ID',
+                                                              isset($gms_type_list)? $gms_type_list: ['all' => 'ทั้งหมด'],
+                                                              ( empty($search_type_id) )? 'all': $search_type_id,
+                                                              'id="TYPE_ID" class="form-control"');
+                                          ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td><label for="SPORT_ID">ชนิดกีฬา/ชนิดการฝึกอบรม</label></td>
                                         <td>
-                                            <div id="selectSPORT">
-                                                <select name="SPORT_ID" id="SPORT_ID" class="form-control" onchange="searchCourse(this.value)">
-                                                    <option value="" selected="true"></option>
-                                                </select>
-                                            </div>
+                                          <?php
+                                            $search_sport_id = $this->session->userdata('SPORT_ID');
+                                            echo form_dropdown('SPORT_ID',
+                                                            isset($gms_sport_list)? $gms_sport_list: ['all' => 'ทั้งหมด'],
+                                                            ( empty($search_sport_id) )? 'all': $search_sport_id,
+                                                            'id="sport_ID" class="form-control"');
+                                          ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td><label for="SPORT_ID">ชื่อหลักสูตร</label></td>
                                         <td>
-                                            <div id="selectCourse">
-                                                <select name="COURSE_ID" id="COURSE_ID" class="form-control">
-                                                    <option value="" selected="true"></option>
-                                                </select>
-                                            </div>
+                                          <?php
+                                            $search_course_id = $this->session->userdata('COURSE_ID');
+                                            echo form_dropdown('COURSE_ID',
+                                                            isset($gms_course_list)? $gms_course_list: ['all' => 'ทั้งหมด'],
+                                                            ( empty($search_course_id) )? 'all': $search_course_id,
+                                                            'id="COURSE_ID" class="form-control"');
+                                          ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td><label for="TERM_GEN">รุ่นที่</label></td>
-                                        <td><input type="text" class="form-control" id="TERM_GEN" name="TERM_GEN" placeholder="รุ่นที่" value=""></td>
+                                        <td><input type="text"
+                                                  class="form-control"
+                                                  id="TERM_GEN"
+                                                  name="TERM_GEN"
+                                                  placeholder="รุ่นที่"
+                                                  value="<?php echo $this->session->userdata('TERM_GEN'); ?>">
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td><label for="HISTORY_STATUS_REGIS">สถานะ</label></td>
                                         <td>
-                                            <select name="HISTORY_STATUS_REGIS" id="HISTORY_STATUS_REGIS" class="form-control">
-                                                <option value="" selected="true"></option>
-                                                <option value="0" >รอพิจารณา</option>
-                                                <option value="1" >อนุมัติ</option>
-                                                <option value="2" >ไม่ผ่านเกณฑ์</option>
-                                                <option value="3" >สละสิทธิ์</option>
-                                            </select>
+                                          <?php echo form_dropdown('HISTORY_STATUS_REGIS',
+                                                                    $HISTORY_STATUS_REGIS_WITH_ALL,
+                                                                    $this->session->userdata('HISTORY_STATUS_REGIS'),
+                                                                    'id="HISTORY_STATUS_REGIS" class="form-control"'); ?>
                                         </td>
                                     </tr>
                                 </table>
@@ -93,7 +104,7 @@
 //                                echo '<option value="' . $row['TYPE_ID'] . '">' . $row['TYPE_SUBJECT'] . '</option>';
 //                            }
                             ?>
-                            
+
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
@@ -104,7 +115,7 @@
                                                                 </select>
                                                             </div>
                                                         </div>
-                            
+
                                                         <div class="form-group">
                                                             <label for="SPORT_ID">ชื่อหลักสูตร</label>
                                                             <div id="selectCourse">
@@ -113,12 +124,12 @@
                                                                 </select>
                                                             </div>
                                                         </div>
-                            
+
                                                         <div class="form-group">
                                                             <label for="TERM_GEN">รุ่นที่</label>
                                                             <input type="text" class="form-control" id="TERM_GEN" name="TERM_GEN" placeholder="รุ่นที่" value="">
                                                         </div>
-                            
+
                                                         <div class="form-group">
                                                             <label for="HISTORY_STATUS_REGIS">สถานะ</label>
                                                             <div id="selectCourse">
@@ -252,52 +263,64 @@
 <script src="<?php echo base_url(); ?>js/AdminLTE/app.js" type="text/javascript"></script>
 
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="<?php echo base_url(); ?>js/AdminLTE/dashboard.js" type="text/javascript"></script> 
-<script>
-                                                    function selectMember(e) {
-                                                        jQuery.ajax({
-                                                            url: '<?php echo base_url(); ?>index.php/<?php echo $this->router->class; ?>/searchMember/' + e,
-                                                            async: false,
-                                                            success: function (data) {
-                                                                document.getElementById("dataMember").innerHTML = data;
-                                                            },
-                                                            error: function (xhr, desc, exceptionobj) {
-                                                                alert("ERROR:" + xhr.responseText);
-                                                            }
+<!-- <script src="<?php echo base_url(); ?>js/AdminLTE/dashboard.js" type="text/javascript"></script> -->
+<script type="text/javascript">
+  jQuery(function() {
+    jQuery('select[name="TYPE_ID"]').on('change', function(e) {
+      searchSport(jQuery(this).val());
+    });
 
-                                                        });
-                                                    }
-                                                    function searchSport(e) {
-                                                        jQuery.ajax({
-                                                            url: '<?php echo base_url(); ?>index.php/<?php echo $this->router->class; ?>/searchSportByType/' + e,
-                                                            async: false,
-                                                            success: function (data) {
-                                                                var arrData = new Array();
-                                                                arrData = data.split(',');
-                                                                document.getElementById("selectSPORT").innerHTML = arrData[0];
-                                                            },
-                                                            error: function (xhr, desc, exceptionobj) {
-                                                                alert("ERROR:" + xhr.responseText);
-                                                            }
+    jQuery('select[name="SPORT_ID"]').on('change', function(e) {
+      searchCourse(jQuery(this).val());
+    });
+  });
+  function selectMember(e) {
+      jQuery.ajax({
+          url: '<?php echo base_url(); ?>index.php/<?php echo $this->router->class; ?>/searchMember/' + e,
+          async: false,
+          success: function (data) {
+              document.getElementById("dataMember").innerHTML = data;
+          },
+          error: function (xhr, desc, exceptionobj) {
+              alert("ERROR:" + xhr.responseText);
+          }
 
-                                                        });
-                                                    }
+      });
+  }
+  function searchSport(e) {
+    if (e !== 'all') {
+      jQuery.ajax({
+          url: '<?php echo base_url(); ?>index.php/<?php echo $this->router->class; ?>/searchSportByType/' + e,
+          async: false,
+          success: function (data) {
+              var arrData = new Array();
+              arrData = data.split(',');
+              jQuery('select[name="SPORT_ID"]').html(arrData[0]);
+          },
+          error: function (xhr, desc, exceptionobj) {
+              alert("ERROR:" + xhr.responseText);
+          }
 
-                                                    function searchCourse(e) {
-                                                        jQuery.ajax({
-                                                            url: '<?php echo base_url(); ?>index.php/<?php echo $this->router->class; ?>/searchCourseBySport/' + e,
-                                                            async: false,
-                                                            success: function (data) {
-                                                                // alert(data);
-                                                                var arrData = new Array();
-                                                                arrData = data.split(',');
-                                                                document.getElementById("selectCourse").innerHTML = arrData[0];
-                                                            },
-                                                            error: function (xhr, desc, exceptionobj) {
-                                                                alert("ERROR:" + xhr.responseText);
-                                                            }
+      });
+    }
+  }
 
-                                                        });
-                                                    }
+  function searchCourse(e) {
+    if (e !== 'all') {
+      jQuery.ajax({
+          url: '<?php echo base_url(); ?>index.php/<?php echo $this->router->class; ?>/searchCourseBySport/' + e,
+          async: false,
+          success: function (data) {
+              // alert(data);
+              var arrData = new Array();
+              arrData = data.split(',');
+              jQuery('select[name="COURSE_ID"]').html(arrData[0]);
+          },
+          error: function (xhr, desc, exceptionobj) {
+              alert("ERROR:" + xhr.responseText);
+          }
 
+      });
+    }
+  }
 </script>
