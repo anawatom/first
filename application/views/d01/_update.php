@@ -300,7 +300,7 @@ foreach ($term as $row) {
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <?php echo form_label('ชื่อ/นามสกุล วิยากร', 'MEMBER_NAME'); ?>
+                                        <?php echo form_label('ชื่อ/นามสกุล วิทยากร', 'MEMBER_NAME'); ?>
                                         <div class="input-group">
                                             <input type="text" name="MEMBER_NAME" class="form-control">
                                             <span class="input-group-addon">
