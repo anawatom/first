@@ -15,8 +15,17 @@ class Model_view_member_detail_all extends CI_Model {
 
 	public function get_data_by_name($name, $limit = 15, $order_field = 'MEMBER_ID')
 	{
-		$this->db->like('FIRST_NAME', $name);
-		$this->db->or_like('LAST_NAME', $name);
+		$split_name = explode(' ', trim($name));
+		if ( count($split_name) > 1 )
+		{
+			$this->db->like('FIRST_NAME', $split_name[0]);
+			$this->db->like('LAST_NAME', $split_name[1]);
+		}
+		else
+		{
+			$this->db->like('FIRST_NAME', $split_name[0]);
+			$this->db->or_like('LAST_NAME', $split_name[0]);
+		}
 		$this->db->limit($limit);
 		$query = $this->db->get($this->table_name);
 
