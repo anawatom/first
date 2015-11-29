@@ -23,6 +23,7 @@ class D01 extends CI_Controller {
         $this->load->model('model_gms_director_course', 'director_course');
         $this->load->model('model_gms_director_term', 'director_term');
         $this->load->model('model_gms_blog', 'gms_blog');
+        $this->load->model('model_gms_term_attach', 'gms_term_attach');
     }
 
     public function index() {
@@ -210,11 +211,13 @@ class D01 extends CI_Controller {
         $data['province'] = $this->province->_getAllProvince();
         $data['sign'] = $this->certificate_sign->_getAllCertificate();
         $data['term'] = $this->gms_term->_selectTerm();
+        $data['gms_term_attaches'] = $this->gms_term_attach->get_by_term_id($this->gms_term->TERM_ID);
         $this->load->view($this->dir . "/_update", $data);
         $this->load->view("lib/footer");
     }
 
     public function updateExc() {
+        header('Content-type: text/html; charset=utf-8');
         $this->gms_term->TERM_ID = $this->input->post('TERM_ID');
         $this->gms_term->TERM_GEN = $this->input->post('TERM_GEN');
         $this->gms_term->TERM_TIME_UPDATE = $this->configAll->_dateToDB(date('d/m/') . (date('Y') + 543)); //01/04/2558
@@ -247,7 +250,25 @@ class D01 extends CI_Controller {
             $this->director_term->_updateMasterDirectorTerm();
         }
 
-        echo '<META HTTP-EQUIV="REFRESH" CONTENT="0;URL=' . base_url() . 'index.php/' . $this->dir . '">';
+        // Upload image
+        $this->load->helper('upload_form');
+        $result_upload = upload_document_image( 'ATTACH_FILE', 
+                                                $this->load->get_var('UPLOAD_PATH_GMS_TERM_ATTACH'),
+                                                $this->gms_term->TERM_ID.'_'.time() );
+        if ($result_upload['status'] === FALSE)
+        {
+            //$result_upload['data'];
+        }
+        else
+        {
+            $this->gms_term_attach->insert(['ATTACH_SUBJECT' => $this->input->post('ATTACH_SUBJECT'),
+                                            'ATTACH_PATH' => $result_upload['data']['file_path'].$result_upload['data']['file_name'],
+                                            'TERM_ID' => $this->gms_term->TERM_ID,
+                                            'ATTACH_SIZE' => $result_upload['data']['file_size']]);
+
+        }
+
+        echo '<META HTTP-EQUIV="REFRESH" CONTENT="0;URL=' . base_url() . 'index.php/' . $this->dir . '/update/'.$this->gms_term->TERM_ID.'">';
     }
 
     public function delExc($id){
@@ -272,6 +293,23 @@ class D01 extends CI_Controller {
         }
 
         echo '<META HTTP-EQUIV="REFRESH" CONTENT="0;URL=' . base_url() . 'index.php/' . $this->dir . '">';
+    }
+
+    public function delete_document($id, $attach_id) {
+        $gms_term_attach = $this->gms_term_attach->find_by_id($attach_id);
+        if ( ! empty($gms_term_attach) ) {
+            $split_attach_path = [];
+            $file_name = '';
+            $split_attach_path = explode('/', $gms_term_attach['ATTACH_PATH']);
+            $file_name = $split_attach_path[count($split_attach_path) - 1];
+
+            // echo $this->load->get_var('UPLOAD_PATH_GMS_TERM_ATTACH').$gms_term_attach['ATTACH_SUBJECT'];
+            if ( unlink($this->load->get_var('UPLOAD_PATH_GMS_TERM_ATTACH').$file_name) ) {
+                $this->gms_term_attach->delete($gms_term_attach['ATTACH_ID']);
+            }
+        }
+
+        echo '<META HTTP-EQUIV="REFRESH" CONTENT="0;URL=' . base_url() . 'index.php/' . $this->dir . '/update/'.$id.'">';
     }
 
     /***

@@ -273,7 +273,54 @@ foreach ($term as $row) {
                                         </select>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td colspan="4">
+                                        <hr>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4">
+                                        <div class="box box-primary">
+                                            <div class="box-heading">
+                                                <h4>เอกสารประกอบการอบรม</h4>
+                                            </div>
+                                            <div class="box-body">
+                                                <?php if (!empty($gms_term_attaches)) : ?>
+                                                    <div class="form-group">
+                                                        <ul class="list-group">
+                                                            <?php 
+                                                                foreach ($gms_term_attaches as $key => $value) {
+                                                                    $split_attach_path = [];
+                                                                    $file_name = '';
+                                                                    $split_attach_path = explode('/', $value['ATTACH_PATH']);
+                                                                    $file_name = $split_attach_path[count($split_attach_path) - 1];
 
+                                                                    echo '<li class="list-group-item">';
+                                                                    echo '<div class="row">';
+                                                                    echo '<div class="col-md-11">';
+                                                                    echo '<a href="'.base_url($UPLOAD_PATH_GMS_TERM_ATTACH.$file_name).'" target="_bank">'.$value['ATTACH_SUBJECT'].'</a>';
+                                                                    echo '</div>';
+                                                                    echo '<div class="col-md-1" style="text-align: right;">';
+                                                                    echo '<a class="btn btn-danger btn-delete-document" data-href="'.site_url('d01/delete_document/'.$value['TERM_ID'].'/'.$value['ATTACH_ID']).'"><i class="fa fa-times"></i></a>';
+                                                                    echo '</div>';
+                                                                    echo '</div>';
+                                                                    echo '</l>';
+                                                                }
+                                                            ?>
+                                                        <ul>
+                                                    </div>
+                                                <?php endif; ?>
+                                                <div class="form-group">
+                                                    <?php echo form_label('ชื่อไฟล์', 'ATTACH_SUBJECT', ['class' => 'aa']); ?>
+                                                    <?php echo form_input(['name' => 'ATTACH_SUBJECT', 'class' => 'form-control']); ?>
+                                                </div>
+                                                <div class="form-group">
+                                                    <?php echo form_upload(['name' => 'ATTACH_FILE']); ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
                             </table>
                             <div class="box-footer text-center">
                                 <button type="submit" class="btn btn-primary">บันทึก</button>
@@ -362,6 +409,10 @@ foreach ($term as $row) {
             }
         });
 
+        $('input[name="ATTACH_FILE"]').on('change', function(e) {
+            validateFileExtension(e, this);
+        });
+
         $('form[name="formDirectorTerm"').on('submit', function(e) {
             e.preventDefault();
             var $form = $(this);
@@ -385,6 +436,12 @@ foreach ($term as $row) {
                     alert('เกิดข้อผิดพลาด');
                 }
             });
+        });
+
+        $('.btn-delete-document').on('click', function(e) {
+            if ( confirm('กรุณายืนยัน') ) {
+                window.location = $(this).attr('data-href');
+            }
         });
     });
 //                                            document.onkeydown = chkEvent
@@ -516,6 +573,23 @@ foreach ($term as $row) {
             alert('กรุณาเลือก ชื่อหลักสูตร');
             document.form1.COURSE_ID.focus();
             return false;
+        }
+        if ( $('input[name="ATTACH_FILE"]').val() ) {
+            if ( ! $('input[name="ATTACH_SUBJECT"]').val() ) {
+                alert('กรุณาใส่ชื่อไฟล์');
+                $('input[name="ATTACH_SUBJECT"]').focus();
+                return false;
+            }
+        }
+    }
+  
+    function validateFileExtension(event, element) {
+        var $element = $(element),
+            ext = $element.val().split('.').pop().toLowerCase();
+
+        if ($.inArray(ext, ['jpg','gif','bmp','png', 'doc', 'docx', 'xls', 'xlsx', 'pdf']) == -1) {
+            alert('นามสกุลไฟล์ไม่ถูกต้อง ได้เฉพาะ .jpg/ .gif/ .bmp/ .png/ .doc/ .xls/ xlsx/ .pdf เท่านั้น');
+            $element.val('');
         }
     }
 

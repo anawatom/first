@@ -41,5 +41,39 @@ if ( ! function_exists('upload_image'))
 	}
 }
 
+if ( ! function_exists('upload_document_image'))
+{
+	function upload_document_image($input_name = 'IMAGE', $path = '', $file_name = '', $overwrite = TRUE)
+	{
+		$ci =& get_instance();
+
+		$config['upload_path'] = $path;
+		$config['allowed_types'] = 'gif|jpg|png|bmp|doc|xls|xlsx|pdf';
+		$config['max_size']	= '2048';
+		$config['overwrite'] = $overwrite;
+		if ($file_name !== '')
+		{
+			$config['file_name'] = $file_name;
+		}
+
+		$ci->load->library('upload', $config);
+
+		if ( ! $ci->upload->do_upload($input_name))
+		{
+			return [
+				'status' => FALSE,
+				'data' => $ci->upload->display_errors('<p class="danger">', '</p>')
+			];
+		}
+		else
+		{
+			return [
+				'status' => TRUE,
+				'data' => $ci->upload->data()
+			];
+		}
+	}
+}
+
 /* End of file upload_form_helper.php */
 /* Location: ./helpers/upload_form_helper.php */
