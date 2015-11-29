@@ -288,14 +288,14 @@ class D03 extends CI_Controller {
 
     public function updatePositionIDExc(){
         $HISTORY_ID = $this->input->post('HISTORY_ID');
-        $numL = $this->input->post('numL');
+
         for ($i = 0; $i < count($HISTORY_ID); $i++) {
             $this->gms_history->HISTORY_ID = $HISTORY_ID[$i];
             $this->gms_history->POSITION_ID = $this->input->post('POSITION_ID_' . $HISTORY_ID[$i]);
             $this->gms_history->_updateHistoryByPositionID();
         }
-        $numL = $numL + 10;
-        echo '<META HTTP-EQUIV="REFRESH" CONTENT="0;URL=' . base_url() . 'index.php/' . $this->dir . '/updatePositionID/' . $numL . '">';
+        
+        echo '<META HTTP-EQUIV="REFRESH" CONTENT="0;URL=' . base_url() . 'index.php/' . $this->dir . '/updatePositionID/' . $this->input->post('numL') . '">';
     }
 
     public function delMember($HISTORY_ID = '') {
