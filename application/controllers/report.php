@@ -228,11 +228,10 @@ class report extends CI_Controller {
             // End
 
             // GMS_TERM
-            $gms_term = $this->gms_term->find_by_id($get_data['TERM_ID']);
-            $str_term_gen = (string) $gms_term['TERM_GEN'];
+            $str_term_gen = (string) $get_data['TERM_GEN'];
             $params->put("p_termGen", $str_term_gen);
 
-            $str_course_id = (string) $gms_term['COURSE_ID'];
+            $str_course_id = (string) $get_data['COURSE_ID'];
             $params->put("p_courseId", $str_course_id);
             // End
 
