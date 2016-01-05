@@ -38,7 +38,7 @@ class Gms_term extends CI_Controller {
 
 		$html = '<option value="" selected="true">กรุณาเลือก</option>';
 		foreach ($gms_terms as $row) {
-			$html .= '<option value="' . $row['TERM_ID'] . '">' 
+			$html .= '<option value="' . $row['TERM_GEN'] . '">' 
 					. $row['TERM_GEN_NAME']
 					. '</option>';
 		}
